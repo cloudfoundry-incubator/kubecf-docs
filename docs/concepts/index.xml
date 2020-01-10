@@ -1,0 +1,65 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KubeCF – Concepts</title>
+    <link>https://suse.github.io/kubecf-docs/docs/concepts/</link>
+    <description>Recent content in Concepts on KubeCF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://suse.github.io/kubecf-docs/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Cloud Foundry Operator</title>
+      <link>https://suse.github.io/kubecf-docs/docs/concepts/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/concepts/operator/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CF-Operator is a Cloud Foundry Incubating Project.&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; enables the deployment of BOSH Releases, especially Cloud Foundry, to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s implemented as a k8s operator, an active controller component which acts upon custom k8s resources.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/#installing&#34; target=&#34;_blank&#34;&gt;Installation notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Incubation Proposal: &lt;a href=&#34;https://docs.google.com/document/d/1_IvFf-cCR4_Hxg-L7Z_R51EKhZfBqlprrs5NgC2iO2w/edit#heading=h.lybtsdyh8res&#34; target=&#34;_blank&#34;&gt;Containerizing Cloud Foundry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slack: #quarks-dev on &lt;a href=&#34;https://slack.cloudfoundry.org/&#34; target=&#34;_blank&#34;&gt;https://slack.cloudfoundry.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Backlog: &lt;a href=&#34;https://www.pivotaltracker.com/n/projects/2192232&#34; target=&#34;_blank&#34;&gt;Pivotal Tracker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker: &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&#34; target=&#34;_blank&#34;&gt;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Project Quarks</title>
+      <link>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://www.cloudfoundry.org/project-quarks/&#34; target=&#34;_blank&#34;&gt;Project Quarks&lt;/a&gt; is an incubating effort within the Cloud Foundry Foundation that packages Cloud Foundry Application Runtime as containers instead of virtual machines, enabling easy deployment to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;The resulting containerized CFAR provides an identical developer experience to that of BOSH-managed Cloud Foundry installations, requires less infrastructure capacity and delivers an operational experience that is familiar to Kubernetes operators.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KubeCF – New Releases</title>
+    <link>https://suse.github.io/kubecf-docs/blog/releases/</link>
+    <description>Recent content in New Releases on KubeCF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://suse.github.io/kubecf-docs/blog/releases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Another Great Release</title>
+      <link>https://suse.github.io/kubecf-docs/blog/2018/01/04/another-great-release/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/blog/2018/01/04/another-great-release/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

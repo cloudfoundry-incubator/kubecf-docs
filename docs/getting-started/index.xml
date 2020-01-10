@@ -1,0 +1,246 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KubeCF – Getting Started</title>
+    <link>https://suse.github.io/kubecf-docs/docs/getting-started/</link>
+    <description>Recent content in Getting Started on KubeCF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://suse.github.io/kubecf-docs/docs/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Deploy on Kubernetes</title>
+      <link>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The intended audience of this document are developers wishing to
+contribute to the Kubecf project.&lt;/p&gt;
+
+&lt;p&gt;Here we explain how to deploy Kubecf using:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A generic kubernetes cluster.&lt;/li&gt;
+&lt;li&gt;A released cf-operator helm chart.&lt;/li&gt;
+&lt;li&gt;A released kubecf helm chart.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h2&gt;
+
+&lt;p&gt;In contrast to other recipes, we are not set on using a local
+cluster. Any Kubernetes cluster will do, assuming that the following
+requirements are met:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Presence of a default storage class (provisioner).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For use with a diego-based kubecf (default), a node OS with XFS
+support.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For GKE, using the option &lt;code&gt;--image-type UBUNTU&lt;/code&gt; with the
+&lt;code&gt;gcloud beta container&lt;/code&gt; command selects such an OS.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This can be any of, but not restricted to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GKE (&lt;a href=&#34;../provider/gke.md&#34;&gt;Notes&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;AKS&lt;/li&gt;
+&lt;li&gt;EKS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that how to deploy and tear-down such a cluster is outside of the
+scope of this recipe.&lt;/p&gt;
+
+&lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; is the underlying generic tool to deploy a (modified)
+BOSH deployment like Kubecf for use.&lt;/p&gt;
+
+&lt;p&gt;It has to be installed in the same Kubernetes cluster that Kubecf will
+be deployed to.&lt;/p&gt;
+
+&lt;p&gt;Here we are not using development-specific dependencies like bazel,
+but only generic tools, i.e. &lt;code&gt;kubectl&lt;/code&gt; and &lt;code&gt;helm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;helm.md&#34; target=&#34;_blank&#34;&gt;Installing and configuring Helm&lt;/a&gt; is the same regardless of
+the chosen foundation, and assuming that the cluster does not come
+with Helm Tiller pre-installed.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment-and-tear-down&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install --name cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace cfo &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.operator.watchNamespace=kubecf&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v0.4.2-147.gb88e4296.tgz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the example above, version 0.4.1 of the operator was used. Look
+into the &lt;code&gt;cf_operator&lt;/code&gt; section of the top-level &lt;code&gt;def.bzl&lt;/code&gt; file to find
+the version of the operator validated against the current kubecf
+master.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+&amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt; namespace.
+&amp;gt; Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
+&amp;gt;
+&amp;gt; The &lt;code&gt;global.operator.watchNamespace=kubecf&lt;/code&gt; path tells the
+controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.
+&amp;gt;
+&amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and eventually one of the
+controllers will use a webhook to label this namespace with the &lt;code&gt;cf-operator-ns&lt;/code&gt; key.
+&amp;gt;
+&amp;gt; If the &lt;code&gt;kubecf&lt;/code&gt; namespace is deleted, but the operators are still running, they will no longer
+know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
+
+&lt;p&gt;Note how the namespace the operator is installed into (&lt;code&gt;cfo&lt;/code&gt;) differs
+from the namespace the operator is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;This form of deployment enables restarting the operator because it is
+not affected by webhooks. It further enables the deletion of the
+Kubecf deployment namespace to start from scratch, without redeploying
+the operator itself.&lt;/p&gt;
+
+&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h2 id=&#34;kubecf&#34;&gt;Kubecf&lt;/h2&gt;
+
+&lt;p&gt;With all the prerequisites handled by the preceding sections it is now
+possible to build and deploy kubecf itself.&lt;/p&gt;
+
+&lt;p&gt;This again uses helm and a released helm chart.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment-and-tear-down-1&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install --name kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://scf-v3.s3.amazonaws.com/scf-3.0.0-82165ef3.tgz &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;system_domain=kubecf.suse.dev&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this default deployment, kubecf is launched without Ingress, and it
+uses the Diego scheduler.&lt;/p&gt;
+
+&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h3 id=&#34;access&#34;&gt;Access&lt;/h3&gt;
+
+&lt;p&gt;To access the cluster after the cf-operator has completed the
+deployment and all pods are active invoke:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cf api --skip-ssl-validation &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://api.&amp;lt;domain&amp;gt;&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy the admin cluster password.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get secret &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        --namespace kubecf kubecf.var-cf-admin-password &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.data.password}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 --decode&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Use the password from the previous step when requested.&lt;/span&gt;
+cf auth admin &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;advanced-topics&#34;&gt;Advanced Topics&lt;/h3&gt;
+
+&lt;h4 id=&#34;diego-vs-eirini&#34;&gt;Diego vs Eirini&lt;/h4&gt;
+
+&lt;p&gt;Diego is the standard scheduler used by kubecf to deploy CF
+applications. Eirini is an alternative to Diego that follows a more
+Kubernetes native approach, deploying the CF apps directly to a
+Kubernetes namespace.&lt;/p&gt;
+
+&lt;p&gt;To activate this alternative, use the option
+&lt;code&gt;--set features.eirini.enabled=true&lt;/code&gt; when deploying kubecf from its chart.&lt;/p&gt;
+
+&lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
+
+&lt;p&gt;By default, the cluster is exposed through its Kubernetes services.&lt;/p&gt;
+
+&lt;p&gt;To use the NGINX ingress instead, it is necessary to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install and configure the NGINX Ingress Controller.&lt;/li&gt;
+&lt;li&gt;Configure Kubecf to use the ingress controller.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This has to happen before deploying kubecf.&lt;/p&gt;
+
+&lt;h5 id=&#34;installation-of-the-nginx-ingress-controller&#34;&gt;Installation of the NGINX Ingress Controller&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;helm install stable/nginx-ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --name ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.2222=kubecf/kubecf-scheduler:2222&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.start&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.start&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  ...
+  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.end&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.end&amp;gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;tcp.&amp;lt;port&amp;gt;&lt;/code&gt; option uses the NGINX TCP pass-through.&lt;/p&gt;
+
+&lt;p&gt;In the case of the &lt;code&gt;tcp-router&lt;/code&gt; ports, one &lt;code&gt;--set&lt;/code&gt; for each port is required, starting with
+&lt;code&gt;services.tcp-router.port_range.start&lt;/code&gt; and ending with &lt;code&gt;services.tcp-router.port_range.end&lt;/code&gt;. Those
+values are defined on the &lt;code&gt;values.yaml&lt;/code&gt; file with default values.&lt;/p&gt;
+
+&lt;h5 id=&#34;configure-kubecf&#34;&gt;Configure kubecf&lt;/h5&gt;
+
+&lt;p&gt;Use the Helm option &lt;code&gt;--set features.ingress.enabled=true&lt;/code&gt; when
+deploying kubecf.&lt;/p&gt;
+
+&lt;h4 id=&#34;external-database&#34;&gt;External Database&lt;/h4&gt;
+
+&lt;p&gt;By default, kubecf includes a single-availability database provided by the
+cf-mysql-release. Kubecf also exposes a way to use an external database via the
+Helm property &lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more
+details.&lt;/p&gt;
+
+&lt;p&gt;For local development with an external database, the
+&lt;code&gt;bazel run //dev/external_database:deploy_mysql&lt;/code&gt; command will bring a mysql database up and running
+ready to be consumed by kubecf.&lt;/p&gt;
+
+&lt;p&gt;An example for the additional values to be provided to &lt;code&gt;//dev/kubecf:apply&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;external_database&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;enabled&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;mysql&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;host&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;kubecf-mysql.kubecf-mysql.svc&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;port&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;databases&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;uaa&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;uaa&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;cc&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;cloud_controller&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;bbs&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;diego&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;routing_api&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;routing-api&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;policy_server&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;network_policy&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;silk_controller&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;network_connectivity&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;locket&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;locket&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;credhub&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;credhub&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/overview/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/tests/</loc>
+    <lastmod>2019-12-19T16:16:16+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/getting-started/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</loc>
+    <lastmod>2019-12-19T10:20:25+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/concepts/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/concepts/operator/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tasks/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/tutorials/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/contribution-guidelines/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/</loc>
+    <lastmod>2019-12-19T12:02:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/blog/news/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/blog/releases/</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/blog/2018/10/06/easy-documentation-with-docsy/</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/blog/2018/01/04/another-great-release/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</loc>
+    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</loc>
+    <lastmod>2019-12-19T16:03:09+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/index.json</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/about/</loc>
+    <lastmod>2019-12-19T12:02:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/blog/</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/community/</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/</loc>
+    <lastmod>2020-01-03T16:43:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suse.github.io/kubecf-docs/search/</loc>
+    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
+  </url>
+  
+</urlset>

@@ -1,0 +1,1188 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KubeCF – Documentation</title>
+    <link>https://suse.github.io/kubecf-docs/docs/</link>
+    <description>Recent content in Documentation on KubeCF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://suse.github.io/kubecf-docs/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Tests</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/tests/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/tests/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The bazel target &lt;strong&gt;//testing/acceptance_tests&lt;/strong&gt; starts a run of the
+&lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release&#34; target=&#34;_blank&#34;&gt;Cloud Foundry Acceptance Tests&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;See also the &lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;limiting-test-suites&#34;&gt;Limiting test suites&lt;/h2&gt;
+
+&lt;p&gt;To limit the test groups to run, set the BOSH property
+&lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release/blob/0.0.1/jobs/acceptance-tests/spec#L47-L54&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;acceptance_tests.include&lt;/code&gt;&lt;/a&gt; as documented.  To do so, adjust the &lt;code&gt;properties&lt;/code&gt;
+key in &lt;a href=&#34;https://github.com/SUSE/kubecf/blob/master/deploy/helm/kubecf/values.yaml&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; to specify the groups desired.  For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;properties&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;acceptance-tests&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;acceptance-tests&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;acceptance_tests&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;include&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;+docker,-ssh&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that this is an example of how to use the second kind of
+customization feature noted in the main
+&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Bosh releases integration</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</guid>
+      <description>
+        
+        
+        
+
+&lt;h2 id=&#34;table-of-contents&#34;&gt;Table Of Contents&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#preparing-the-release-image&#34;&gt;Preparing the Release Image&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#building-a-docker-image-with-fissile&#34;&gt;Building a Docker Image with Fissile&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#uploading-the-image&#34;&gt;Uploading The Image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#modify-kubecf-to-use-the-new-image&#34;&gt;Modify Kubecf to Use the New Image&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#integrating-the-release-in-kubecf&#34;&gt;Integrating the Release in Kubecf&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#bpm&#34;&gt;BPM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#operation-files&#34;&gt;Operation Files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#testing-with-kubecf&#34;&gt;Testing With Kubecf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;preparing-the-release-image&#34;&gt;Preparing the Release Image&lt;/h2&gt;
+
+&lt;p&gt;BOSH release authors who want to test their development code with the
+Quarks operator need to build a Docker image from their release.
+This can be done with &lt;code&gt;fissile&lt;/code&gt;.  Afterwards, upload the image to a
+cluster for testing it, e.g. with Kubecf.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-a-docker-image-with-fissile&#34;&gt;Building a Docker Image with Fissile&lt;/h3&gt;
+
+&lt;p&gt;Build the BOSH release first and convert it with &lt;a href=&#34;https://github.com/cloudfoundry-incubator/fissile&#34; target=&#34;_blank&#34;&gt;fissile&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To generate a docker image from the BOSH release, you should use the
+following subcommand:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;fissile build release-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For more information on how to use the command, please refer to the
+related &lt;a href=&#34;https://github.com/cloudfoundry-incubator/fissile/blob/develop/docs/build-docker-imgs.md&#34; target=&#34;_blank&#34;&gt;documentation&lt;/a&gt;. For a real example, see &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator-ci/blob/e83e46548787ee740ea1918182604faaa5cddf8f/pipelines/release-images/tasks/build.sh#L34&#34; target=&#34;_blank&#34;&gt;build.sh&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;uploading-the-image&#34;&gt;Uploading The Image&lt;/h3&gt;
+
+&lt;p&gt;Depending on your cluster, you will need a way to get the locally
+built image into the Kubernetes registry.&lt;/p&gt;
+
+&lt;p&gt;With &lt;strong&gt;minikube&lt;/strong&gt; you can build directly on minikube&amp;rsquo;s Docker. Switch
+to that docker daemon by running &lt;code&gt;eval $(minikube docker-env)&lt;/code&gt;, before
+you build the image with &lt;code&gt;fissile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;With &lt;strong&gt;kind&lt;/strong&gt;, you need to use &lt;code&gt;kind load docker-image&lt;/code&gt; after building
+the image, to make it available, i.e.:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;kind load docker-image docker.io/org/nats:0.1-dev&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;modify-kubecf-to-use-the-new-image&#34;&gt;Modify Kubecf to Use the New Image&lt;/h3&gt;
+
+&lt;p&gt;Add an operations file to Kubernetes with the new image location. The
+example below uses NATS as the example for a BOSH release.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;kubectl&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;apply&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;-f&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;&amp;lt;EOF&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;---&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;apiVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;kind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ConfigMap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;metadata&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats-dev&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;data&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;ops&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;replace&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;path&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/releases/name=nats&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;value&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;url&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;docker.io/org/nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;version&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0.1&lt;/span&gt;-dev&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;sha1&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;~&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;EOF&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, when running &lt;code&gt;helm install kubecf&lt;/code&gt;, refer to that image:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;helm install ... --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;operations.custom={nats-dev}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can also unpack the helm release and modify it directly.
+There is no need to zip the release again, as &lt;code&gt;helm install scf/&lt;/code&gt; is
+able to install the unpacked release.&lt;/p&gt;
+
+&lt;p&gt;Note further that the above is an example of how to use the first kind
+of customization feature noted in the main &lt;a href=&#34;Contribute.md#customization&#34; target=&#34;_blank&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;integrating-the-release-in-kubecf&#34;&gt;Integrating the Release in Kubecf&lt;/h2&gt;
+
+&lt;p&gt;With Quarks and Kubecf, BOSH releases can largely be used just the
+same as with a BOSH director. There are a few things Quarks offers,
+however, to make the adaptation to the Kubernetes environment easier.&lt;/p&gt;
+
+&lt;h3 id=&#34;bpm&#34;&gt;BPM&lt;/h3&gt;
+
+&lt;p&gt;BPM configurations for jobs are parsed from a rendered &lt;code&gt;bpm.yml&lt;/code&gt;, as
+usual. But if need be, it is also possible to override the BPM
+configuration in the deployment manifest in the &lt;code&gt;quarks&lt;/code&gt; field. See
+&lt;a href=&#34;https://bosh.io/docs/bpm/config/&#34; target=&#34;_blank&#34;&gt;the bpm documentation&lt;/a&gt; for details on how to configure BPM.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;instance_groups&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;instances&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;jobs&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;properties&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;quarks&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;bpm&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;processes&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;limits&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;open_files&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;executable&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/var/vcap/packages/gnatsd/bin/gnatsd&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;args&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/var/vcap/jobs/nats/config/nats.conf&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note: The next section on &lt;a href=&#34;#operation-files&#34;&gt;ops files&lt;/a&gt; explains how
+this can be applied without the need to modify the original deployment
+manifest using ops files.&lt;/p&gt;
+
+&lt;h3 id=&#34;operation-files&#34;&gt;Operation Files&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://bosh.io/docs/cli-ops-files/&#34; target=&#34;_blank&#34;&gt;ops files&lt;/a&gt; can be used to modify arbitrary parts of the deployment
+manifest before it is applied. To do so, create a file in the
+directory &lt;code&gt;deploy/helm/scf/assets/operations/instance_groups&lt;/code&gt; and it
+will be automagically applied during installation, courtesy of the
+bazel machinery.&lt;/p&gt;
+
+&lt;p&gt;The ops file for the example above could look like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;replace&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;path&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/instance_groups/name=nats/jobs/name=nats/properties/quarks&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;?&lt;/span&gt;/bpm/processes&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;value&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;nats&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;limits&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;open_files&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;executable&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/var/vcap/packages/gnatsd/bin/gnatsd&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;args&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/var/vcap/jobs/nats/config/nats.conf&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;testing-with-kubecf&#34;&gt;Testing With Kubecf&lt;/h2&gt;
+
+&lt;p&gt;After upload and integration, it is possible to build and deploy Kubecf
+according to any of the recipes listed by the main
+&lt;a href=&#34;Contribute.md#deployment&#34; target=&#34;_blank&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Deploy KubeCF in Minikube</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The intended audience of this document are developers wishing to
+contribute to the Kubecf project.&lt;/p&gt;
+
+&lt;p&gt;Here we explain how to deploy Kubecf locally using:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Minikube to manage a local Kubernetes cluster.&lt;/li&gt;
+&lt;li&gt;A cf-operator pinned with Bazel.&lt;/li&gt;
+&lt;li&gt;Kubecf built and deployed from the sources in the current checkout.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;minikube&#34;&gt;Minikube&lt;/h2&gt;
+
+&lt;p&gt;Minikube is one of several projects enabling the deployment,
+management and tear-down of a local Kubernetes cluster.&lt;/p&gt;
+
+&lt;p&gt;The Kubecf Bazel workspace contains targets to deploy and/or tear-down
+a Minikube-based cluster. Using these has the advantage of using a
+specific version of Minikube. On the other side, the reduced
+variability of the development environment is a disadvantage as well,
+possibly allowing portability issues to slide through.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Deployment&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/minikube:start&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Tear-down&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/minikube:delete&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;attention-dangers&#34;&gt;Attention, Dangers&lt;/h3&gt;
+
+&lt;p&gt;Minikube edits the Kubernetes configuration file referenced by the
+environment variable &lt;code&gt;KUBECONFIG&lt;/code&gt;, or &lt;code&gt;~/.kube/config&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To preserve the original configuration either make a backup of the
+relevant file, or change &lt;code&gt;KUBECONFIG&lt;/code&gt; to a different path specific to
+the intended deployment.&lt;/p&gt;
+
+&lt;h3 id=&#34;advanced-configuration&#34;&gt;Advanced configuration&lt;/h3&gt;
+
+&lt;p&gt;The local &lt;a href=&#34;../kube/minikube.md&#34;&gt;Minikube Documentation&lt;/a&gt; explains the
+various environment variables which can be used to configure the
+resources used by the cluster (CPUs, memory, disk size, etc.) in
+detail.&lt;/p&gt;
+
+&lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; is the underlying generic tool to deploy a (modified)
+BOSH deployment like Kubecf for use.&lt;/p&gt;
+
+&lt;p&gt;It has to be installed in the same kube cluster Kubecf will be deployed to.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment-and-tear-down&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+
+&lt;p&gt;The Kubecf Bazel workspace contains targets to deploy and/or tear-down
+cf-operator:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Deployment&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/cf_operator:apply&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Tear-down&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/cf_operator:delete&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;kubecf&#34;&gt;Kubecf&lt;/h2&gt;
+
+&lt;p&gt;With all the prequisites handled by the preceding sections it is now
+possible to build and deploy kubecf itself.&lt;/p&gt;
+
+&lt;h3 id=&#34;system-domain&#34;&gt;System domain&lt;/h3&gt;
+
+&lt;p&gt;The main configuration to set for kubecf is its system domain.
+For the Minikube foundation we have to specify it as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;system_domain: &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube ip&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;.xip.io&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  &amp;gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;bazel info workspace&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;/dev/kubecf/system_domain_values.yaml&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;deployment-and-tear-down-1&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+
+&lt;p&gt;The Kubecf Bazel workspace contains targets to deploy and/or tear-down
+kubecf from the sources:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Deployment&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/kubecf:apply&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Tear-down&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bazel run //dev/kubecf:delete&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In this default deployment kubecf is launched without Ingress, and
+uses the Diego scheduler.&lt;/p&gt;
+
+&lt;h3 id=&#34;access&#34;&gt;Access&lt;/h3&gt;
+
+&lt;p&gt;Accessing the cluster from outside of the minikube VM requires
+&lt;a href=&#34;#ingress&#34;&gt;ingress&lt;/a&gt; to be set up correctly.&lt;/p&gt;
+
+&lt;p&gt;To access the cluster after the cf-operator has completed the
+deployment and all pods are active invoke:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cf api --skip-ssl-validation &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://api.&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube ip&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;.xip.io&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy the admin cluster password.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;acp&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get secret &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        --namespace kubecf kubecf.var-cf-admin-password &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.data.password}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 --decode&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Use the password from the previous step when requested.&lt;/span&gt;
+cf auth admin &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;acp&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;advanced-topics&#34;&gt;Advanced Topics&lt;/h3&gt;
+
+&lt;h4 id=&#34;diego-vs-eirini&#34;&gt;Diego vs Eirini&lt;/h4&gt;
+
+&lt;p&gt;Diego is the standard scheduler used by kubecf to deploy CF
+applications. Eirini is an alternative to Diego that follows a more
+Kubernetes native approach, deploying the CF apps directly to a
+Kubernetes namespace.&lt;/p&gt;
+
+&lt;p&gt;To activate this alternative, add a file matching the pattern
+&lt;code&gt;*values.yaml&lt;/code&gt; to the directory &lt;strong&gt;dev/kubecf&lt;/strong&gt; and containing&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;eirini&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;enabled&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;before deploying kubecf.&lt;/p&gt;
+
+&lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
+
+&lt;p&gt;By default, the cluster is exposed through its Kubernetes services.&lt;/p&gt;
+
+&lt;p&gt;To use the NGINX ingress instead, it is necessary to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install and configure the NGINX Ingress Controller.&lt;/li&gt;
+&lt;li&gt;Configure Kubecf to use the ingress controller.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This has to happen before deploying kubecf.&lt;/p&gt;
+
+&lt;h5 id=&#34;installation-of-the-nginx-ingress-controller&#34;&gt;Installation of the NGINX Ingress Controller&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;helm install stable/nginx-ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --name ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.2222=kubecf/kubecf-scheduler:2222&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.start&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.start&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  ...
+  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.end&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.end&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;controller.service.externalIPs={&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;minikube ip&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;tcp.&amp;lt;port&amp;gt;&lt;/code&gt; option uses the NGINX TCP pass-through.&lt;/p&gt;
+
+&lt;p&gt;In the case of the &lt;code&gt;tcp-router&lt;/code&gt; ports, one &lt;code&gt;--set&lt;/code&gt; for each port is required, starting with
+&lt;code&gt;services.tcp-router.port_range.start&lt;/code&gt; and ending with &lt;code&gt;services.tcp-router.port_range.end&lt;/code&gt;. Those
+values are defined on the &lt;code&gt;values.yaml&lt;/code&gt; file with default values.&lt;/p&gt;
+
+&lt;p&gt;The last flag in the command above assigns the external IP of the
+cluster to the Ingress Controller service.&lt;/p&gt;
+
+&lt;h5 id=&#34;configure-kubecf&#34;&gt;Configure kubecf&lt;/h5&gt;
+
+&lt;p&gt;Place a file matching the pattern &lt;code&gt;*values.yaml&lt;/code&gt; into the directory
+&lt;strong&gt;dev/kubecf&lt;/strong&gt; and containing&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;ingress&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;enabled&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Cloud Foundry Operator</title>
+      <link>https://suse.github.io/kubecf-docs/docs/concepts/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/concepts/operator/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CF-Operator is a Cloud Foundry Incubating Project.&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; enables the deployment of BOSH Releases, especially Cloud Foundry, to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s implemented as a k8s operator, an active controller component which acts upon custom k8s resources.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/#installing&#34; target=&#34;_blank&#34;&gt;Installation notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Incubation Proposal: &lt;a href=&#34;https://docs.google.com/document/d/1_IvFf-cCR4_Hxg-L7Z_R51EKhZfBqlprrs5NgC2iO2w/edit#heading=h.lybtsdyh8res&#34; target=&#34;_blank&#34;&gt;Containerizing Cloud Foundry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slack: #quarks-dev on &lt;a href=&#34;https://slack.cloudfoundry.org/&#34; target=&#34;_blank&#34;&gt;https://slack.cloudfoundry.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Backlog: &lt;a href=&#34;https://www.pivotaltracker.com/n/projects/2192232&#34; target=&#34;_blank&#34;&gt;Pivotal Tracker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker: &lt;a href=&#34;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&#34; target=&#34;_blank&#34;&gt;https://hub.docker.com/r/cfcontainerization/cf-operator/tags&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Project Quarks</title>
+      <link>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://www.cloudfoundry.org/project-quarks/&#34; target=&#34;_blank&#34;&gt;Project Quarks&lt;/a&gt; is an incubating effort within the Cloud Foundry Foundation that packages Cloud Foundry Application Runtime as containers instead of virtual machines, enabling easy deployment to Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;The resulting containerized CFAR provides an identical developer experience to that of BOSH-managed Cloud Foundry installations, requires less infrastructure capacity and delivers an operational experience that is familiar to Kubernetes operators.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Secret rotation KubeCF</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Deploy KubeCF</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Upgrading KubeCF deployments</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Test BOSH releases</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Image naming</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When running a kubecf instance, all of the job containers in the pods
+for the instance groups use a docker image. This image provides that job and
+the associated packages.&lt;/p&gt;
+
+&lt;p&gt;The names of these docker images are structured like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker.io/cfcontainerization/nats:opensuse-42.3-36.g03b4653-30.80-7.0.0_362.g9610e90b-26
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Registry                     Role Tag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The tag is further structured as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;opensuse-42.3-36.g03b4653-30.80-7.0.0_362.g9610e90b-26
+~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+Stemcell OS   Stemcell version                      Role version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The various components above come from a number of places in the
+Chart, chart values, deployment manifest, etc. When an element can be
+provided by multiple places, the first place (in the order given below)
+with a defined value (i.e. not nil) is used.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Element&lt;/th&gt;
+&lt;th&gt;Origin&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Role&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;instance_groups.[].name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Registry&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.(role).url&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.defaults.url&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Role version&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.(role).version&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.defaults.version&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Stemcell OS&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.(role).stemcell.os&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.defaults.stemcell.os&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Stemcell version&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.(role).stemcell.version&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;releases.defaults.stemcell.version&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Attention&lt;/strong&gt;: The stemcell information put into the Chart / manifest
+has to match the stemcell baked into the docker image by the CI image
+builder at the time of building.&lt;/p&gt;
+
+&lt;p&gt;This information is easiest to extract from the tag for the used
+docker image.&lt;/p&gt;
+
+&lt;p&gt;Some, but not all, of this information can also be extracted from the
+labels of the used docker image. For image &lt;strong&gt;foo&lt;/strong&gt;, invoke:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker inspect -f &#39;{{ index .Config.Labels &amp;quot;stemcell-version&amp;quot; }}&#39; foo
+docker inspect -f &#39;{{ index .Config.Labels &amp;quot;stemcell-flavor&amp;quot; }}&#39; foo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;flavor&lt;/strong&gt; plus the part of the &lt;strong&gt;version&lt;/strong&gt; up to the first dash
+character (&lt;code&gt;-&lt;/code&gt;) provides the stemcell OS, and the remainder of the
+version provides a prefix for the stemcell version.&lt;/p&gt;
+
+&lt;p&gt;For example, the version and flavor strings&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;42.3-36.g03b4653-30.80
+opensuse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;yield &lt;strong&gt;opensuse-42.3&lt;/strong&gt; and &lt;strong&gt;36.g03b4653-30.80&lt;/strong&gt; for os and version
+prefix. Below, the tag structure again, with the labeling information
+added:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stemcell-flavor
+|        stemcell-version
+~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~
+opensuse-42.3-36.g03b4653-30.80-7.0.0_362.g9610e90b-26
+~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+Stemcell OS   Stemcell version                      Role version
+&lt;/code&gt;&lt;/pre&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: CF Bump scripts</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The scripts in directory &lt;strong&gt;dev/cf_deployment/bump&lt;/strong&gt; are used when bumping
+the version of the &lt;code&gt;cf-deployment&lt;/code&gt; manifest.&lt;/p&gt;
+
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://yq.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34;&gt;yq&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;scripts&#34;&gt;Scripts&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;set_release_urls.sh&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;To be run after updating the cf-deployment version to use and
+regenerating &lt;code&gt;assets/cf-deployment.yml&lt;/code&gt;, this script regenerates
+the &lt;code&gt;assets/operations/set_release_urls.yaml&lt;/code&gt; ops file which
+replaces BOSH release locations with references to the equivalent
+docker images.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: CF CLI script</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;cf_cli.sh&lt;/code&gt; script contained in directory &lt;strong&gt;dev/cf_cli&lt;/strong&gt; is a
+temporary helper script that creates a pod with the &lt;code&gt;cf-cli&lt;/code&gt;
+configured and ready to talk to the Kubecf in the cluster.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Deploy on Kubernetes</title>
+      <link>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The intended audience of this document are developers wishing to
+contribute to the Kubecf project.&lt;/p&gt;
+
+&lt;p&gt;Here we explain how to deploy Kubecf using:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A generic kubernetes cluster.&lt;/li&gt;
+&lt;li&gt;A released cf-operator helm chart.&lt;/li&gt;
+&lt;li&gt;A released kubecf helm chart.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h2&gt;
+
+&lt;p&gt;In contrast to other recipes, we are not set on using a local
+cluster. Any Kubernetes cluster will do, assuming that the following
+requirements are met:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Presence of a default storage class (provisioner).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For use with a diego-based kubecf (default), a node OS with XFS
+support.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For GKE, using the option &lt;code&gt;--image-type UBUNTU&lt;/code&gt; with the
+&lt;code&gt;gcloud beta container&lt;/code&gt; command selects such an OS.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This can be any of, but not restricted to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GKE (&lt;a href=&#34;../provider/gke.md&#34;&gt;Notes&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;AKS&lt;/li&gt;
+&lt;li&gt;EKS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that how to deploy and tear-down such a cluster is outside of the
+scope of this recipe.&lt;/p&gt;
+
+&lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; is the underlying generic tool to deploy a (modified)
+BOSH deployment like Kubecf for use.&lt;/p&gt;
+
+&lt;p&gt;It has to be installed in the same Kubernetes cluster that Kubecf will
+be deployed to.&lt;/p&gt;
+
+&lt;p&gt;Here we are not using development-specific dependencies like bazel,
+but only generic tools, i.e. &lt;code&gt;kubectl&lt;/code&gt; and &lt;code&gt;helm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;helm.md&#34; target=&#34;_blank&#34;&gt;Installing and configuring Helm&lt;/a&gt; is the same regardless of
+the chosen foundation, and assuming that the cluster does not come
+with Helm Tiller pre-installed.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment-and-tear-down&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install --name cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace cfo &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.operator.watchNamespace=kubecf&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v0.4.2-147.gb88e4296.tgz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the example above, version 0.4.1 of the operator was used. Look
+into the &lt;code&gt;cf_operator&lt;/code&gt; section of the top-level &lt;code&gt;def.bzl&lt;/code&gt; file to find
+the version of the operator validated against the current kubecf
+master.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+&amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt; namespace.
+&amp;gt; Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
+&amp;gt;
+&amp;gt; The &lt;code&gt;global.operator.watchNamespace=kubecf&lt;/code&gt; path tells the
+controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.
+&amp;gt;
+&amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and eventually one of the
+controllers will use a webhook to label this namespace with the &lt;code&gt;cf-operator-ns&lt;/code&gt; key.
+&amp;gt;
+&amp;gt; If the &lt;code&gt;kubecf&lt;/code&gt; namespace is deleted, but the operators are still running, they will no longer
+know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
+
+&lt;p&gt;Note how the namespace the operator is installed into (&lt;code&gt;cfo&lt;/code&gt;) differs
+from the namespace the operator is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;This form of deployment enables restarting the operator because it is
+not affected by webhooks. It further enables the deletion of the
+Kubecf deployment namespace to start from scratch, without redeploying
+the operator itself.&lt;/p&gt;
+
+&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h2 id=&#34;kubecf&#34;&gt;Kubecf&lt;/h2&gt;
+
+&lt;p&gt;With all the prerequisites handled by the preceding sections it is now
+possible to build and deploy kubecf itself.&lt;/p&gt;
+
+&lt;p&gt;This again uses helm and a released helm chart.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment-and-tear-down-1&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install --name kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://scf-v3.s3.amazonaws.com/scf-3.0.0-82165ef3.tgz &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;system_domain=kubecf.suse.dev&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this default deployment, kubecf is launched without Ingress, and it
+uses the Diego scheduler.&lt;/p&gt;
+
+&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h3 id=&#34;access&#34;&gt;Access&lt;/h3&gt;
+
+&lt;p&gt;To access the cluster after the cf-operator has completed the
+deployment and all pods are active invoke:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cf api --skip-ssl-validation &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://api.&amp;lt;domain&amp;gt;&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy the admin cluster password.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get secret &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        --namespace kubecf kubecf.var-cf-admin-password &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.data.password}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 --decode&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Use the password from the previous step when requested.&lt;/span&gt;
+cf auth admin &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;advanced-topics&#34;&gt;Advanced Topics&lt;/h3&gt;
+
+&lt;h4 id=&#34;diego-vs-eirini&#34;&gt;Diego vs Eirini&lt;/h4&gt;
+
+&lt;p&gt;Diego is the standard scheduler used by kubecf to deploy CF
+applications. Eirini is an alternative to Diego that follows a more
+Kubernetes native approach, deploying the CF apps directly to a
+Kubernetes namespace.&lt;/p&gt;
+
+&lt;p&gt;To activate this alternative, use the option
+&lt;code&gt;--set features.eirini.enabled=true&lt;/code&gt; when deploying kubecf from its chart.&lt;/p&gt;
+
+&lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
+
+&lt;p&gt;By default, the cluster is exposed through its Kubernetes services.&lt;/p&gt;
+
+&lt;p&gt;To use the NGINX ingress instead, it is necessary to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install and configure the NGINX Ingress Controller.&lt;/li&gt;
+&lt;li&gt;Configure Kubecf to use the ingress controller.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This has to happen before deploying kubecf.&lt;/p&gt;
+
+&lt;h5 id=&#34;installation-of-the-nginx-ingress-controller&#34;&gt;Installation of the NGINX Ingress Controller&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;helm install stable/nginx-ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --name ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.2222=kubecf/kubecf-scheduler:2222&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.start&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.start&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  ...
+  --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tcp.&amp;lt;services.tcp-router.port_range.end&amp;gt;=kubecf/kubecf-tcp-router:&amp;lt;services.tcp-router.port_range.end&amp;gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;tcp.&amp;lt;port&amp;gt;&lt;/code&gt; option uses the NGINX TCP pass-through.&lt;/p&gt;
+
+&lt;p&gt;In the case of the &lt;code&gt;tcp-router&lt;/code&gt; ports, one &lt;code&gt;--set&lt;/code&gt; for each port is required, starting with
+&lt;code&gt;services.tcp-router.port_range.start&lt;/code&gt; and ending with &lt;code&gt;services.tcp-router.port_range.end&lt;/code&gt;. Those
+values are defined on the &lt;code&gt;values.yaml&lt;/code&gt; file with default values.&lt;/p&gt;
+
+&lt;h5 id=&#34;configure-kubecf&#34;&gt;Configure kubecf&lt;/h5&gt;
+
+&lt;p&gt;Use the Helm option &lt;code&gt;--set features.ingress.enabled=true&lt;/code&gt; when
+deploying kubecf.&lt;/p&gt;
+
+&lt;h4 id=&#34;external-database&#34;&gt;External Database&lt;/h4&gt;
+
+&lt;p&gt;By default, kubecf includes a single-availability database provided by the
+cf-mysql-release. Kubecf also exposes a way to use an external database via the
+Helm property &lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more
+details.&lt;/p&gt;
+
+&lt;p&gt;For local development with an external database, the
+&lt;code&gt;bazel run //dev/external_database:deploy_mysql&lt;/code&gt; command will bring a mysql database up and running
+ready to be consumed by kubecf.&lt;/p&gt;
+
+&lt;p&gt;An example for the additional values to be provided to &lt;code&gt;//dev/kubecf:apply&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;external_database&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;enabled&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;mysql&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;host&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;kubecf-mysql.kubecf-mysql.svc&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;port&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;databases&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;uaa&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;uaa&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;cc&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;cloud_controller&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;bbs&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;diego&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;routing_api&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;routing-api&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;policy_server&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;network_policy&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;silk_controller&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;network_connectivity&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;locket&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;locket&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;credhub&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;credhub&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;password&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        username: root&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Inspection Helpers</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The tools in directory &lt;strong&gt;dev/kube&lt;/strong&gt; help developers inspect kube
+clusters and kubecf deployments.&lt;/p&gt;
+
+&lt;p&gt;The scripts and their uses are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;klog.sh&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;Run after kubecf is deployed, this script pulls the kube logs from
+all containers in all kubecf pods, as well as kubecf log files in
+the containers, pod descriptions, events, and resources.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;kube-ready-state-check.sh&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;Run before kubecf is deployed, this script inspects the kube
+cluster for issues known to impede kubecf deployment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;pod-status&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;Run during or after kubecf is deployed, this script shows a table
+of all pods in the deployment and their state. Options exists to
+restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Kind</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</guid>
+      <description>
+        
+        
+        
+
+&lt;h2 id=&#34;deployment-and-teardown&#34;&gt;Deployment and teardown&lt;/h2&gt;
+
+&lt;p&gt;For developing with &lt;a href=&#34;https://github.com/kubernetes-sigs/kind&#34; target=&#34;_blank&#34;&gt;KinD&lt;/a&gt;, start a local cluster by running the &lt;code&gt;start&lt;/code&gt; target:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;bazel run //dev/kind:start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And tear it down via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;bazel run //dev/kind:delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: KubeCF</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The target defined in directory &lt;strong&gt;dev/kubecf&lt;/strong&gt; is used to apply the
+rendered Helm template to a Kubernetes cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Attention&lt;/strong&gt;: While any files matching the glob pattern
+&lt;code&gt;*values.yaml&lt;/code&gt; and found in this directory are ignored by git, they
+are used by Bazel to render the SCF chart before applying to the
+cluster with kubectl.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Linters</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The directory &lt;strong&gt;dev/linters&lt;/strong&gt; contains tooling to statically check the
+sources of kubecf.&lt;/p&gt;
+
+&lt;p&gt;The following linters are available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;shellcheck.sh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;Runs shellcheck on all &lt;code&gt;.sh&lt;/code&gt; files found in the entire checkout
+and reports any issues found.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;yamllint.sh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;Runs yamllint on all &lt;code&gt;.{yaml,yml}&lt;/code&gt; files found in the entire checkout
+and reports any issues found.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;helmlint.sh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;Runs &lt;code&gt;helm lint&lt;/code&gt; on the generated &lt;code&gt;kubecf&lt;/code&gt; chart and repos any errors found.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Minikube</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</guid>
+      <description>
+        
+        
+        
+
+&lt;h2 id=&#34;attention&#34;&gt;Attention&lt;/h2&gt;
+
+&lt;p&gt;Minikube edits the kubernetes configuration file referenced by the
+environment variable &lt;code&gt;KUBECONFIG&lt;/code&gt;, or &lt;code&gt;~/.kube/config&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To preserve the original configuration either make a backup of the
+relevant file, or change &lt;code&gt;KUBECONFIG&lt;/code&gt; to a different path specific to
+the intended deployment.&lt;/p&gt;
+
+&lt;h2 id=&#34;deployment-and-teardown&#34;&gt;Deployment and teardown&lt;/h2&gt;
+
+&lt;p&gt;For developing with Minikube, start a local cluster by running the &lt;code&gt;start&lt;/code&gt; target:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //dev/minikube:start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And tear it down again via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //dev/minikube:delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;managing-system-resources&#34;&gt;Managing system resources&lt;/h2&gt;
+
+&lt;p&gt;The following three environment variables are used by the &lt;code&gt;start&lt;/code&gt;
+target to allocate the resources used by the deployed Minikube:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th&gt;Setting&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;VM_CPUS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;the number of CPUs Minikube will use.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;VM_MEMORY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;the amount of RAM Minikube will be allowed to use.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;VM_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;the disk size Minikube will be allowed to use.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;E.g.:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;VM_CPUS&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;VM_MEMORY&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$((&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1024&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;24&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;VM_DISK_SIZE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;180g bazel run //dev/minikube:start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;specifying-a-different-kubernetes-version&#34;&gt;Specifying a different Kubernetes version&lt;/h2&gt;
+
+&lt;p&gt;Set the &lt;code&gt;K8S_VERSION&lt;/code&gt; environment variable to override the default version.&lt;/p&gt;
+
+&lt;h2 id=&#34;vm-drivers&#34;&gt;VM Drivers&lt;/h2&gt;
+
+&lt;p&gt;At the moment, only the VirtualBox and KVM2 drivers are working correctly. Set the &lt;code&gt;VM_DRIVER&lt;/code&gt;
+environment variable to override the default. E.g. &lt;code&gt;VM_DRIVER=kvm2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;extra-minikube-options&#34;&gt;Extra minikube options&lt;/h2&gt;
+
+&lt;p&gt;It is possible to set extra minikube options (e.g. to set a docker registry
+mirror) via the environment variable &lt;code&gt;MINIKUBE_EXTRA_OPTIONS&lt;/code&gt;.  For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;MINIKUBE_EXTRA_OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--registry-mirror http://registry.mirror.example:5000/&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Pre-render scripts</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The directory &lt;strong&gt;bosh/releases/pre_render_scripts&lt;/strong&gt; contains scripts
+added to the &lt;code&gt;quarks&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;p&gt;The structure of this directory is expected to be
+&lt;code&gt;&amp;lt;instance_group&amp;gt;/&amp;lt;job&amp;gt;/&amp;lt;type&amp;gt;/&amp;lt;script&amp;gt;&lt;/code&gt;, where &lt;code&gt;&amp;lt;type&amp;gt;&lt;/code&gt; is one of&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;jobs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ig_resolver&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This type details the exact location of where the patch executes.&lt;/p&gt;
+
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#Pre_render_scripts&#34; target=&#34;_blank&#34;&gt;Pre render scripts&lt;/a&gt; are kubecf&amp;rsquo;s equivalent of its predecessors&amp;rsquo; (SCF
+v2) &lt;a href=&#34;https://github.com/SUSE/scf/tree/develop/container-host-files/etc/scf/config/scripts/patches&#34; target=&#34;_blank&#34;&gt;patches&lt;/a&gt; scripts. They, like them, enable developers and
+maintainers to apply general patches to the sources of a job
+(e.g. configuration templates, script sources, etc.) before that job
+was rendered and then executed.&lt;/p&gt;
+
+&lt;p&gt;At the core, the feature allows the user to execute custom scripts
+during runtime of the job container for a specific instance_group.&lt;/p&gt;
+
+&lt;h2 id=&#34;machinery&#34;&gt;Machinery&lt;/h2&gt;
+
+&lt;p&gt;The parent and sibling directories (&lt;strong&gt;bosh/releases&lt;/strong&gt; and
+&lt;strong&gt;bosh/releases/generators&lt;/strong&gt;) contain supporting code (bazel
+machinery) which will automatically convert the script files into the
+proper ops files for use by the CF operator, as part of the overall
+generation of the kubecf helm chart.&lt;/p&gt;
+
+&lt;p&gt;It is this machinery which depends on the
+&lt;code&gt;&amp;lt;instance_group&amp;gt;/&amp;lt;job&amp;gt;/&amp;lt;type&amp;gt;/&amp;lt;script&amp;gt;&lt;/code&gt; structure noted above.&lt;/p&gt;
+
+&lt;h2 id=&#34;attention-dangers&#34;&gt;Attention, Dangers&lt;/h2&gt;
+
+&lt;p&gt;All patch scripts &lt;strong&gt;must be idempotent&lt;/strong&gt;. In other words, it must be
+possible to apply them multiple times without error and without
+changing the result.&lt;/p&gt;
+
+&lt;p&gt;The existing patch scripts do this by checking if the patch is already
+applied before attempting to apply it for real.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Testing</title>
+      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The smoke, brain, and acceptance tests can be run after Kubecf
+deployment has completed, via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //testing/smoke_tests
+bazel run //testing/brain_tests
+bazel run //testing/acceptance_tests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;a href=&#34;tests_cat.md&#34; target=&#34;_blank&#34;&gt;acceptance tests&lt;/a&gt; can be limited to specific suites of interest,
+as explained in the linked document.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,70 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KubeCF – Core Tasks</title>
+    <link>https://suse.github.io/kubecf-docs/docs/tasks/</link>
+    <description>Recent content in Core Tasks on KubeCF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://suse.github.io/kubecf-docs/docs/tasks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Secret rotation KubeCF</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Deploy KubeCF</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Upgrading KubeCF deployments</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Test BOSH releases</title>
+      <link>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
