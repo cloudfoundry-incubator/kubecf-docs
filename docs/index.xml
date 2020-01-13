@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Documentation</title>
-    <link>https://suse.github.io/kubecf-docs/docs/</link>
+    <link>https://kubecf.suse.dev/docs/</link>
     <description>Recent content in Documentation on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://suse.github.io/kubecf-docs/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.suse.dev/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Tests</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/tests/</link>
+      <link>https://kubecf.suse.dev/docs/reference/tests/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/tests/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/tests/</guid>
       <description>
         
         
@@ -27,7 +27,7 @@
 &lt;p&gt;The bazel target &lt;strong&gt;//testing/acceptance_tests&lt;/strong&gt; starts a run of the
 &lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release&#34; target=&#34;_blank&#34;&gt;Cloud Foundry Acceptance Tests&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;See also the &lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See also the &lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;limiting-test-suites&#34;&gt;Limiting test suites&lt;/h2&gt;
 
@@ -41,17 +41,17 @@ key in &lt;a href=&#34;https://github.com/SUSE/kubecf/blob/master/deploy/helm/ku
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;include&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;+docker,-ssh&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that this is an example of how to use the second kind of
 customization feature noted in the main
-&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://kubecf.suse.dev/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Bosh releases integration</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</link>
+      <link>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</guid>
+      <guid>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</guid>
       <description>
         
         
@@ -198,10 +198,10 @@ according to any of the recipes listed by the main
     
     <item>
       <title>Docs: Deploy KubeCF in Minikube</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</link>
+      <link>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</guid>
+      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</guid>
       <description>
         
         
@@ -415,10 +415,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Cloud Foundry Operator</title>
-      <link>https://suse.github.io/kubecf-docs/docs/concepts/operator/</link>
+      <link>https://kubecf.suse.dev/docs/concepts/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/concepts/operator/</guid>
+      <guid>https://kubecf.suse.dev/docs/concepts/operator/</guid>
       <description>
         
         
@@ -447,10 +447,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Project Quarks</title>
-      <link>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</link>
+      <link>https://kubecf.suse.dev/docs/concepts/quarks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</guid>
+      <guid>https://kubecf.suse.dev/docs/concepts/quarks/</guid>
       <description>
         
         
@@ -463,10 +463,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Secret rotation KubeCF</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</link>
+      <link>https://kubecf.suse.dev/docs/tasks/secrets/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tasks/secrets/</guid>
+      <guid>https://kubecf.suse.dev/docs/tasks/secrets/</guid>
       <description>
         
         
@@ -476,10 +476,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Deploy KubeCF</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</link>
+      <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tasks/deploy/</guid>
+      <guid>https://kubecf.suse.dev/docs/tasks/deploy/</guid>
       <description>
         
         
@@ -489,10 +489,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Upgrading KubeCF deployments</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</link>
+      <link>https://kubecf.suse.dev/docs/tasks/upgrade/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tasks/upgrade/</guid>
+      <guid>https://kubecf.suse.dev/docs/tasks/upgrade/</guid>
       <description>
         
         
@@ -502,10 +502,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Test BOSH releases</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</link>
+      <link>https://kubecf.suse.dev/docs/tasks/bosh/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tasks/bosh/</guid>
+      <guid>https://kubecf.suse.dev/docs/tasks/bosh/</guid>
       <description>
         
         
@@ -515,10 +515,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Image naming</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</link>
+      <link>https://kubecf.suse.dev/docs/reference/image-naming/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/image-naming/</guid>
       <description>
         
         
@@ -642,10 +642,10 @@ Stemcell OS   Stemcell version                      Role version
     
     <item>
       <title>Docs: CF Bump scripts</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/bump/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/bump/</guid>
       <description>
         
         
@@ -677,10 +677,10 @@ docker images.&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Docs: CF CLI script</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/cfcli/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/cfcli/</guid>
       <description>
         
         
@@ -693,10 +693,10 @@ configured and ready to talk to the Kubecf in the cluster.&lt;/p&gt;
     
     <item>
       <title>Docs: Deploy on Kubernetes</title>
-      <link>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</link>
+      <link>https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/getting-started/kubernetes-deploy/</guid>
+      <guid>https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/</guid>
       <description>
         
         
@@ -922,10 +922,10 @@ ready to be consumed by kubecf.&lt;/p&gt;
     
     <item>
       <title>Docs: Inspection Helpers</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kube/</guid>
       <description>
         
         
@@ -958,10 +958,10 @@ restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&g
     
     <item>
       <title>Docs: Kind</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kind/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kind/</guid>
       <description>
         
         
@@ -978,10 +978,10 @@ restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&g
     
     <item>
       <title>Docs: KubeCF</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kubecf/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kubecf/</guid>
       <description>
         
         
@@ -998,10 +998,10 @@ cluster with kubectl.&lt;/p&gt;
     
     <item>
       <title>Docs: Linters</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/linters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/linters/</guid>
       <description>
         
         
@@ -1031,10 +1031,10 @@ and reports any issues found.&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Docs: Minikube</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/minikube/</guid>
       <description>
         
         
@@ -1107,10 +1107,10 @@ mirror) via the environment variable &lt;code&gt;MINIKUBE_EXTRA_OPTIONS&lt;/code
     
     <item>
       <title>Docs: Pre-render scripts</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/patches/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/patches/</guid>
       <description>
         
         
@@ -1166,10 +1166,10 @@ applied before attempting to apply it for real.&lt;/p&gt;
     
     <item>
       <title>Docs: Testing</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/testing/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/testing/</guid>
       <description>
         
         

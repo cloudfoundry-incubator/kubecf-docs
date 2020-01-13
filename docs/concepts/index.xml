@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Concepts</title>
-    <link>https://suse.github.io/kubecf-docs/docs/concepts/</link>
+    <link>https://kubecf.suse.dev/docs/concepts/</link>
     <description>Recent content in Concepts on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://suse.github.io/kubecf-docs/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.suse.dev/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Cloud Foundry Operator</title>
-      <link>https://suse.github.io/kubecf-docs/docs/concepts/operator/</link>
+      <link>https://kubecf.suse.dev/docs/concepts/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/concepts/operator/</guid>
+      <guid>https://kubecf.suse.dev/docs/concepts/operator/</guid>
       <description>
         
         
@@ -47,10 +47,10 @@
     
     <item>
       <title>Docs: Project Quarks</title>
-      <link>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</link>
+      <link>https://kubecf.suse.dev/docs/concepts/quarks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/concepts/quarks/</guid>
+      <guid>https://kubecf.suse.dev/docs/concepts/quarks/</guid>
       <description>
         
         

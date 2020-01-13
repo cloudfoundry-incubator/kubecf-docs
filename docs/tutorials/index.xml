@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Tutorials</title>
-    <link>https://suse.github.io/kubecf-docs/docs/tutorials/</link>
+    <link>https://kubecf.suse.dev/docs/tutorials/</link>
     <description>Recent content in Tutorials on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 04 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://suse.github.io/kubecf-docs/docs/tutorials/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.suse.dev/docs/tutorials/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Bosh releases integration</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</link>
+      <link>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/bosh-integration/</guid>
+      <guid>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</guid>
       <description>
         
         
@@ -166,10 +166,10 @@ according to any of the recipes listed by the main
     
     <item>
       <title>Docs: Deploy KubeCF in Minikube</title>
-      <link>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</link>
+      <link>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/tutorials/deploy-minikube/</guid>
+      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</guid>
       <description>
         
         

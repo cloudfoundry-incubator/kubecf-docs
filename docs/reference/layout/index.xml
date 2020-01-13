@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Project Layout</title>
-    <link>https://suse.github.io/kubecf-docs/docs/reference/layout/</link>
+    <link>https://kubecf.suse.dev/docs/reference/layout/</link>
     <description>Recent content in Project Layout on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://suse.github.io/kubecf-docs/docs/reference/layout/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.suse.dev/docs/reference/layout/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: CF Bump scripts</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/bump/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/bump/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/bump/</guid>
       <description>
         
         
@@ -51,10 +51,10 @@ docker images.&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Docs: CF CLI script</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/cfcli/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/cfcli/</guid>
       <description>
         
         
@@ -67,10 +67,10 @@ configured and ready to talk to the Kubecf in the cluster.&lt;/p&gt;
     
     <item>
       <title>Docs: Inspection Helpers</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kube/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kube/</guid>
       <description>
         
         
@@ -103,10 +103,10 @@ restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&g
     
     <item>
       <title>Docs: Kind</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kind/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kind/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kind/</guid>
       <description>
         
         
@@ -123,10 +123,10 @@ restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&g
     
     <item>
       <title>Docs: KubeCF</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/kubecf/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/kubecf/</guid>
       <description>
         
         
@@ -143,10 +143,10 @@ cluster with kubectl.&lt;/p&gt;
     
     <item>
       <title>Docs: Linters</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/linters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/linters/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/linters/</guid>
       <description>
         
         
@@ -176,10 +176,10 @@ and reports any issues found.&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Docs: Minikube</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/minikube/</guid>
       <description>
         
         
@@ -252,10 +252,10 @@ mirror) via the environment variable &lt;code&gt;MINIKUBE_EXTRA_OPTIONS&lt;/code
     
     <item>
       <title>Docs: Pre-render scripts</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/patches/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/patches/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/patches/</guid>
       <description>
         
         
@@ -311,10 +311,10 @@ applied before attempting to apply it for real.&lt;/p&gt;
     
     <item>
       <title>Docs: Testing</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/testing/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/testing/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/testing/</guid>
       <description>
         
         

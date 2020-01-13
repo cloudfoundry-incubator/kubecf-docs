@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Reference</title>
-    <link>https://suse.github.io/kubecf-docs/docs/reference/</link>
+    <link>https://kubecf.suse.dev/docs/reference/</link>
     <description>Recent content in Reference on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://suse.github.io/kubecf-docs/docs/reference/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.suse.dev/docs/reference/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Tests</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/tests/</link>
+      <link>https://kubecf.suse.dev/docs/reference/tests/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/tests/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/tests/</guid>
       <description>
         
         
@@ -27,7 +27,7 @@
 &lt;p&gt;The bazel target &lt;strong&gt;//testing/acceptance_tests&lt;/strong&gt; starts a run of the
 &lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release&#34; target=&#34;_blank&#34;&gt;Cloud Foundry Acceptance Tests&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;See also the &lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See also the &lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;limiting-test-suites&#34;&gt;Limiting test suites&lt;/h2&gt;
 
@@ -41,17 +41,17 @@ key in &lt;a href=&#34;https://github.com/SUSE/kubecf/blob/master/deploy/helm/ku
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;include&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;+docker,-ssh&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that this is an example of how to use the second kind of
 customization feature noted in the main
-&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://kubecf.suse.dev/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Image naming</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</link>
+      <link>https://kubecf.suse.dev/docs/reference/image-naming/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/image-naming/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/image-naming/</guid>
       <description>
         
         
@@ -175,10 +175,10 @@ Stemcell OS   Stemcell version                      Role version
     
     <item>
       <title>Docs: Project Layout</title>
-      <link>https://suse.github.io/kubecf-docs/docs/reference/layout/</link>
+      <link>https://kubecf.suse.dev/docs/reference/layout/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://suse.github.io/kubecf-docs/docs/reference/layout/</guid>
+      <guid>https://kubecf.suse.dev/docs/reference/layout/</guid>
       <description>
         
         
@@ -211,7 +211,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/patches/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/bosh/releases&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/patches/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/bosh/releases&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Support for runtime patches of a kubecf deployment.&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -221,7 +221,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/bump/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_deployment/bump&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/bump/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_deployment/bump&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Tools to support updating the cf deployment&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -231,7 +231,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/cfcli/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_cli&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/cfcli/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_cli&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Deploy cf cli into a helper pod from which to then&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -241,17 +241,17 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/kube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kube&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kube&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Tools to inspect kube clusters and kubecf deployments.&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/linters/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/linters&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/linters/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/linters&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Tools for statically checking the kubecf sources.&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/minikube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/minikube&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/minikube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/minikube&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Targets to manage a local kubernetes cluster.&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -261,7 +261,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/kind/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kind&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kind/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kind&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Targets to manage a local kubernetes cluster.&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -271,7 +271,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/kubecf/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kubecf&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kubecf/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kubecf&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Kubecf chart configuration, and targets for&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -296,7 +296,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://suse.github.io/kubecf-docs/docs/reference/layout/testing/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/testing&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/testing&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Bazel targets to run CF smoke and acceptance tests.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
