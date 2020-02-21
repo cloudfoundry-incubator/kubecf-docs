@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</loc>
+    <lastmod>2020-02-07T15:46:27+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</loc>
     <lastmod>2019-12-19T10:20:25+01:00</lastmod>
   </url>

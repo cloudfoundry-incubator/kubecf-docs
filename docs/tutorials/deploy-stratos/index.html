@@ -20,28 +20,28 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Deploy KubeCF in Minikube | KubeCF</title><meta property="og:title" content="Deploy KubeCF in Minikube" />
-<meta property="og:description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<title>Deploy Stratos next to KubeCF | KubeCF</title><meta property="og:title" content="Deploy Stratos next to KubeCF" />
+<meta property="og:description" content="Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-minikube/" />
-<meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-19T15:14:30+01:00" /><meta property="og:site_name" content="KubeCF" />
-<meta itemprop="name" content="Deploy KubeCF in Minikube">
-<meta itemprop="description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-stratos/" />
+<meta property="article:published_time" content="2020-02-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-07T15:46:27+01:00" /><meta property="og:site_name" content="KubeCF" />
+<meta itemprop="name" content="Deploy Stratos next to KubeCF">
+<meta itemprop="description" content="Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF
 ">
 
 
-<meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-19T15:14:30&#43;01:00" />
-<meta itemprop="wordCount" content="623">
+<meta itemprop="datePublished" content="2020-02-07T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-07T15:46:27&#43;01:00" />
+<meta itemprop="wordCount" content="229">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Deploy KubeCF in Minikube"/>
-<meta name="twitter:description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<meta name="twitter:title" content="Deploy Stratos next to KubeCF"/>
+<meta name="twitter:description" content="Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF
 "/>
 
 
@@ -60,7 +60,7 @@
   crossorigin="anonymous"></script>
 
 
-    <title>Deploy KubeCF in Minikube | KubeCF</title>
+    <title>Deploy Stratos next to KubeCF | KubeCF</title>
   </head>
   <body class="td-page">
     <header>
@@ -314,7 +314,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-stratos" href="/docs/tutorials/deploy-stratos/">Deploy Stratos next to KubeCF</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-tutorials-deploy-stratos" href="/docs/tutorials/deploy-stratos/">Deploy Stratos next to KubeCF</a>
       
       
       
@@ -326,7 +326,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-tutorials-deploy-minikube" href="/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-minikube" href="/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
       
       
     </li>
@@ -493,8 +493,8 @@
 
 
 
-<a href="https://github.com/SUSE/kubecf-docs/edit/master/content/en/docs/Tutorials/deploy-minikube.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/SUSE/kubecf-docs/issues/new?title=Deploy%20KubeCF%20in%20Minikube" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/SUSE/kubecf-docs/edit/master/content/en/docs/Tutorials/deploy-stratos.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/SUSE/kubecf-docs/issues/new?title=Deploy%20Stratos%20next%20to%20KubeCF" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/SUSE/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -510,30 +510,12 @@
 <ul>
 <li>
 <ul>
-<li><a href="#minikube">Minikube</a>
+<li><a href="#required-details">Required details</a>
 <ul>
-<li><a href="#attention-dangers">Attention, Dangers</a></li>
-<li><a href="#advanced-configuration">Advanced configuration</a></li>
+<li><a href="#prepare-stratos-setup-config">Prepare Stratos setup config</a></li>
+<li><a href="#deploy-stratos">Deploy Stratos</a></li>
 </ul></li>
-<li><a href="#cf-operator">cf-operator</a>
-<ul>
-<li><a href="#deployment-and-tear-down">Deployment and Tear-down</a></li>
-</ul></li>
-<li><a href="#kubecf">Kubecf</a>
-<ul>
-<li><a href="#system-domain">System domain</a></li>
-<li><a href="#deployment-and-tear-down-1">Deployment and Tear-down</a></li>
-<li><a href="#access">Access</a></li>
-<li><a href="#advanced-topics">Advanced Topics</a>
-<ul>
-<li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
-<li><a href="#ingress">Ingress</a>
-<ul>
-<li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
-<li><a href="#configure-kubecf">Configure kubecf</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
+<li><a href="#initial-setup-of-stratos">Initial setup of Stratos</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -570,7 +552,7 @@
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://kubecf.suse.dev/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
+	<a href="https://kubecf.suse.dev/docs/tutorials/deploy-stratos/">Deploy Stratos next to KubeCF</a>
 </li>
 
 	</ol>
@@ -578,216 +560,48 @@
 
             
 <div class="td-content">
-	<h1>Deploy KubeCF in Minikube</h1>
-	<div class="lead">Deploy a git KubeCF checkout in Minikube with Bazel.</div>
+	<h1>Deploy Stratos next to KubeCF</h1>
+	<div class="lead">Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF</div>
 	
 
-<p>The intended audience of this document are developers wishing to
-contribute to the Kubecf project.</p>
-
-<p>Here we explain how to deploy Kubecf locally using:</p>
+<h2 id="required-details">Required details</h2>
 
 <ul>
-<li>Minikube to manage a local Kubernetes cluster.</li>
-<li>A cf-operator pinned with Bazel.</li>
-<li>Kubecf built and deployed from the sources in the current checkout.</li>
+<li>External Kubernetes IP</li>
+<li>UAA endpoint url</li>
+<li>CF admin username and password</li>
+<li>CF API url</li>
 </ul>
 
-<h2 id="minikube">Minikube</h2>
+<h3 id="prepare-stratos-setup-config">Prepare Stratos setup config</h3>
 
-<p>Minikube is one of several projects enabling the deployment,
-management and tear-down of a local Kubernetes cluster.</p>
+<p>Replace <code>&lt;EXTERNAL_IP&gt;</code> by the external ip[s] of your cluster,  adapt the port if required and store everything in a file, for example <code>stratos.yml</code>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">console<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>service<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>externalIPs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&lt;EXTERNAL_IP&gt;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>servicePort<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">8443</span></code></pre></div>
+<h3 id="deploy-stratos">Deploy Stratos</h3>
 
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-a Minikube-based cluster. Using these has the advantage of using a
-specific version of Minikube. On the other side, the reduced
-variability of the development environment is a disadvantage as well,
-possibly allowing portability issues to slide through.</p>
+<p>Add the SUSE Kubernetes charts repo and deploy Stratos. Instead of the SUSE repo the Stratos chart can also be referenced from <a href="https://github.com/cloudfoundry/stratos/releases" target="_blank">https://github.com/cloudfoundry/stratos/releases</a>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo add suse https://kubernetes-charts.suse.com/
+helm install --namespace stratos --name stratos --values ./stratos.yml suse/console</code></pre></div>
+<h2 id="initial-setup-of-stratos">Initial setup of Stratos</h2>
 
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
+<p>As soon as Stratos is deployed connect to https://<EXTERNAL_IP>:<SERIVCE_PORT> and follow the steps.</p>
 
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/minikube:start</code></td>
-</tr>
+<p>Provide your UAA Endpoint url, for example: <a href="https://uaa" target="_blank">https://uaa</a>.<YOUR_CF_DOMAIN> (Make sure that there is no leading Slash at the end, otherwise UAA will ignore the authentication request.)</p>
 
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/minikube:delete</code></td>
-</tr>
-</tbody>
-</table>
+<p>The client id is <code>cf</code> and the client secret stays empty.</p>
 
-<h3 id="attention-dangers">Attention, Dangers</h3>
+<p>The admin username is <code>admin</code> and password is the Cloudfoundry admin password. If you do not know the admin password yet, because for example it was autogenerated during the initial deployment of kubecf, it can be extracted with this command:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">echo</span> <span style="color:#204a87;font-weight:bold">$(</span>kubectl get secrets -n kubecf kubecf.var-cf-admin-password -o json <span style="color:#000;font-weight:bold">|</span> jq -r .data.password <span style="color:#000;font-weight:bold">|</span> base64 -d<span style="color:#204a87;font-weight:bold">)</span></code></pre></div>
+<p>The next step defines which uaa group specifies Stratos admins and does not need to be changed.</p>
 
-<p>Minikube edits the Kubernetes configuration file referenced by the
-environment variable <code>KUBECONFIG</code>, or <code>~/.kube/config</code>.</p>
+<p>After the initial setup Cloudfoundry can be added with the api endpoint url and the same cloudfoundry admin credentials.</p>
 
-<p>To preserve the original configuration either make a backup of the
-relevant file, or change <code>KUBECONFIG</code> to a different path specific to
-the intended deployment.</p>
-
-<h3 id="advanced-configuration">Advanced configuration</h3>
-
-<p>The local <a href="../kube/minikube.md">Minikube Documentation</a> explains the
-various environment variables which can be used to configure the
-resources used by the cluster (CPUs, memory, disk size, etc.) in
-detail.</p>
-
-<h2 id="cf-operator">cf-operator</h2>
-
-<p>The <a href="https://github.com/cloudfoundry-incubator/cf-operator" target="_blank">cf-operator</a> is the underlying generic tool to deploy a (modified)
-BOSH deployment like Kubecf for use.</p>
-
-<p>It has to be installed in the same kube cluster Kubecf will be deployed to.</p>
-
-<h3 id="deployment-and-tear-down">Deployment and Tear-down</h3>
-
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-cf-operator:</p>
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/cf_operator:apply</code></td>
-</tr>
-
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/cf_operator:delete</code></td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="kubecf">Kubecf</h2>
-
-<p>With all the prequisites handled by the preceding sections it is now
-possible to build and deploy kubecf itself.</p>
-
-<h3 id="system-domain">System domain</h3>
-
-<p>The main configuration to set for kubecf is its system domain.
-For the Minikube foundation we have to specify it as:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#204a87">echo</span> <span style="color:#4e9a06">&#34;system_domain: </span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">.xip.io&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  &gt; <span style="color:#4e9a06">&#34;</span><span style="color:#204a87;font-weight:bold">$(</span>bazel info workspace<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">/dev/kubecf/system_domain_values.yaml&#34;</span></code></pre></div>
-<h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
-
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-kubecf from the sources:</p>
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/kubecf:apply</code></td>
-</tr>
-
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/kubecf:delete</code></td>
-</tr>
-</tbody>
-</table>
-
-<p>In this default deployment kubecf is launched without Ingress, and
-uses the Diego scheduler.</p>
-
-<h3 id="access">Access</h3>
-
-<p>Accessing the cluster from outside of the minikube VM requires
-<a href="#ingress">ingress</a> to be set up correctly.</p>
-
-<p>To access the cluster after the cf-operator has completed the
-deployment and all pods are active invoke:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cf api --skip-ssl-validation <span style="color:#4e9a06">&#34;https://api.</span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">.xip.io&#34;</span>
-
-<span style="color:#8f5902;font-style:italic"># Copy the admin cluster password.</span>
-<span style="color:#000">acp</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get secret <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        --namespace kubecf kubecf.var-cf-admin-password <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        -o <span style="color:#000">jsonpath</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#39;{.data.password}&#39;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        <span style="color:#000;font-weight:bold">|</span> base64 --decode<span style="color:#204a87;font-weight:bold">)</span>
-
-<span style="color:#8f5902;font-style:italic"># Use the password from the previous step when requested.</span>
-cf auth admin <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">acp</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
-<h3 id="advanced-topics">Advanced Topics</h3>
-
-<h4 id="diego-vs-eirini">Diego vs Eirini</h4>
-
-<p>Diego is the standard scheduler used by kubecf to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
-Kubernetes native approach, deploying the CF apps directly to a
-Kubernetes namespace.</p>
-
-<p>To activate this alternative, add a file matching the pattern
-<code>*values.yaml</code> to the directory <strong>dev/kubecf</strong> and containing</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>eirini<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span></code></pre></div>
-<p>before deploying kubecf.</p>
-
-<h4 id="ingress">Ingress</h4>
-
-<p>By default, the cluster is exposed through its Kubernetes services.</p>
-
-<p>To use the NGINX ingress instead, it is necessary to:</p>
-
-<ul>
-<li>Install and configure the NGINX Ingress Controller.</li>
-<li>Configure Kubecf to use the ingress controller.</li>
-</ul>
-
-<p>This has to happen before deploying kubecf.</p>
-
-<h5 id="installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</h5>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install stable/nginx-ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --name ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --namespace ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.2222=kubecf/kubecf-scheduler:2222&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.start&gt;=kubecf/kubecf-tcp-router:&lt;services.tcp-router.port_range.start&gt;&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  ...
-  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.end&gt;=kubecf/kubecf-tcp-router:&lt;services.tcp-router.port_range.end&gt;&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;controller.service.externalIPs={</span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">}&#34;</span></code></pre></div>
-<p>The <code>tcp.&lt;port&gt;</code> option uses the NGINX TCP pass-through.</p>
-
-<p>In the case of the <code>tcp-router</code> ports, one <code>--set</code> for each port is required, starting with
-<code>services.tcp-router.port_range.start</code> and ending with <code>services.tcp-router.port_range.end</code>. Those
-values are defined on the <code>values.yaml</code> file with default values.</p>
-
-<p>The last flag in the command above assigns the external IP of the
-cluster to the Ingress Controller service.</p>
-
-<h5 id="configure-kubecf">Configure kubecf</h5>
-
-<p>Place a file matching the pattern <code>*values.yaml</code> into the directory
-<strong>dev/kubecf</strong> and containing</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ingress<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/SUSE/kubecf-docs/commit/ae742729c486ef79bf341b688213025cf9c102e4">Drop boilerplate content and add few extracts from real docs (ae74272)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 7, 2020: <a  href="https://github.com/SUSE/kubecf-docs/commit/a7d3d66e178aef25825651b3ec6d8ecd83b0dbbc">Add Stratos setup docs (a7d3d66)</a>
 </div>
 </div>
 
