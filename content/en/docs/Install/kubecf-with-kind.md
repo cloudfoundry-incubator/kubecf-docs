@@ -163,10 +163,10 @@ cf api --skip-ssl-validation api.172.17.0.3.nip.io
 
 # What's next
 
-After the deployment finishes with success it's time to give it a try by pushing an app using the cf-push cli command and/or deploy a BOSH deployment.
+After the deployment finishes with success it's time to give it a try by pushing an app using the cf-push cli command.
 
 # Cleaning up
 
 ```
-> bazel run //dev/kind:stop
+> bazel run //dev/kind:delete
 ```
