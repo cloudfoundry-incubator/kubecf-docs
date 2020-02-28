@@ -10,15 +10,6 @@ kind v0.7.0 go1.13.6 darwin/amd64
 ```
 
 ```
-❯ bazel version
-Build label: 2.1.0
-Build target: bazel-out/darwin-opt/bin/src/main/java/com/google/devtools/build/lib/bazel/BazelServer_deploy.jar
-Build time: Fri Feb 7 13:04:00 2020 (1581080640)
-Build timestamp: 1581080640
-Build timestamp as int: 1581080640
-```
-[helm 3.1.1](https://github.com/helm/helm/releases/tag/v3.1.1)
-```
 > helm version
 version.BuildInfo{Version:"v3.1.1", GitCommit:"afe70585407b420d0097d07b21c47dc511525ac8", GitTreeState:"clean", GoVersion:"go1.13.8"}
 ```
@@ -139,7 +130,7 @@ kube:
 Now is time to install KubeCF by running the helm command:
 
 ```
-❯ helm install kubecf \
+> helm install kubecf \
     --namespace kubecf \
     --values values.yaml \
 https://github.com/SUSE/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
@@ -154,14 +145,23 @@ Be aware that it takes a couple of minutes to see the pods showing up on the kub
 Run the following command to watch the pods progress:
 
 ```
-watch kubectl get pods -n kubecf
+> watch kubectl get pods -n kubecf
 ```
 
 After all the pods are running you can check by running the *cf* cli command:
 
 ```
-cf api --skip-ssl-validation api.172.17.0.3.nip.io
+> cf api --skip-ssl-validation api.172.17.0.3.nip.io
 ```
+get the admin password:
+
+`> admin_pass=$(kubectl get secret \
+        --namespace kubecf kubecf.var-cf-admin-password \
+        -o jsonpath='{.data.password}' \
+        | base64 --decode)`
+
+
+and login with: `cf auth admin "${admin_pass}"`
 
 # What's next
 
