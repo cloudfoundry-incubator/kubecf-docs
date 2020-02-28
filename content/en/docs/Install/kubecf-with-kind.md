@@ -17,14 +17,14 @@ Build time: Fri Feb 7 13:04:00 2020 (1581080640)
 Build timestamp: 1581080640
 Build timestamp as int: 1581080640
 ```
-
+[helm 3.1.1](https://github.com/helm/helm/releases/tag/v3.1.1)
 ```
-❯ helm version
+> helm version
 version.BuildInfo{Version:"v3.1.1", GitCommit:"afe70585407b420d0097d07b21c47dc511525ac8", GitTreeState:"clean", GoVersion:"go1.13.8"}
 ```
 
 ```
-❯ docker version
+> docker version
 Client: Docker Engine - Community
  Version:           19.03.5
  API version:       1.40
@@ -36,12 +36,12 @@ Client: Docker Engine - Community
 ```
 
 ```
-❯ kubectl version
+> kubectl version
 Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.3", GitCommit:"06ad960bfd03b39c8310aaf92d1e7c12ce618213", GitTreeState:"clean", BuildDate:"2020-02-13T18:08:14Z", GoVersion:"go1.13.8", Compiler:"gc", Platform:"darwin/amd64"}
 ```
 
 ```
-❯ cf version
+> cf version
 cf version 6.46.1+4934877ec.2019-08-23z
 ```
 
@@ -54,7 +54,9 @@ To install Kind please follow the official instructions [here](https://kind.sigs
 To make sure that the cluster is set correctly to host KubeCF, we recommended to go through bazel from the root of the repository:
 
 ``` 
-> bazel run //dev/kind:start
+> export KUBECONFIG=kubeconfig-kubecf
+> kind create cluster --name kubecf
+> kubectl cluster-info --context kind-kubecf
 ```
 
 # Installing cf-operator
@@ -62,13 +64,13 @@ To make sure that the cluster is set correctly to host KubeCF, we recommended to
 Before we can deploy the [cf-operator](https://github.com/cloudfoundry-incubator/cf-operator) we need to create the namespace:
 
 ```
-kubectl create ns cfo
+> kubectl create ns cfo
 ```
 
 and after we can install by running the helm command:
 
 ```
-❯ helm install cf-operator \
+> helm install cf-operator \
     --namespace cfo \
     --set "global.operator.watchNamespace=kubecf" \
     https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v2.0.0-0.g0142d1e9.tgz
@@ -168,5 +170,5 @@ After the deployment finishes with success it's time to give it a try by pushing
 # Cleaning up
 
 ```
-> bazel run //dev/kind:delete
+> kind delete cluster --name kubecf
 ```
