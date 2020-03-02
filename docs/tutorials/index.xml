@@ -15,6 +15,187 @@
     
     
     <item>
+      <title>Docs: Deploy KubeCF on Kind</title>
+      <link>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</link>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</guid>
+      <description>
+        
+        
+        
+
+&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+
+&lt;p&gt;This guideline will provide a quick way to deploy KubeCF with Kind and should be used only for evaluation purposes.&lt;/p&gt;
+
+&lt;p&gt;Here is a list of all the tools and versions used when creating these instructions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; kind version
+kind v0.7.0 go1.13.6 darwin/amd64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; helm version
+version.BuildInfo{Version:&amp;quot;v3.1.1&amp;quot;, GitCommit:&amp;quot;afe70585407b420d0097d07b21c47dc511525ac8&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, GoVersion:&amp;quot;go1.13.8&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; docker version
+Client: Docker Engine - Community
+ Version:           19.03.5
+ API version:       1.40
+ Go version:        go1.12.12
+ Git commit:        633a0ea
+ Built:             Wed Nov 13 07:22:34 2019
+ OS/Arch:           darwin/amd64
+ Experimental:      false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; kubectl version
+Client Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.3&amp;quot;, GitCommit:&amp;quot;06ad960bfd03b39c8310aaf92d1e7c12ce618213&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-02-13T18:08:14Z&amp;quot;, GoVersion:&amp;quot;go1.13.8&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;darwin/amd64&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cf version
+cf version 6.46.1+4934877ec.2019-08-23z
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-kind&#34;&gt;Installing Kind&lt;/h2&gt;
+
+&lt;p&gt;To install Kind please follow the official instructions &lt;a href=&#34;https://kind.sigs.k8s.io/docs/user/quick-start/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-a-kind-cluster&#34;&gt;Create a Kind cluster&lt;/h2&gt;
+
+&lt;p&gt;Run the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; export KUBECONFIG=kubeconfig-kubecf
+&amp;gt; kind create cluster --name kubecf
+&amp;gt; kubectl cluster-info --context kind-kubecf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-cf-operator&#34;&gt;Installing cf-operator&lt;/h2&gt;
+
+&lt;p&gt;Before we can deploy the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; we need to create the namespace:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; kubectl create ns cfo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and after we can install by running the helm command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; helm install cf-operator \
+    --namespace cfo \
+    --set &amp;quot;global.operator.watchNamespace=kubecf&amp;quot; \
+    https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v2.0.0-0.g0142d1e9.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notes:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The &lt;em&gt;watchNamespace&lt;/em&gt; property is set to watch the &lt;strong&gt;kubecf&lt;/strong&gt; namespace for changes&lt;/li&gt;
+&lt;li&gt;cf-operator version may differ between KubeCF versions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Check if the pods are up and running before moving to the next section:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; kubectl get pods -n cfo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-kubecf&#34;&gt;Installing KubeCF&lt;/h2&gt;
+
+&lt;p&gt;First let&amp;rsquo;s get Kind node IP address:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node_ip=$(kubectl get node kubecf-control-plane \
+  --output jsonpath=&#39;{ .status.addresses[?(@.type == &amp;quot;InternalIP&amp;quot;)].address }&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and then set the properties correctly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat &amp;lt;&amp;lt; _EOF_  &amp;gt; values.yaml
+system_domain: ${node_ip}.nip.io
+services:
+  router:
+    externalIPs:
+    - ${node_ip}
+kube:
+  service_cluster_ip_range: 0.0.0.0/0
+  pod_cluster_ip_range: 0.0.0.0/0
+_EOF_
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On this example, we will use Diego instead Eirini but you can easily switch by adding the following
+lines into your &lt;strong&gt;values.yaml&lt;/strong&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+features:
+  eirini:
+    enabled: true
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and, you need to trust the kubernetes root CA on the kind docker container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; docker exec -it &amp;quot;kubecf-control-plane&amp;quot; bash -c &#39;cp /etc/kubernetes/pki/ca.crt /etc/ssl/certs/ &amp;amp;&amp;amp; update-ca-certificates &amp;amp;&amp;amp; (systemctl list-units | grep containerd &amp;gt; /dev/null &amp;amp;&amp;amp; systemctl restart containerd)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the &lt;strong&gt;values.yaml&lt;/strong&gt; file should be similiar to the snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;system_domain: 172.17.0.3.nip.io
+
+services:
+  router:
+    loadBalancerIP:
+    - 172.17.0.3
+
+kube:
+  service_cluster_ip_range: 0.0.0.0/0
+  pod_cluster_ip_range: 0.0.0.0/0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now is time to install KubeCF by running the helm command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; helm install kubecf \
+    --namespace kubecf \
+    --values values.yaml \
+https://github.com/cloudfoundry-incubator/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notes:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;the namespace property value is the same as cf-operator watchNamespace one&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Be aware that it takes a couple of minutes to see the pods showing up on the kubecf namespace and the installation process may take 20-25 minutes depending on your
+internet connection speed.&lt;/p&gt;
+
+&lt;p&gt;Run the following command to watch the pods progress:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; watch kubectl get pods -n kubecf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After all the pods are running you can check by running the &lt;em&gt;cf&lt;/em&gt; cli command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cf api --skip-ssl-validation api.172.17.0.3.nip.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;get the admin password:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; admin_pass=$(kubectl get secret --namespace kubecf kubecf.var-cf-admin-password -o jsonpath=&#39;{.data.password}&#39; | base64 --decode)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and login with: &lt;code&gt;cf auth admin &amp;quot;${admin_pass}&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
+
+&lt;p&gt;After the deployment finishes with success it&amp;rsquo;s time to give it a try by pushing an app using the cf-push cli command.&lt;/p&gt;
+
+&lt;h2 id=&#34;cleaning-up&#34;&gt;Cleaning up&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; kind delete cluster --name kubecf
+&lt;/code&gt;&lt;/pre&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Deploy Stratos next to KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
