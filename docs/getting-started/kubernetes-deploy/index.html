@@ -26,14 +26,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-19T15:14:30+01:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-03-06T13:54:15+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy on Kubernetes">
 <meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-19T15:14:30&#43;01:00" />
+<meta itemprop="dateModified" content="2020-03-06T13:54:15&#43;02:00" />
 <meta itemprop="wordCount" content="827">
 
 
@@ -683,7 +683,7 @@ possible to build and deploy kubecf itself.</p>
 <h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install --name kubecf <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --namespace kubecf <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     https://scf-v3.s3.amazonaws.com/scf-3.0.0-82165ef3.tgz <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v0.0.0-998b961.tgz <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;system_domain=kubecf.suse.dev&#34;</span></code></pre></div>
 <p>In this default deployment, kubecf is launched without Ingress, and it
 uses the Diego scheduler.</p>
@@ -801,7 +801,7 @@ ready to be consumed by kubecf.</p>
 </span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/ae742729c486ef79bf341b688213025cf9c102e4">Drop boilerplate content and add few extracts from real docs (ae74272)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified March 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/c6c87d7f2868c33dc429411d864903a36f0d46ee">Change the artifact bucket (c6c87d7)</a>
 </div>
 </div>
 
