@@ -694,13 +694,171 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     <item>
       <title>Docs: Secret rotation KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tasks/secrets/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://kubecf.suse.dev/docs/tasks/secrets/</guid>
       <description>
         
         
         
+
+&lt;p&gt;&lt;strong&gt;Rotating secrets&lt;/strong&gt; is in general the process of updating one or more
+secrets to new values and restarting all affected pods so that they
+will use these new values.&lt;/p&gt;
+
+&lt;p&gt;Most of the process is automatic. How to trigger it is explained
+in the following document.&lt;/p&gt;
+
+&lt;p&gt;Beyond this, the keys used to encrypt the Cloud Controller Database
+(CCDB) can also be rotated, however, they do not exist as general
+secrets of the KubeCF deployment. This means that the general process
+explained above &lt;strong&gt;does not apply&lt;/strong&gt; to them.&lt;/p&gt;
+
+&lt;h2 id=&#34;secret-rotation&#34;&gt;Secret Rotation&lt;/h2&gt;
+
+&lt;p&gt;Note, this document explains the general rotation of secrets.&lt;/p&gt;
+
+&lt;p&gt;The instructions to rotate the CCDB keys specifically are in
+&lt;a href=&#34;secret_rotation.md&#34; target=&#34;_blank&#34;&gt;a separate document&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The audience of this document are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Developers working on KubeCF.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Operators deploying KubeCF.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
+
+&lt;p&gt;One of the features KubeCF (or rather the cf-operator it sits on top
+of) provides is the ability to declare secrets (passwords and
+certificates) and have the system automatically generate something
+suitably random for such on deployment, and distribute the results to
+the pods using them.&lt;/p&gt;
+
+&lt;p&gt;This removes the burden from human operators to come up with lots of
+such just to have all the internal components of KubeCF properly wired
+up for secure communication.&lt;/p&gt;
+
+&lt;p&gt;However, even with this, operators may wish to change such secrets
+from time to time, or on a schedule. In other words, re-randomize the
+board, and limit the lifetime of any particular secret.&lt;/p&gt;
+
+&lt;p&gt;As a note on terminology, this kind of change is called
+&lt;strong&gt;rotating a secret&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This document describes how this can be done, in the context of KubeCF.&lt;/p&gt;
+
+&lt;h3 id=&#34;finding-secrets&#34;&gt;Finding secrets&lt;/h3&gt;
+
+&lt;p&gt;Retrieve the list of all secrets maintained by a KubeCF deployment via&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl get quarkssecret --namespace kubecf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To see the information about a specific secret, for example the NATS password, use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl get quarkssecret --namespace kubecf kubecf.var-nats-password --output yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that each quarkssecret has a corresponding regulare k8s secret it
+controls.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl get secret --namespace kubecf
+kubectl get secret --namespace kubecf kubecf.var-nats-password --output yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;requesting-a-rotation-for-a-specific-secret&#34;&gt;Requesting a rotation for a specific secret&lt;/h3&gt;
+
+&lt;p&gt;We keep using &lt;code&gt;kubecf.var-nats-password&lt;/code&gt; as our example secret.&lt;/p&gt;
+
+&lt;p&gt;To rotate this secret:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a YAML file for a ConfigMap of the form:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; ---
+ apiVersion: v1
+ kind: ConfigMap
+ metadata:
+   name: rotate-kubecf.var-nats-password
+   labels:
+     quarks.cloudfoundry.org/secret-rotation: &amp;quot;true&amp;quot;
+ data:
+   secrets: &#39;[&amp;quot;kubecf.var-nats-password&amp;quot;]&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note, while the name of this ConfigMap can be technically
+ anything (allowed by k8s syntax) we recommend using a name
+ derived from the name of the secret itself, to make the
+ connection clear.&lt;/p&gt;
+
+&lt;p&gt;Note further that while this example rotates only a single
+ secret, the &lt;code&gt;data.secrets&lt;/code&gt; key accepts an array of secret names,
+ allowing the simultaneous rotation of many secrets together.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Apply this ConfigMap using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; kubectl apply --namespace kubecf -f /path/to/your/yaml/file
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The cf-operator will process this ConfigMap due the label&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; quarks.cloudfoundry.org/secret-rotation: &amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and knows that it has to invoke a rotation of the referenced
+ secrets.&lt;/p&gt;
+
+&lt;p&gt;The actions of the cf-operator can be followed in its log.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;After the cf-operator has done the rotation, i.e. has not only
+changed the secrets, but also restarted all affected pods (the
+users of the rotated secrets), delete the trigger config map
+again:&lt;/p&gt;
+
+&lt;p&gt;kubectl delete &amp;ndash;namespace kubecf -f /path/to/your/yaml/file&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;rotating-the-ccdb-encryption-keys&#34;&gt;Rotating the CCDB encryption keys&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt; - Always backup the database before rotating the encryption key.&lt;/p&gt;
+
+&lt;p&gt;The key used to encrypt the database is generated the first time kubecf is deployed.
+It is based on the Helm values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;ccdb&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;encryption&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;rotation&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;key_labels&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encryption_key_0&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;current_key_label&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encryption_key_0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For each label under &lt;code&gt;key_labels&lt;/code&gt;, kubecf will generate an encryption key.
+The &lt;code&gt;current_key_label&lt;/code&gt; indicates which key is currently being used.&lt;/p&gt;
+
+&lt;p&gt;In order to rotate the CCDB encryption key, add a new label to &lt;code&gt;key_labels&lt;/code&gt; (keeping the old
+labels), and mark the &lt;code&gt;current_key_label&lt;/code&gt; with the newly added label. Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;ccdb&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;encryption&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;rotation&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;key_labels&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encryption_key_0&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encryption_key_1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;current_key_label&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;encryption_key_1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt; - key labels should be less than 240 characters long.&lt;/p&gt;
+
+&lt;p&gt;Then, update the kubecf Helm installation. After Helm finishes its updates, trigger the
+&lt;code&gt;rotate-cc-database-key&lt;/code&gt; errand:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - the following command assumes the Helm installation is named &lt;code&gt;kubecf&lt;/code&gt; and it was
+installed to the &lt;code&gt;kubecf&lt;/code&gt; namespace. These values may be different depending on how kubecf was
+installed.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;kubectl patch qjob kubecf-rotate-cc-database-key &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --type merge &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --patch &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;trigger&amp;#34;:{&amp;#34;strategy&amp;#34;:&amp;#34;now&amp;#34;}}}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
