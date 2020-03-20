@@ -510,6 +510,7 @@
 <ul>
 <li><a href="#table-of-contents-aspects">Table of Contents (Aspects)</a></li>
 <li><a href="#deployment">Deployment</a></li>
+<li><a href="#build-from-source">Build from source</a></li>
 <li><a href="#pull-requests">Pull Requests</a></li>
 <li><a href="#docker-images">Docker Images</a></li>
 <li><a href="#linting">Linting</a></li>
@@ -617,6 +618,17 @@ combinations of choices in detail, from the bottom up.</p>
 </tr>
 </tbody>
 </table>
+
+<h2 id="build-from-source">Build from source</h2>
+
+<p>To build KubeCF from source, <code>bazel</code> is required.
+You can check <a href="https://docs.bazel.build/versions/master/install.html" target="_blank">the official bazel docs on how to install</a> it in your system.</p>
+
+<p>To build <a href="https://github.com/cloudfoundry-incubator/kubecf" target="_blank">KubeCF</a> from source, you can just:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$&gt; git clone https://github.com/cloudfoundry-incubator/kubecf
+$&gt; <span style="color:#204a87">cd</span> kubecf
+$&gt; bazel build //deploy/helm/kubecf</code></pre></div>
+<p>This will generate a helm chart, which can be installed with Helm3 in your Kubernetes cluster!</p>
 
 <h2 id="pull-requests">Pull Requests</h2>
 
@@ -876,7 +888,7 @@ applied before attempting to apply it for real.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/961159ce7d2028eae8924b7170f5cefc82fb6f8d">Integrating remaining existing docs (961159c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified March 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/2585789e6e0fbadd1cd9472994f7fce9c28f76b9">Add section to explain how to build KubeCF (2585789)</a>
 </div>
 </div>
 

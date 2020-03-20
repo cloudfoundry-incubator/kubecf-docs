@@ -714,13 +714,6 @@ in the following document.&lt;/p&gt;
 secrets of the KubeCF deployment. This means that the general process
 explained above &lt;strong&gt;does not apply&lt;/strong&gt; to them.&lt;/p&gt;
 
-&lt;h2 id=&#34;secret-rotation&#34;&gt;Secret Rotation&lt;/h2&gt;
-
-&lt;p&gt;Note, this document explains the general rotation of secrets.&lt;/p&gt;
-
-&lt;p&gt;The instructions to rotate the CCDB keys specifically are in
-&lt;a href=&#34;secret_rotation.md&#34; target=&#34;_blank&#34;&gt;a separate document&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;The audience of this document are:&lt;/p&gt;
 
 &lt;ul&gt;

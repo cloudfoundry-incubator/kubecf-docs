@@ -14,6 +14,186 @@
     
     
     <item>
+      <title>Blog: KubeCF Release v1.0</title>
+      <link>https://kubecf.suse.dev/blog/2020/03/19/kubecf-release-v1.0/</link>
+      <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/blog/2020/03/19/kubecf-release-v1.0/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;KubeCF first major release is out 🥳 &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/Sk5uipPXyBjfW/giphy.gif&#34; alt=&#34;kubecf-1.0&#34; title=&#34;KubeCF 1.0!&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;HA database configuration for CCDB and UAA based on the &lt;a href=&#34;https://github.com/helm/charts/tree/master/stable/percona-xtradb-cluster&#34; target=&#34;_blank&#34;&gt;upstream PXC chart&lt;/a&gt;
+&lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/issues/312&#34; target=&#34;_blank&#34;&gt;#312&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Stratos on KubeCF &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/issues/199&#34; target=&#34;_blank&#34;&gt;#199&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bump all releases to use SLE15 base image &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/issues/373&#34; target=&#34;_blank&#34;&gt;#373&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Add SITS to CI &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/issues/423&#34; target=&#34;_blank&#34;&gt;#423&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bump cf-deployment to 12.33 &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/413&#34; target=&#34;_blank&#34;&gt;#413&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bump cf-operator to 3.2.1 &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/446&#34; target=&#34;_blank&#34;&gt;#446&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://concourse.suse.dev/teams/main/pipelines/kubecf&#34; target=&#34;_blank&#34;&gt;Public Concourse CI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can find all the closed no-bug issues &lt;a href=&#34;https://github.com/SUSE/kubecf/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aclosed+milestone%3A1.0.0+-label%3A%22Type%3A+Bug%22+-label%3A%22Status%3A+Not+Implemented%22+&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;bug-fixes&#34;&gt;Bug fixes&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fix: allow only credhub and uaa for apps &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/434&#34; target=&#34;_blank&#34;&gt;#434&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;fix: helm: reduce duplication in sizing ops &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/440&#34; target=&#34;_blank&#34;&gt;#440&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;fix: allow only credhub and uaa for apps &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/434&#34; target=&#34;_blank&#34;&gt;#434&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fixing out of memory issue when scaling doppler instances &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/366&#34; target=&#34;_blank&#34;&gt;#366&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Remove security group that allows apps to communicate with internal network &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/issues/304&#34; target=&#34;_blank&#34;&gt;#304&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can find all the fixed bugs &lt;a href=&#34;https://github.com/SUSE/kubecf/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aclosed+milestone%3A1.0.0+label%3A%22Type%3A+Bug%22+-label%3A%22Status%3A+Not+Implemented%22+&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h1&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;cf-operator&lt;/td&gt;
+&lt;td&gt;3.2.1-.ga32a3f79&lt;/td&gt;
+&lt;td&gt;Processes BOSH deployments. Maps them to kube objects&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;quick-fresh-installation&#34;&gt;Quick Fresh Installation&lt;/h1&gt;
+
+&lt;p&gt;These are the basic guidelines to deploy KubeCF in a development environment. For more detailed information check &lt;a href=&#34;doc/dev/general.md&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before starting the deployment phase, make sure that the &lt;strong&gt;values.yaml&lt;/strong&gt; file contains all the needed properties with valid values. For more information about the available properties check &lt;a href=&#34;https://github.com/SUSE/kubecf/blob/002b49ad26109e175812c04a3764bd8712e54580/deploy/helm/kubecf/values.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Download the release bundle artifact extract the content to a local folder.&lt;/p&gt;
+
+&lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;helm install cf-operator \
+  --namespace cf-operator \
+  --set &amp;quot;global.operator.watchNamespace=kubecf&amp;quot; \
+cf-operator-3.2.1+0.ga32a3f79.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;kubecf&#34;&gt;KubeCF&lt;/h2&gt;
+
+&lt;p&gt;Install KubeCF after setting the needed properties in your &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;helm install kubecf \
+  --namespace kubecf \
+  --values values.yaml \
+kubecf.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;download&#34;&gt;Download&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bundle: &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.0/kubecf-bundle-v1.0.0.tgz&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.0/kubecf-bundle-v1.0.0.tgz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Standalone chart: &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.0/kubecf-v1.0.0.tgz&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.0/kubecf-v1.0.0.tgz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: KubeCF Release v1.0.1</title>
+      <link>https://kubecf.suse.dev/blog/2020/03/19/kubecf-release-v1.0.1/</link>
+      <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/blog/2020/03/19/kubecf-release-v1.0.1/</guid>
+      <description>
+        
+        
+        
+
+&lt;h1 id=&#34;bug-fixes&#34;&gt;Bug fixes&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixes the permissions issue in autoscaler db when the pod restarts. &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/467&#34; target=&#34;_blank&#34;&gt;#467&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Moved pxc image to cfcontainerization organization, like all the other images. &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/479&#34; target=&#34;_blank&#34;&gt;#479&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The database-seeder job pod was not being deleted after KubeCF helm installation was removed with success. &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/493&#34; target=&#34;_blank&#34;&gt;#493&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Security group setups. &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/pull/485&#34; target=&#34;_blank&#34;&gt;#485&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;maintenance&#34;&gt;Maintenance&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cf-operator bumped to version 3.3.0+0.gf32b521e.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h1&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;cf-operator&lt;/td&gt;
+&lt;td&gt;3.3.0+0.gf32b521e&lt;/td&gt;
+&lt;td&gt;Processes BOSH deployments. Maps them to kube objects&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;quick-fresh-installation&#34;&gt;Quick Fresh Installation&lt;/h1&gt;
+
+&lt;p&gt;These are the basic guidelines to deploy KubeCF in a development environment. For more detailed information check &lt;a href=&#34;doc/dev/general.md&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before starting the deployment phase, make sure that the &lt;strong&gt;values.yaml&lt;/strong&gt; file contains all the needed properties with valid values. For more information about the available properties check &lt;a href=&#34;https://github.com/SUSE/kubecf/blob/002b49ad26109e175812c04a3764bd8712e54580/deploy/helm/kubecf/values.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Download the release bundle artifact extract the content to a local folder.&lt;/p&gt;
+
+&lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;helm install cf-operator \
+  --namespace cf-operator \
+  --set &amp;quot;global.operator.watchNamespace=kubecf&amp;quot; \
+cf-operator.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;kubecf&#34;&gt;KubeCF&lt;/h2&gt;
+
+&lt;p&gt;Install KubeCF after setting the needed properties in your &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;helm install kubecf \
+  --namespace kubecf \
+  --values values.yaml \
+kubecf.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;download&#34;&gt;Download&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bundle: &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.1/kubecf-bundle-v1.0.1.tgz&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.1/kubecf-bundle-v1.0.1.tgz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Standalone chart: &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.1/kubecf-v1.0.1.tgz&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/kubecf/releases/download/v1.0.1/kubecf-v1.0.1.tgz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Easy documentation with Docsy</title>
       <link>https://kubecf.suse.dev/blog/2018/10/06/easy-documentation-with-docsy/</link>
       <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
@@ -85,19 +265,6 @@ Fetch and scale an image in the upcoming Hugo 0.43.
 
 &lt;p&gt;The image will be rendered at the size and byline specified in the front matter.&lt;/p&gt;
 
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Another Great Release</title>
-      <link>https://kubecf.suse.dev/blog/2018/01/04/another-great-release/</link>
-      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kubecf.suse.dev/blog/2018/01/04/another-great-release/</guid>
-      <description>
-        
-        
-        
       </description>
     </item>
     
