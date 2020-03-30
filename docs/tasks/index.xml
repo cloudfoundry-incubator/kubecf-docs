@@ -15,6 +15,29 @@
     
     
     <item>
+      <title>Docs: Deploy KubeCF</title>
+      <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/docs/tasks/deploy/</guid>
+      <description>
+        
+        
+        
+
+&lt;h3 id=&#34;deploying-on-rhel-centos-7-based-kubernetes&#34;&gt;Deploying on RHEL / CentOS 7 -based Kubernetes&lt;/h3&gt;
+
+&lt;p&gt;If you are deploying with diego (that is, Eirini is not enabled) on top of a
+RHEL / CentOS 7 based cluster, please make sure that the
+&lt;code&gt;user.max_user_namespaces&lt;/code&gt; &lt;code&gt;sysctl&lt;/code&gt; is set to a large number.  Do this on any
+worker node that may host any &lt;code&gt;diego-cell&lt;/code&gt; workloads:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo sh -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;sysctl -w user.max_user_namespaces=15076 | tee -a /etc/sysctl.conf&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is not necessary on RHEL / CentOS 8 based systems.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Secret rotation KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tasks/secrets/</link>
       <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
@@ -175,19 +198,6 @@ installed.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --type merge &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --patch &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;trigger&amp;#34;:{&amp;#34;strategy&amp;#34;:&amp;#34;now&amp;#34;}}}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Deploy KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://kubecf.suse.dev/docs/tasks/deploy/</guid>
-      <description>
-        
-        
-        
       </description>
     </item>
     
