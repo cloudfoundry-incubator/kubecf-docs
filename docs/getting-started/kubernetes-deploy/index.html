@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-23T16:11:24&#43;02:00" />
-<meta itemprop="wordCount" content="827">
+<meta itemprop="wordCount" content="825">
 
 
 
@@ -640,7 +640,7 @@ the chosen foundation, and assuming that the cluster does not come
 with Helm Tiller pre-installed.</p>
 
 <h3 id="deployment-and-tear-down">Deployment and Tear-down</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install --name cf-operator <span style="color:#4e9a06">\
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install cf-operator <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --namespace cfo <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;global.operator.watchNamespace=kubecf&#34;</span> <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v0.4.2-147.gb88e4296.tgz</code></pre></div>
@@ -681,7 +681,7 @@ possible to build and deploy kubecf itself.</p>
 <p>This again uses helm and a released helm chart.</p>
 
 <h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install --name kubecf <span style="color:#4e9a06">\
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install kubecf <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --namespace kubecf <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v0.0.0-998b961.tgz <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;system_domain=kubecf.suse.dev&#34;</span></code></pre></div>
