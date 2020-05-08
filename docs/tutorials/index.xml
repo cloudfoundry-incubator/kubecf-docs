@@ -132,7 +132,9 @@ features:
 
 &lt;p&gt;and, you need to trust the kubernetes root CA on the kind docker container:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt; docker exec -it &amp;quot;kubecf-control-plane&amp;quot; bash -c &#39;cp /etc/kubernetes/pki/ca.crt /etc/ssl/certs/ &amp;amp;&amp;amp; update-ca-certificates &amp;amp;&amp;amp; (systemctl list-units | grep containerd &amp;gt; /dev/null &amp;amp;&amp;amp; systemctl restart containerd)&#39;
+&lt;pre&gt;&lt;code&gt;&amp;gt; docker exec -it &amp;quot;kubecf-control-plane&amp;quot; bash -c &#39;cp /etc/kubernetes/pki/ca.crt /etc/ssl/certs/ &amp;amp;&amp;amp; \
+    update-ca-certificates &amp;amp;&amp;amp; \
+    (systemctl list-units | grep containerd &amp;gt; /dev/null &amp;amp;&amp;amp; systemctl restart containerd)&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;the &lt;strong&gt;values.yaml&lt;/strong&gt; file should be similiar to the snippet:&lt;/p&gt;
@@ -154,7 +156,7 @@ kube:
 &lt;pre&gt;&lt;code&gt;&amp;gt; helm install kubecf \
     --namespace kubecf \
     --values values.yaml \
-https://github.com/cloudfoundry-incubator/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
+    https://github.com/cloudfoundry-incubator/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Notes:&lt;/p&gt;
@@ -178,7 +180,9 @@ internet connection speed.&lt;/p&gt;
 
 &lt;p&gt;get the admin password:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt; admin_pass=$(kubectl get secret --namespace kubecf kubecf.var-cf-admin-password -o jsonpath=&#39;{.data.password}&#39; | base64 --decode)
+&lt;pre&gt;&lt;code&gt;&amp;gt; admin_pass=$(kubectl get secret --namespace kubecf \
+                                  kubecf.var-cf-admin-password \
+                                  -o jsonpath=&#39;{.data.password}&#39; | base64 --decode)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;and login with: &lt;code&gt;cf auth admin &amp;quot;${admin_pass}&amp;quot;&lt;/code&gt;&lt;/p&gt;
