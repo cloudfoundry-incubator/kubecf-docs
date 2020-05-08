@@ -362,7 +362,7 @@ example below uses NATS as the example for a BOSH release.&lt;/p&gt;
 &lt;p&gt;Then, when running &lt;code&gt;helm install kubecf&lt;/code&gt;, refer to that image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;helm install ... --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;operations.custom={nats-dev}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can also unpack the helm release and modify it directly.
-There is no need to zip the release again, as &lt;code&gt;helm install scf/&lt;/code&gt; is
+There is no need to zip the release again, as &lt;code&gt;helm install kubecf/&lt;/code&gt; is
 able to install the unpacked release.&lt;/p&gt;
 
 &lt;p&gt;Note further that the above is an example of how to use the first kind
