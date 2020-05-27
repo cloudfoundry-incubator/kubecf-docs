@@ -46,10 +46,15 @@
 <link href="/scss/main.min.09e7d522d5846094a77df8fe690c2672d05ec6a02218a7463cb37d7c6962580c.css" rel="stylesheet" integrity="">
 
 
+<link href="/css/offline-search.css" rel="stylesheet">
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
+<script src="/js/offline-search.js"></script>
 
 
     <title>Getting Started | KubeCF</title>
@@ -110,7 +115,10 @@
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+<div id="search-nav-container">
+<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
+<div id="search-results" class="container"></div>
+</div>
 </div>
 </nav>
 
@@ -128,7 +136,10 @@
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+<div id="search-nav-container">
+<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
+<div id="search-results" class="container"></div>
+</div>
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
