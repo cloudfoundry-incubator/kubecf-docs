@@ -103,16 +103,6 @@
   </url>
   
   <url>
-    <loc>https://kubecf.suse.dev/blog/news/</loc>
-    <lastmod>2019-12-19T15:14:30+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kubecf.suse.dev/blog/2018/10/06/easy-documentation-with-docsy/</loc>
-    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://kubecf.suse.dev/docs/reference/layout/bump/</loc>
     <lastmod>2019-12-19T16:03:09+01:00</lastmod>
   </url>
@@ -175,11 +165,6 @@
   <url>
     <loc>https://kubecf.suse.dev/about/</loc>
     <lastmod>2019-12-19T12:02:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kubecf.suse.dev/blog/</loc>
-    <lastmod>2019-12-19T09:03:55+01:00</lastmod>
   </url>
   
   <url>
