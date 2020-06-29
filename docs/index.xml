@@ -696,6 +696,60 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Docs: Run smoke tests</title>
+      <link>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;Once you have deployed KubeCF, you might want to validate it by running Cloud
+Foundry&amp;rsquo;s smoke tests.
+For that purpose, KubeCF&amp;rsquo;s helm chart ships the Cloud Foundry smoke tests,
+packaged inside of a deployment&amp;rsquo;s instance group.&lt;/p&gt;
+
+&lt;h2 id=&#34;triggering-the-smoke-tests&#34;&gt;Triggering the smoke tests&lt;/h2&gt;
+
+&lt;p&gt;The smoke tests are run by a CF-Operator qjob (a wrapper on Kube jobs). That job
+is defined to not trigger automatically by default. To start it, patch the job
+with trigger strategy &amp;ldquo;now&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ kubectl get qjob --namespace scf --output name 2&amp;gt; /dev/null | grep smoke-tests
+quarksjob.quarks.cloudfoundry.org/smoke-tests
+
+$ kubectl patch quarksjob.quarks.cloudfoundry.org/smoke-tests \
+         --namespace kubecf --type merge --patch \
+         &#39;{ &amp;quot;spec&amp;quot;: { &amp;quot;trigger&amp;quot;: { &amp;quot;strategy&amp;quot;: &amp;quot;now&amp;quot; } } }&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will start the job, which creates a &lt;code&gt;smoke-tests-&amp;lt;id&amp;gt;&lt;/code&gt; pod. Inside that
+pod, there&amp;rsquo;s a container called &lt;code&gt;smoke-tests-smoke-tests&lt;/code&gt; with the test run.&lt;/p&gt;
+
+&lt;p&gt;You can, as usual, see the resulting logs from the smoke-tests pod with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ kubectl logs -f smoke-tests-614496c133797980-bm2g4 --namespace scf \
+          --container smoke-tests-smoke-tests
+Running smoke tests...
+Running binaries smoke/isolation_segments/isolation_segments.test
+smoke/logging/logging.test
+smoke/runtime/runtime.test
+[1592406628] CF-Isolation-Segment-Smoke-Tests - 4 specs - 7 nodes SSSS SUCCESS! 13.717155722s
+[1592406628] CF-Logging-Smoke-Tests - 2 specs - 7 nodes S• SUCCESS! 36.291956367s
+[1592406628] CF-Runtime-Smoke-Tests - 2 specs - 7 nodes S• SUCCESS! 30.456607562s
+
+Ginkgo ran 3 suites in 1m21.517660359s
+Test Suite Passed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The pod will exit with a return code of &lt;code&gt;0&lt;/code&gt; if successful, and other if not.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Deploy KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
