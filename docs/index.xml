@@ -750,6 +750,37 @@ Test Suite Passed
     </item>
     
     <item>
+      <title>Docs: Upgrading KubeCF deployments</title>
+      <link>https://kubecf.suse.dev/docs/tasks/upgrade/</link>
+      <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/docs/tasks/upgrade/</guid>
+      <description>
+        
+        
+        
+
+&lt;h2 id=&#34;upgrading-from-a-previous-deployment&#34;&gt;Upgrading from a previous deployment&lt;/h2&gt;
+
+&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/&#34;&gt;initial deployment&lt;/a&gt;; however, please
+use &lt;code&gt;helm upgrade&lt;/code&gt; intead of &lt;code&gt;helm install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you are providing a configuration file that was originally from a previous
+deployment, please take care to review the configuration to ensure you are not
+maintaining default values from a previous version unintentionally.  Where
+possible, not specifying configuration that maintains the default values will
+prevent accidentally changing them if the defaults have changed in the new
+version.&lt;/p&gt;
+
+&lt;h2 id=&#34;upgrading-from-scf&#34;&gt;Upgrading from SCF&lt;/h2&gt;
+
+&lt;p&gt;Please refer to the &lt;a href=&#34;https://documentation.suse.com/suse-cap/2.0/html/cap-guides/cha-cap-upgrade.html&#34; target=&#34;_blank&#34;&gt;SUSE documentation&lt;/a&gt;.  Exporting data from the SCF
+insallation and importing into KubeCF is required.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Deploy KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
@@ -933,19 +964,6 @@ installed.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --type merge &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --patch &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;trigger&amp;#34;:{&amp;#34;strategy&amp;#34;:&amp;#34;now&amp;#34;}}}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Upgrading KubeCF deployments</title>
-      <link>https://kubecf.suse.dev/docs/tasks/upgrade/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://kubecf.suse.dev/docs/tasks/upgrade/</guid>
-      <description>
-        
-        
-        
       </description>
     </item>
     
