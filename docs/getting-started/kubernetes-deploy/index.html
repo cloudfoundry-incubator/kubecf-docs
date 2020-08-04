@@ -26,14 +26,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-05-27T20:29:19+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-08-04T10:19:38+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy on Kubernetes">
 <meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-05-27T20:29:19&#43;02:00" />
+<meta itemprop="dateModified" content="2020-08-04T10:19:38&#43;02:00" />
 <meta itemprop="wordCount" content="825">
 
 
@@ -650,8 +650,8 @@ with Helm Tiller pre-installed.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install cf-operator <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --namespace cfo <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;global.operator.watchNamespace=kubecf&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v0.4.2-147.gb88e4296.tgz</code></pre></div>
-<p>In the example above, version 0.4.1 of the operator was used. Look
+</span><span style="color:#4e9a06"></span>     https://cf-operators.s3.amazonaws.com/helm-charts/cf-operator-5.0.0%2B0.gd7ac12bc.tgz</code></pre></div>
+<p>In the example above, version 5.0.0 of the operator was used. Look
 into the <code>cf_operator</code> section of the top-level <code>def.bzl</code> file to find
 the version of the operator validated against the current kubecf
 master.</p>
@@ -690,7 +690,7 @@ possible to build and deploy kubecf itself.</p>
 <h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install kubecf <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --namespace kubecf <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v0.0.0-998b961.tgz <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v2.3.0.tgz <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;system_domain=kubecf.suse.dev&#34;</span></code></pre></div>
 <p>In this default deployment, kubecf is launched without Ingress, and it
 uses the Diego scheduler.</p>
@@ -808,7 +808,7 @@ ready to be consumed by kubecf.</p>
 </span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 27, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/8d8c10d12a0c7c120846e038030cce0b21bb5526">Update kubernetes-deploy.md (8d8c10d)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/0364d843524a6741104978aa2c1b932a42d55310">Update cf-operator and kubecf tar URLS (0364d84)</a>
 </div>
 </div>
 
