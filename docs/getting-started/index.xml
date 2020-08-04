@@ -85,7 +85,7 @@ with Helm Tiller pre-installed.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.operator.watchNamespace=kubecf&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://cf-operators.s3.amazonaws.com/helm-charts/cf-operator-5.0.0%2B0.gd7ac12bc.tgz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In the example above, version 5.0.0 of the operator was used. Look
-into the &lt;code&gt;cf_operator&lt;/code&gt; section of the top-level &lt;code&gt;def.bzl&lt;/code&gt; file to find
+into the &lt;code&gt;cf_operator&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/blob/13ffb01dff8ab5eba16da54539b36e3b3b5f758e/dependencies.yaml#L108&#34; target=&#34;_blank&#34;&gt;section&lt;/a&gt; of the top-level &lt;code&gt;dependencies.yaml&lt;/code&gt; file to find
 the version of the operator validated against the current kubecf
 master.&lt;/p&gt;
 
@@ -195,11 +195,11 @@ cf-mysql-release. Kubecf also exposes a way to use an external database via the
 Helm property &lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more
 details.&lt;/p&gt;
 
-&lt;p&gt;For local development with an external database, the
-&lt;code&gt;bazel run //dev/external_database:deploy_mysql&lt;/code&gt; command will bring a mysql database up and running
+&lt;p&gt;For local development with an external database, the command
+&lt;code&gt;bash  ./scripts/deploy_mysql.sh&lt;/code&gt; will bring a mysql database up and running
 ready to be consumed by kubecf.&lt;/p&gt;
 
-&lt;p&gt;An example for the additional values to be provided to &lt;code&gt;//dev/kubecf:apply&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;An example for the additional values to be provided to &lt;code&gt;make kubecf:apply&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;external_database&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;enabled&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
