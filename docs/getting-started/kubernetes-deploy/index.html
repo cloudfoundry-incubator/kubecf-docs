@@ -26,14 +26,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-04T16:44:15+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-08-04T16:45:14+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy on Kubernetes">
 <meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-08-04T16:44:15&#43;02:00" />
+<meta itemprop="dateModified" content="2020-08-04T16:45:14&#43;02:00" />
 <meta itemprop="wordCount" content="825">
 
 
@@ -660,7 +660,7 @@ master.</p>
 &gt; The above <code>helm install</code> will generate many controllers spread over multiple pods inside the <code>cfo</code> namespace.
 &gt; Most of these controllers run inside the <code>cf-operator</code> pod.
 &gt;
-&gt; The <code>global.operator.watchNamespace=kubecf</code> path tells the
+&gt; The <code>global.singleNamespace.name=kubecf</code> path tells the
 controllers to watch for CRD´s instances into the <code>kubecf</code> namespace.
 &gt;
 &gt; The cf-operator helm chart will generate the <code>kubecf</code> namespace during installation, and eventually one of the
@@ -808,7 +808,7 @@ ready to be consumed by kubecf.</p>
 </span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/dc3f893ef261d1904a88e49e206a8d776f5c7a81">Update kubernetes-deploy.md when cf-operator &gt; 4 (dc3f893)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/686b6b4f3e2d78b42f61b332114a14ea8442901f">Update kubernetes-deploy.md (686b6b4)</a>
 </div>
 </div>
 

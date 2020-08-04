@@ -93,7 +93,7 @@ master.&lt;/p&gt;
 &amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt; namespace.
 &amp;gt; Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
 &amp;gt;
-&amp;gt; The &lt;code&gt;global.operator.watchNamespace=kubecf&lt;/code&gt; path tells the
+&amp;gt; The &lt;code&gt;global.singleNamespace.name=kubecf&lt;/code&gt; path tells the
 controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.
 &amp;gt;
 &amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and eventually one of the
