@@ -1472,7 +1472,7 @@ cluster with kubectl.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;The directory &lt;strong&gt;dev/linters&lt;/strong&gt; contains tooling to statically check the
+        &lt;p&gt;The &lt;code&gt;make lint&lt;/code&gt; targets runs tooling to statically check the
 sources of kubecf.&lt;/p&gt;
 
 &lt;p&gt;The following linters are available:&lt;/p&gt;
