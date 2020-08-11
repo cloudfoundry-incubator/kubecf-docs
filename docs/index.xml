@@ -1640,11 +1640,14 @@ applied before attempting to apply it for real.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;The smoke, brain, and acceptance tests can be run after Kubecf
+        &lt;p&gt;The smoke, brain, acceptance, and sync integration tests can be run after KubeCF
 deployment has completed, via:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //testing/smoke_tests
-bazel run //testing/brain_tests
-bazel run //testing/acceptance_tests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;make tests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or each by:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;make smoke
+make brain
+make sits
+make cats&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;a href=&#34;tests_cat.md&#34; target=&#34;_blank&#34;&gt;acceptance tests&lt;/a&gt; can be limited to specific suites of interest,
 as explained in the linked document.&lt;/p&gt;
 

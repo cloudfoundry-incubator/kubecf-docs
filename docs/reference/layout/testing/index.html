@@ -26,15 +26,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/reference/layout/testing/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-19T16:03:09+01:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-08-11T11:29:26+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Testing">
 <meta itemprop="description" content="Bazel targets to run CF smoke and acceptance tests.
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-19T16:03:09&#43;01:00" />
-<meta itemprop="wordCount" content="41">
+<meta itemprop="dateModified" content="2020-08-11T11:29:26&#43;02:00" />
+<meta itemprop="wordCount" content="47">
 
 
 
@@ -569,17 +569,20 @@
 <div class="td-content">
 	<h1>Testing</h1>
 	<div class="lead">Bazel targets to run CF smoke and acceptance tests.</div>
-	<p>The smoke, brain, and acceptance tests can be run after Kubecf
+	<p>The smoke, brain, acceptance, and sync integration tests can be run after KubeCF
 deployment has completed, via:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">bazel run //testing/smoke_tests
-bazel run //testing/brain_tests
-bazel run //testing/acceptance_tests</code></pre></div>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make tests</code></pre></div>
+<p>or each by:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make smoke
+make brain
+make sits
+make cats</code></pre></div>
 <p>The <a href="tests_cat.md" target="_blank">acceptance tests</a> can be limited to specific suites of interest,
 as explained in the linked document.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/961159ce7d2028eae8924b7170f5cefc82fb6f8d">Integrating remaining existing docs (961159c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 11, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/95b67f1dd526d65ec212eb8d6e83956407a5b465">Update testing.md (95b67f1)</a>
 </div>
 </div>
 
