@@ -24,7 +24,7 @@
         
         
 
-&lt;p&gt;The bazel target &lt;strong&gt;//testing/acceptance_tests&lt;/strong&gt; starts a run of the
+&lt;p&gt;The &lt;code&gt;make cats&lt;/code&gt; target starts a run of the
 &lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release&#34; target=&#34;_blank&#34;&gt;Cloud Foundry Acceptance Tests&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;See also the &lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
