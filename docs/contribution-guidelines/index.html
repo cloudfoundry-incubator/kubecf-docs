@@ -517,8 +517,9 @@
 <ul>
 <li><a href="#table-of-contents-aspects">Table of Contents (Aspects)</a></li>
 <li><a href="#deployment">Deployment</a></li>
-<li><a href="#build-from-source">Build from source</a></li>
 <li><a href="#pull-requests">Pull Requests</a></li>
+<li><a href="#source-organization">Source Organization</a></li>
+<li><a href="#updating-subcharts">Updating subcharts</a></li>
 <li><a href="#docker-images">Docker Images</a></li>
 <li><a href="#linting">Linting</a></li>
 <li><a href="#patching">Patching</a>
@@ -528,6 +529,7 @@
 <li><a href="#customization">Customization</a></li>
 <li><a href="#patches">Patches</a></li>
 </ul></li>
+<li><a href="#rotating-secrets">Rotating Secrets</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -584,11 +586,13 @@ which go deeper into the details of each aspect.</p>
 <ul>
 <li><a href="#deployment">Deployment</a></li>
 <li><a href="#pull-requests">Pull Requests</a></li>
-<li><a href="/docs/reference/layout/">Source Organization</a></li>
+<li><a href="#source-organization">Source Organization</a></li>
+<li><a href="#updating-subcharts">Updating Subcharts</a></li>
 <li><a href="#docker-images">Docker Images</a></li>
 <li><a href="#linting">Linting</a></li>
 <li><a href="#patching">Patching</a></li>
-<li><a href="/docs/tutorials/bosh-integration/">BOSH Development Workflow</a></li>
+<li>[BOSH Development Workflow]</li>
+<li><a href="#rotating-secrets">Rotating secrets</a></li>
 </ul>
 
 <h2 id="deployment">Deployment</h2>
@@ -615,27 +619,16 @@ combinations of choices in detail, from the bottom up.</p>
 
 <tbody>
 <tr>
-<td><a href="/docs/tutorials/deploy-minikube/">Local Minikube</a></td>
-<td>Minikube/Bazel + Operator/Bazel + Kubecf/Bazel</td>
+<td><a href="dev/minikube.md" target="_blank">Local Minikube</a></td>
+<td>Minikube + Operator + Kubecf</td>
 </tr>
 
 <tr>
-<td><a href="/docs/getting-started/kubernetes-deploy/">General Kube</a></td>
+<td><a href="dev/general.md" target="_blank">General Kube</a></td>
 <td>Any Kube + Operator/Helm + Kubecf/Helm</td>
 </tr>
 </tbody>
 </table>
-
-<h2 id="build-from-source">Build from source</h2>
-
-<p>To build KubeCF from source, <code>bazel</code> is required.
-You can check <a href="https://docs.bazel.build/versions/master/install.html" target="_blank">the official bazel docs on how to install</a> it in your system.</p>
-
-<p>To build <a href="https://github.com/cloudfoundry-incubator/kubecf" target="_blank">KubeCF</a> from source, you can just:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$&gt; git clone https://github.com/cloudfoundry-incubator/kubecf
-$&gt; <span style="color:#204a87">cd</span> kubecf
-$&gt; bazel build //deploy/helm/kubecf</code></pre></div>
-<p>This will generate a helm chart, which can be installed with Helm3 in your Kubernetes cluster!</p>
 
 <h2 id="pull-requests">Pull Requests</h2>
 
@@ -655,6 +648,9 @@ web interface, against the <strong>master</strong> branch.</p></li>
 questions, requesting changes, and generally discussing the
 submission with the submitter and among themselves.</p></li>
 
+<li><p>PRs from branches of this repository are automatically tested <a href="https://concourse.suse.dev/teams/main/pipelines/kubecf" target="_blank">in the CI</a>.
+For forks, you should ask a maintainer of this repository to trigger a build. Automated triggers have been disabled for security reasons.</p></li>
+
 <li><p>After all issues with the request are resolved, and CI has passed,
 a developer will merge it into master.</p></li>
 
@@ -667,31 +663,147 @@ contributor, on the assumption that the contributor is best suited
 to resolving the conflicts.</p></li>
 </ul>
 
+<h2 id="source-organization">Source Organization</h2>
+
+<p>The important directories of the kubecf sources, and their contents
+are shown in the table below. Each directory entry links to the
+associated documentation, if we have any.</p>
+
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Content</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>top</strong></td>
+<td>Documentation entrypoint, License,</td>
+</tr>
+
+<tr>
+<td></td>
+<td>Main workspace definitions.</td>
+</tr>
+
+<tr>
+<td><strong>top</strong>/&hellip;/README.md</td>
+<td>Directory-specific local documentation.</td>
+</tr>
+
+<tr>
+<td><a href="../bosh/releases/pre_render_scripts/README.md"><strong>top</strong>/bosh/releases</a></td>
+<td>Support for runtime patches of a kubecf deployment.</td>
+</tr>
+
+<tr>
+<td><strong>top</strong>/doc</td>
+<td>Global documentation.</td>
+</tr>
+
+<tr>
+<td><a href="cf_deployment/bump.md" target="_blank"><strong>top</strong>/dev/cf_deployment/bump</a></td>
+<td>Tools to support updating the cf deployment</td>
+</tr>
+
+<tr>
+<td></td>
+<td>manifest used by kubecf.</td>
+</tr>
+
+<tr>
+<td><a href="cf_cli.md" target="_blank"><strong>top</strong>/dev/cf_cli</a></td>
+<td>Deploy cf cli into a helper pod from which to then</td>
+</tr>
+
+<tr>
+<td></td>
+<td>inspect the deployed Kubecf</td>
+</tr>
+
+<tr>
+<td><a href="inspection.md" target="_blank"><strong>top</strong>/dev/kube</a></td>
+<td>Tools to inspect kube clusters and kubecf deployments.</td>
+</tr>
+
+<tr>
+<td><a href="../dev/kubecf/README.md"><strong>top</strong>/dev/kubecf</a></td>
+<td>Kubecf chart configuration</td>
+</tr>
+
+<tr>
+<td><strong>top</strong>/deploy/helm/kubecf</td>
+<td>Templates and assets wrapping a CF deployment</td>
+</tr>
+
+<tr>
+<td></td>
+<td>manifest into a helm chart.</td>
+</tr>
+
+<tr>
+<td><strong>top</strong>/rules</td>
+<td>Supporting scripts.</td>
+</tr>
+
+<tr>
+<td><a href="tests.md" target="_blank"><strong>top</strong>/testing</a></td>
+<td>Scripts with specific testing</td>
+</tr>
+
+<tr>
+<td><a href="../scripts/README.md"><strong>top</strong>/scripts</a></td>
+<td>Developer scripts used by make to start a k8s cluster</td>
+</tr>
+
+<tr>
+<td></td>
+<td>(for example on kind), lint, build, run &amp; test kubecf</td>
+</tr>
+
+<tr>
+<td><a href="../scripts/tools/README.md"><strong>top</strong>/scripts/tools</a></td>
+<td>Developer scripts pinning the development dependencies</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="updating-subcharts">Updating subcharts</h2>
+
+<p>The kubecf helm chart includes a number of subcharts. They are declared in
+<a href="../deploy/helm/kubecf/requirements.yaml">requirements.yaml</a>. For the
+convenience of development they are included in unpacked form directly in
+this repo, so version changes can be inspected with regular <code>git</code> tools,
+and the subcharts can be searched with <code>grep</code> etc.</p>
+
+<p>The procedure to update the version of a subchart is:</p>
+
+<pre><code>vi deploy/helm/kubecf/requirements.yaml
+./dev/helm/update_subcharts.sh
+git commit
+</code></pre>
+
 <h2 id="docker-images">Docker Images</h2>
 
 <p>The docker images used by kubecf to run jobs in container use a
 moderately complex naming scheme.</p>
 
 <p>This scheme is explained in a separate document:
-<a href="/docs/reference/image-naming/">The Naming Of Docker Images in kubecf</a>.</p>
+<a href="dev/image-naming.md" target="_blank">The Naming Of Docker Images in kubecf</a>.</p>
 
 <h2 id="linting">Linting</h2>
 
-<p>Currently, 3 linters are available:</p>
+<p>Currently, 3 linters are available: shellcheck, yamllint, &amp; helm linting.</p>
 
-<ul>
-<li><code>dev/linters/shellcheck.sh</code></li>
-<li><code>dev/linters/yamllint.sh</code></li>
-<li><code>dev/linters/helmlint.sh</code></li>
-</ul>
-
-<p>Invoke these linters as</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">dev/linters/shellcheck.sh
-dev/linters/yamllint.sh
-dev/linters/helmlint.sh</code></pre></div>
+<p>Invoke these linters with</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make lint</code></pre></div>
 <p>to run shellcheck on all <code>.sh</code> files found in the entire checkout, or yamllint
 on all <code>.yaml</code> or <code>.yml</code> files respectively, and report any issues found.  The
 last option runs <code>helm lint</code> (without <code>--strict</code>) on the generated helm chart.</p>
+
+<p>See the authoritative list of linters being called in the <code>make lint</code> target.</p>
 
 <h2 id="patching">Patching</h2>
 
@@ -750,43 +862,56 @@ manifest from the chart into the final manifest to deploy.</p>
  kubecf helm chart with its modified values.yaml.</p>
 
 <p>For example, <code>kubectl apply</code> the object below</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ConfigMap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>configmap_name<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>data<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>ops<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>|-<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>some_random_ops</code></pre></div>
+
+<pre><code> ```yaml
+ ---
+ apiVersion: v1
+ kind: ConfigMap
+ metadata:
+   name: configmap_name
+ data:
+   ops: |-
+     some_random_ops
+ ```
+</code></pre>
+
 <p>and then use</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">operations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>custom<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>configmap_name</code></pre></div></li>
-</ol>
+
+<pre><code> ```yaml
+ operations:
+   custom:
+   - configmap_name
+ ```
+</code></pre>
 
 <p>in the values.yaml (or an equivalent <code>--set</code> option) as part of a
-  kubecf deployment to include that ops file in the deployment.</p>
+ kubecf deployment to include that ops file in the deployment.</p>
 
-<p>The <a href="/docs/tutorials/bosh-integration/">BOSH Development Workflow</a> is an example of its use.</p>
+<p>The [BOSH Development Workflow] is an example of its use.</p>
 
-<ol>
+<p>[BOSH Development Workflow]: bosh-release-development.md</p></li>
+
 <li><p>The second mechanism allows the specification of any custom BOSH
  property for any instancegroup and job therein.</p>
 
 <p>Just specifying</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">properties<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>instance-group-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>job-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>some-property<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>some-value</code></pre></div></li>
-</ol>
+
+<pre><code> ```yaml
+ properties:
+   instance-group-name:
+     job-name:
+       some-property: some-value
+ ```
+</code></pre>
 
 <p>in the values.yaml for the kubecf chart causes the chart to
-  generate and use an ops file which applies the assignment of
-  <code>some-value</code> to <code>some-property</code> to the specified instance group
-  and job during deployment.</p>
+ generate and use an ops file which applies the assignment of
+ <code>some-value</code> to <code>some-property</code> to the specified instance group
+ and job during deployment.</p>
 
 <p>An example of its use in Kubecf is limiting the set of test
-  suites executed by the <a href="/docs/reference/tests">CF acceptance tests</a>.</p>
+ suites executed by the <a href="tests_cat.md" target="_blank">CF acceptance tests</a>.</p></li>
+</ol>
 
 <p>Both forms of customization assume a great deal of familiarity on the
 part of the developer and/or operator with the BOSH releases, instance
@@ -803,14 +928,14 @@ job was rendered and then executed. At the core, the feature allows
 the user to execute custom scripts during runtime of the job container
 for a specific instance_group.</p>
 
-<p><a href="/docs/reference/layout/patches/">Pre render scripts</a> are the equivalent feature of the CF operator.</p>
+<p><a href="https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#Pre_render_scripts" target="_blank">Pre render scripts</a> are the equivalent feature of the CF operator.</p>
 
 <p>Kubecf makes use of this feature to fix a number of issues in the
 deployment. The relevant patch scripts are found under the directory
 <code>bosh/releases/pre_render_scripts</code>.</p>
 
 <p>When following the directory structure explained by the
-<a href="/docs/reference/layout/patches/">README</a>, the bazel machinery for generating
+<a href="pre-render-scripts.md" target="_blank">README</a>, the bazel machinery for generating
 the kubecf helm chart will automatically convert these scripts into
 the proper ops files for use by the CF operator.</p>
 
@@ -820,6 +945,23 @@ without changing the result.</p>
 
 <p>The existing patch scripts do this by checking if the patch is already
 applied before attempting to apply it for real.</p>
+
+<h2 id="rotating-secrets">Rotating Secrets</h2>
+
+<p><strong>Rotating secrets</strong> is in general the process of updating one or more
+secrets to new values and restarting all affected pods so that they
+will use these new values.</p>
+
+<p>Most of the process is automatic. How to trigger it is explained
+in <a href="secret_rotation.md" target="_blank">Secret Rotation</a>.</p>
+
+<p>Beyond this, the keys used to encrypt the Cloud Controller Database
+(CCDB) can also be rotated, however, they do not exist as general
+secrets of the KubeCF deployment. This means that the general process
+explained above <strong>does not apply</strong> to them.</p>
+
+<p>Their custom process is explained in
+<a href="encryption_key_rotation.md" target="_blank">CCDB encryption key rotation</a>.</p>
 
         <div class="section-index">
     
@@ -897,7 +1039,7 @@ applied before attempting to apply it for real.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified March 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/2585789e6e0fbadd1cd9472994f7fce9c28f76b9">Add section to explain how to build KubeCF (2585789)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 11, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/5b2d82bbdd62f55a42c3c9710e90252ee6e6120b">Update _index.md (5b2d82b)</a>
 </div>
 </div>
 
