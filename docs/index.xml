@@ -1436,10 +1436,10 @@ restrict it to a specific namespace and to watch continously.&lt;/p&gt;&lt;/li&g
 
 &lt;h2 id=&#34;deployment-and-teardown&#34;&gt;Deployment and teardown&lt;/h2&gt;
 
-&lt;p&gt;For developing with &lt;a href=&#34;https://github.com/kubernetes-sigs/kind&#34; target=&#34;_blank&#34;&gt;KinD&lt;/a&gt;, start a local cluster by running the &lt;code&gt;start&lt;/code&gt; target:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;bazel run //dev/kind:start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For developing with &lt;a href=&#34;https://github.com/kubernetes-sigs/kind&#34; target=&#34;_blank&#34;&gt;KinD&lt;/a&gt;, start a local cluster by running the &lt;code&gt;following&lt;/code&gt; targets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;make kind-start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And tear it down via:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;bazel run //dev/kind:delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;make kind-delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     

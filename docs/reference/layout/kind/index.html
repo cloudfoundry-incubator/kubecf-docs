@@ -26,15 +26,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/reference/layout/kind/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-19T16:03:09+01:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-08-11T11:25:17+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Kind">
 <meta itemprop="description" content="Targets to manage a local Kind kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-19T16:03:09&#43;01:00" />
-<meta itemprop="wordCount" content="27">
+<meta itemprop="dateModified" content="2020-08-11T11:25:17&#43;02:00" />
+<meta itemprop="wordCount" content="25">
 
 
 
@@ -575,13 +575,13 @@
 
 <h2 id="deployment-and-teardown">Deployment and teardown</h2>
 
-<p>For developing with <a href="https://github.com/kubernetes-sigs/kind" target="_blank">KinD</a>, start a local cluster by running the <code>start</code> target:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bazel run //dev/kind:start</code></pre></div>
+<p>For developing with <a href="https://github.com/kubernetes-sigs/kind" target="_blank">KinD</a>, start a local cluster by running the <code>following</code> targets:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make kind-start</code></pre></div>
 <p>And tear it down via:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bazel run //dev/kind:delete</code></pre></div>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make kind-delete</code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/961159ce7d2028eae8924b7170f5cefc82fb6f8d">Integrating remaining existing docs (961159c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 11, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/cfb32d7cc746e8db10dff1b486c0b38907ee3bab">Update kind.md (cfb32d7)</a>
 </div>
 </div>
 
