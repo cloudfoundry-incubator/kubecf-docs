@@ -1518,10 +1518,10 @@ the intended deployment.&lt;/p&gt;
 
 &lt;h2 id=&#34;deployment-and-teardown&#34;&gt;Deployment and teardown&lt;/h2&gt;
 
-&lt;p&gt;For developing with Minikube, start a local cluster by running the &lt;code&gt;start&lt;/code&gt; target:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //dev/minikube:start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For developing with Minikube, start a local cluster by running the following target:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;make minikube-start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And tear it down again via:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bazel run //dev/minikube:delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;make minikube-delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;managing-system-resources&#34;&gt;Managing system resources&lt;/h2&gt;
 
 &lt;p&gt;The following three environment variables are used by the &lt;code&gt;start&lt;/code&gt;
