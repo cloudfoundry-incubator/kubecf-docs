@@ -211,7 +211,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/patches/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/bosh/releases&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../bosh/releases/pre_render_scripts/README.md&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/bosh/releases&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Support for runtime patches of a kubecf deployment.&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -221,7 +221,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/bump/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_deployment/bump&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;cf_deployment/bump.md&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_deployment/bump&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Tools to support updating the cf deployment&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -231,7 +231,7 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/cfcli/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_cli&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;cf_cli.md&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/cf_cli&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Deploy cf cli into a helper pod from which to then&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -241,43 +241,13 @@ associated documentation, if we have any.&lt;/p&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kube&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;inspection.md&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kube&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Tools to inspect kube clusters and kubecf deployments.&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/linters/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/linters&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Tools for statically checking the kubecf sources.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/minikube/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/minikube&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Targets to manage a local kubernetes cluster.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;Minikube based.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kind/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kind&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Targets to manage a local kubernetes cluster.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;KinD based (Kube-in-Docker).&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/kubecf/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kubecf&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Kubecf chart configuration, and targets for&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;local chart application.&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../dev/kubecf/README.md&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/dev/kubecf&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Kubecf chart configuration&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -292,12 +262,27 @@ associated documentation, if we have any.&lt;/p&gt;
 
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;top&lt;/strong&gt;/rules&lt;/td&gt;
-&lt;td&gt;Supporting bazel definitions.&lt;/td&gt;
+&lt;td&gt;Supporting scripts.&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/testing&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Bazel targets to run CF smoke and acceptance tests.&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;tests.md&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/testing&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Scripts with specific testing&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;../scripts/README.md&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/scripts&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Developer scripts used by make to start a k8s cluster&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;(for example on kind), lint, build, run &amp;amp; test kubecf&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;../scripts/tools/README.md&#34;&gt;&lt;strong&gt;top&lt;/strong&gt;/scripts/tools&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Developer scripts pinning the development dependencies&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
