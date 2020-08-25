@@ -26,15 +26,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-kind/" />
 <meta property="article:published_time" content="2020-02-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-05-08T12:22:38+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-08-13T13:46:09+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy KubeCF on Kind">
 <meta itemprop="description" content="Step-by-step guide to deploy KubeCF on top of Kind
 ">
 
 
 <meta itemprop="datePublished" content="2020-02-28T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-05-08T12:22:38&#43;02:00" />
-<meta itemprop="wordCount" content="510">
+<meta itemprop="dateModified" content="2020-08-13T13:46:09&#43;02:00" />
+<meta itemprop="wordCount" content="569">
 
 
 
@@ -526,6 +526,7 @@
 <li><a href="#before-you-begin">Before you begin</a></li>
 <li><a href="#installing-kind">Installing Kind</a></li>
 <li><a href="#create-a-kind-cluster">Create a Kind cluster</a></li>
+<li><a href="#download-cf-operator-and-kubecf-helm-charts">Download cf-operator and KubeCF Helm charts</a></li>
 <li><a href="#installing-cf-operator">Installing cf-operator</a></li>
 <li><a href="#installing-kubecf">Installing KubeCF</a></li>
 <li><a href="#what-s-next">What&rsquo;s next</a></li>
@@ -624,6 +625,20 @@ cf version 6.46.1+4934877ec.2019-08-23z
 &gt; kubectl cluster-info --context kind-kubecf
 </code></pre>
 
+<h2 id="download-cf-operator-and-kubecf-helm-charts">Download cf-operator and KubeCF Helm charts</h2>
+
+<p>Download the latest release bundle (<code>kubecf-bundle-vX.X.X.tgz</code>) to a local directory and extract it:</p>
+
+<pre><code>&gt; curl -s https://api.github.com/repos/cloudfoundry-incubator/kubecf/releases/latest \
+   | grep -oP '&quot;browser_download_url&quot;: &quot;\K(.*)kubecf-bundle(.*)(?=&quot;)' \
+   | wget -qi -
+&gt; tar xf kubecf-bundle-v*.tgz
+</code></pre>
+
+<p>The archive contains cf-operator and KubeCF Helm charts (<code>cf-operator.tgz</code> and <code>kubecf_release.tgz</code> respectively).</p>
+
+<p>All releases can be found on <a href="https://github.com/cloudfoundry-incubator/kubecf/releases" target="_blank">KubeCF releases</a> page.</p>
+
 <h2 id="installing-cf-operator">Installing cf-operator</h2>
 
 <p>Before we can deploy the <a href="https://github.com/cloudfoundry-incubator/cf-operator" target="_blank">cf-operator</a> we need to create the namespace:</p>
@@ -635,14 +650,14 @@ cf version 6.46.1+4934877ec.2019-08-23z
 
 <pre><code>&gt; helm install cf-operator \
     --namespace cfo \
-    --set &quot;global.operator.watchNamespace=kubecf&quot; \
-    https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v2.0.0-0.g0142d1e9.tgz
+    --set &quot;global.singleNamespace.name=kubecf&quot; \
+    ./cf-operator.tgz
 </code></pre>
 
 <p>Notes:</p>
 
 <ol>
-<li>The <em>watchNamespace</em> property is set to watch the <strong>kubecf</strong> namespace for changes</li>
+<li>The <code>singleNamespace</code> property is set to watch the <strong>kubecf</strong> namespace for changes</li>
 <li>cf-operator version may differ between KubeCF versions</li>
 </ol>
 
@@ -709,13 +724,13 @@ kube:
 <pre><code>&gt; helm install kubecf \
     --namespace kubecf \
     --values values.yaml \
-    https://github.com/cloudfoundry-incubator/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
+    ./kubecf_release.tgz
 </code></pre>
 
 <p>Notes:</p>
 
 <ol>
-<li>the namespace property value is the same as cf-operator watchNamespace one</li>
+<li>the namespace property value is the same as cf-operator <code>singleNamespace</code> one</li>
 </ol>
 
 <p>Be aware that it takes a couple of minutes to see the pods showing up on the kubecf namespace and the installation process may take 20-25 minutes depending on your
@@ -734,7 +749,7 @@ internet connection speed.</p>
 <p>get the admin password:</p>
 
 <pre><code>&gt; admin_pass=$(kubectl get secret --namespace kubecf \
-                                  kubecf.var-cf-admin-password \
+                                  var-cf-admin-password \
                                   -o jsonpath='{.data.password}' | base64 --decode)
 </code></pre>
 
@@ -751,7 +766,7 @@ internet connection speed.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/5c9efaa5cfd4767377d071d12547db7320901a1a">Break long line commands on deploy-kind.md (5c9efaa)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified August 13, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/59db6780c3d321ff720c4a4f46831cb78b4dff67">Update KubeCF on Kind tutorial (59db678)</a>
 </div>
 </div>
 

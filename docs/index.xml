@@ -103,6 +103,20 @@ cf version 6.46.1+4934877ec.2019-08-23z
 &amp;gt; kubectl cluster-info --context kind-kubecf
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;download-cf-operator-and-kubecf-helm-charts&#34;&gt;Download cf-operator and KubeCF Helm charts&lt;/h2&gt;
+
+&lt;p&gt;Download the latest release bundle (&lt;code&gt;kubecf-bundle-vX.X.X.tgz&lt;/code&gt;) to a local directory and extract it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; curl -s https://api.github.com/repos/cloudfoundry-incubator/kubecf/releases/latest \
+   | grep -oP &#39;&amp;quot;browser_download_url&amp;quot;: &amp;quot;\K(.*)kubecf-bundle(.*)(?=&amp;quot;)&#39; \
+   | wget -qi -
+&amp;gt; tar xf kubecf-bundle-v*.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The archive contains cf-operator and KubeCF Helm charts (&lt;code&gt;cf-operator.tgz&lt;/code&gt; and &lt;code&gt;kubecf_release.tgz&lt;/code&gt; respectively).&lt;/p&gt;
+
+&lt;p&gt;All releases can be found on &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases&#34; target=&#34;_blank&#34;&gt;KubeCF releases&lt;/a&gt; page.&lt;/p&gt;
+
 &lt;h2 id=&#34;installing-cf-operator&#34;&gt;Installing cf-operator&lt;/h2&gt;
 
 &lt;p&gt;Before we can deploy the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator&#34; target=&#34;_blank&#34;&gt;cf-operator&lt;/a&gt; we need to create the namespace:&lt;/p&gt;
@@ -114,14 +128,14 @@ cf version 6.46.1+4934877ec.2019-08-23z
 
 &lt;pre&gt;&lt;code&gt;&amp;gt; helm install cf-operator \
     --namespace cfo \
-    --set &amp;quot;global.operator.watchNamespace=kubecf&amp;quot; \
-    https://s3.amazonaws.com/cf-operators/helm-charts/cf-operator-v2.0.0-0.g0142d1e9.tgz
+    --set &amp;quot;global.singleNamespace.name=kubecf&amp;quot; \
+    ./cf-operator.tgz
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Notes:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;The &lt;em&gt;watchNamespace&lt;/em&gt; property is set to watch the &lt;strong&gt;kubecf&lt;/strong&gt; namespace for changes&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;singleNamespace&lt;/code&gt; property is set to watch the &lt;strong&gt;kubecf&lt;/strong&gt; namespace for changes&lt;/li&gt;
 &lt;li&gt;cf-operator version may differ between KubeCF versions&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -188,13 +202,13 @@ kube:
 &lt;pre&gt;&lt;code&gt;&amp;gt; helm install kubecf \
     --namespace kubecf \
     --values values.yaml \
-    https://github.com/cloudfoundry-incubator/kubecf/releases/download/v0.2.0/kubecf-0.2.0.tgz
+    ./kubecf_release.tgz
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Notes:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;the namespace property value is the same as cf-operator watchNamespace one&lt;/li&gt;
+&lt;li&gt;the namespace property value is the same as cf-operator &lt;code&gt;singleNamespace&lt;/code&gt; one&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Be aware that it takes a couple of minutes to see the pods showing up on the kubecf namespace and the installation process may take 20-25 minutes depending on your
@@ -213,7 +227,7 @@ internet connection speed.&lt;/p&gt;
 &lt;p&gt;get the admin password:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;gt; admin_pass=$(kubectl get secret --namespace kubecf \
-                                  kubecf.var-cf-admin-password \
+                                  var-cf-admin-password \
                                   -o jsonpath=&#39;{.data.password}&#39; | base64 --decode)
 &lt;/code&gt;&lt;/pre&gt;
 
