@@ -246,6 +246,191 @@ internet connection speed.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Docs: Eirini Persistence broker</title>
+      <link>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</link>
+      <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;KubeCF allows to leverage the Kubernetes Cluster available &lt;code&gt;StorageClass&lt;/code&gt;. When Eirini is being enabled, two additional components are deployed, the &lt;code&gt;eirini-persi-extension&lt;/code&gt; and &lt;code&gt;eirini-persi-broker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The broker must be configured in order to use the storageclass to provide support for persistence data for applications pushed to CloudFoundry with Eirini.&lt;/p&gt;
+
+&lt;p&gt;You can set up default plans that are applied to the broker during deployment.&lt;/p&gt;
+
+&lt;p&gt;To configure the broker, in the KubeCF values add and adjust as needed:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;eirinix&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;persi-broker&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;service-plans&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;id&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;default&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;name&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;description&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Existing default storage class&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;kube_storage_class&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Storageclass used for provisioning&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;free&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;default_size&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1Gi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default size of generated PVC&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;default_access_mode&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ReadWriteOnly&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Here you can tweak the default access mode for new PVCs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;setup-eirini-persi-broker-with-kubecf&#34;&gt;Setup eirini-persi-broker with KubeCF&lt;/h2&gt;
+
+&lt;p&gt;In this section we will see how to setup the eirini-persi-broker on a KubeCF deployment.&lt;/p&gt;
+
+&lt;h3 id=&#34;get-the-broker-password&#34;&gt;Get the broker password&lt;/h3&gt;
+
+&lt;p&gt;After deploying KubeCF the broker password should be automatically generated (the example assumes you have deployed KubeCF in the &lt;code&gt;kubecf&lt;/code&gt; namespace):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; BROKER_PASS=$(kubectl get secrets -n kubecf -o json persi-broker-auth-password | jq -r &#39;.data.&amp;quot;password&amp;quot;&#39; | base64 -d)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;create-the-service-broker&#34;&gt;Create the service broker&lt;/h3&gt;
+
+&lt;p&gt;With &lt;code&gt;cf-cli&lt;/code&gt; (you must be logged in) let&amp;rsquo;s add the broker to our cf instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf create-service-broker eirini-persi admin $BROKER_PASS http://eirini-persi-broker:8999
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;enable-the-service-for-the-space&#34;&gt;Enable the service for the space&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;rsquo;s enable the service (here, doing it globally):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf enable-service-access eirini-persi
+
+
+Enabling access to all plans of service eirini-persi for all orgs as admin...
+OK
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check everything is ok:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$&amp;gt; cf service-brokers
+
+Getting service brokers as admin...
+
+name                  url
+eirini-persi          http://eirini-persi-broker:8999&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If eirini-persi is showed among the list of the available brokers, it means that it is configured and plans supplied during deployment are available to be consumed.&lt;/p&gt;
+
+&lt;p&gt;Now the broker should be available in the marketplace, list all the broker services:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf marketplace
+Getting services from marketplace in org system / space tmp as admin...
+OK
+
+service        plans     description
+eirini-persi   default   Eirini persistence broker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List the plans available from the broker (output might differ):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf marketplace -s eirini-persi
+Getting service plan information for service eirini-persi as admin...
+OK
+
+service plan   description                 free or paid
+default        Eirini persistence broker   free
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-the-eirini-persi-broker&#34;&gt;Using the Eirini-persi broker&lt;/h2&gt;
+
+&lt;p&gt;To verify that everything works correctly it is possible to check after creating a service that the persistent volume claims are present in the Kubernetes cluster.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-service&#34;&gt;Create a service&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;eirini-persi-broker&lt;/code&gt; will create PVCs associated to the services that are created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf create-service eirini-persi default eirini-persi-1
+Creating service instance eirini-persi-1 in org system / space tmp as admin...
+OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this way, we can associate the service to an app, which will actually link and attach a PVC to it.&lt;/p&gt;
+
+&lt;p&gt;List all the &lt;code&gt;PersistentVolumeClaim&lt;/code&gt; and verify that a new one was created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; kubectl get pvc -n eirini
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+f9d4b977-0b9e-4fcb-a92e-652bc77dd7e7   Bound    pvc-9960cc11-7895-11e9-afac-024267c84a6b   1Gi        RWO            persistent     6s
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create a service with a custom capacity, you can define the quota when creating the service.&lt;/p&gt;
+
+&lt;p&gt;E.g. create a service providing a volume with 20M of quota:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf create-service eirini-persi default eirini-persi-1-20M-quota -c &#39;{&amp;quot;size&amp;quot;: &amp;quot;20M&amp;quot;}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;E.g. To create a PVC which has a different access mode:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf create-service eirini-persi default eirini-persi-1-rwm -c &#39;{&amp;quot;access_mode&amp;quot;: &amp;quot;ReadWriteMany&amp;quot;}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;bind-volumes-to-a-cloud-foundry-application&#34;&gt;Bind volumes to a Cloud Foundry application&lt;/h3&gt;
+
+&lt;p&gt;List the available services:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf services
+Getting services in org system / space tmp as admin...
+
+name                          service        plan      bound apps    last operation
+eirini-persi-1                eirini-persi   default   dizzylizard   create succeeded
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s associate the service to an application (in this case &lt;code&gt;dizzylizard&lt;/code&gt;) using &lt;code&gt;eirini-persi-1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf bind-service dizzylizard eirini-persi-1
+
+Binding service eirini-persi-1 to app dizzylizard in org system / space tmp as admin...
+OK
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restage our app so our change takes effect:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$&amp;gt; cf restage dizzylizard
+
+Restaging app dizzylizard in org system / space tmp as admin...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;access-the-volume&#34;&gt;Access the Volume&lt;/h3&gt;
+
+&lt;p&gt;Once the service is associated, the application can access to the data of the volume mount by reading the mounted path inside the &lt;code&gt;VCAP_SERVICES&lt;/code&gt; environment variable.&lt;/p&gt;
+
+&lt;p&gt;An example of &lt;code&gt;VCAP_SERVICES&lt;/code&gt; generated by &lt;code&gt;eirini-persi-broker&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;eirini-persi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;	  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;credentials&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;volume_id&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;the-volume-id&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;eirini-persi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;my-instance&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;plan&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;hostpath&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;tags&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+			&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;erini&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+			&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;kubernetes&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+			&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;
+		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+		&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;volume_mounts&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+		  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+			&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;container_dir&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/var/vcap/data/de847d34-bdcc-4c5d-92b1-cf2158a15b47&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+			&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;device_type&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+			&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;rw&amp;#34;&lt;/span&gt;
+		  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+	  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can refer to the &lt;a href=&#34;https://docs.cloudfoundry.org/devguide/services/using-vol-services.html&#34; target=&#34;_blank&#34;&gt;Cloud Foundry documentation regarding of how to access to the Volume Service&lt;/a&gt;, with the difference that the eirini broker will create services with the id &lt;code&gt;eirini-persi&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SUSE/scf/wiki/Persistence-with-Eirini-in-SCF&#34; target=&#34;_blank&#34;&gt;https://github.com/SUSE/scf/wiki/Persistence-with-Eirini-in-SCF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Deploy Stratos next to KubeCF</title>
       <link>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>

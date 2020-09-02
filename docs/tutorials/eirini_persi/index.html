@@ -20,28 +20,28 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Deploy KubeCF in Minikube | KubeCF</title><meta property="og:title" content="Deploy KubeCF in Minikube" />
-<meta property="og:description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<title>Eirini Persistence broker | KubeCF</title><meta property="og:title" content="Eirini Persistence broker" />
+<meta property="og:description" content="How to set-up KubeCF with Eirini and the persistence broker
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-minikube/" />
-<meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-19T15:14:30+01:00" /><meta property="og:site_name" content="KubeCF" />
-<meta itemprop="name" content="Deploy KubeCF in Minikube">
-<meta itemprop="description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/eirini_persi/" />
+<meta property="article:published_time" content="2020-09-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-02T14:20:57+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta itemprop="name" content="Eirini Persistence broker">
+<meta itemprop="description" content="How to set-up KubeCF with Eirini and the persistence broker
 ">
 
 
-<meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-19T15:14:30&#43;01:00" />
-<meta itemprop="wordCount" content="623">
+<meta itemprop="datePublished" content="2020-09-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-09-02T14:20:57&#43;02:00" />
+<meta itemprop="wordCount" content="704">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Deploy KubeCF in Minikube"/>
-<meta name="twitter:description" content="Deploy a git KubeCF checkout in Minikube with Bazel.
+<meta name="twitter:title" content="Eirini Persistence broker"/>
+<meta name="twitter:description" content="How to set-up KubeCF with Eirini and the persistence broker
 "/>
 
 
@@ -65,7 +65,7 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Deploy KubeCF in Minikube | KubeCF</title>
+    <title>Eirini Persistence broker | KubeCF</title>
   </head>
   <body class="td-page">
     <header>
@@ -321,7 +321,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-eirini-persi" href="/docs/tutorials/eirini_persi/">Eirini Persistence broker</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-tutorials-eirini-persi" href="/docs/tutorials/eirini_persi/">Eirini Persistence broker</a>
       
       
       
@@ -339,7 +339,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-tutorials-deploy-minikube" href="/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-minikube" href="/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
       
       
       
@@ -429,8 +429,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Tutorials/deploy-minikube.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Deploy%20KubeCF%20in%20Minikube" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Tutorials/eirini_persi.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Eirini%20Persistence%20broker" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -446,30 +446,19 @@
 <ul>
 <li>
 <ul>
-<li><a href="#minikube">Minikube</a>
+<li><a href="#setup-eirini-persi-broker-with-kubecf">Setup eirini-persi-broker with KubeCF</a>
 <ul>
-<li><a href="#attention-dangers">Attention, Dangers</a></li>
-<li><a href="#advanced-configuration">Advanced configuration</a></li>
+<li><a href="#get-the-broker-password">Get the broker password</a></li>
+<li><a href="#create-the-service-broker">Create the service broker</a></li>
+<li><a href="#enable-the-service-for-the-space">Enable the service for the space</a></li>
 </ul></li>
-<li><a href="#cf-operator">cf-operator</a>
+<li><a href="#using-the-eirini-persi-broker">Using the Eirini-persi broker</a>
 <ul>
-<li><a href="#deployment-and-tear-down">Deployment and Tear-down</a></li>
+<li><a href="#create-a-service">Create a service</a></li>
+<li><a href="#bind-volumes-to-a-cloud-foundry-application">Bind volumes to a Cloud Foundry application</a></li>
+<li><a href="#access-the-volume">Access the Volume</a></li>
 </ul></li>
-<li><a href="#kubecf">Kubecf</a>
-<ul>
-<li><a href="#system-domain">System domain</a></li>
-<li><a href="#deployment-and-tear-down-1">Deployment and Tear-down</a></li>
-<li><a href="#access">Access</a></li>
-<li><a href="#advanced-topics">Advanced Topics</a>
-<ul>
-<li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
-<li><a href="#ingress">Ingress</a>
-<ul>
-<li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
-<li><a href="#configure-kubecf">Configure kubecf</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
+<li><a href="#see-also">See also</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -506,7 +495,7 @@
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://kubecf.suse.dev/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
+	<a href="https://kubecf.suse.dev/docs/tutorials/eirini_persi/">Eirini Persistence broker</a>
 </li>
 
 	</ol>
@@ -514,216 +503,184 @@
 
             
 <div class="td-content">
-	<h1>Deploy KubeCF in Minikube</h1>
-	<div class="lead">Deploy a git KubeCF checkout in Minikube with Bazel.</div>
+	<h1>Eirini Persistence broker</h1>
+	<div class="lead">How to set-up KubeCF with Eirini and the persistence broker</div>
 	
 
-<p>The intended audience of this document are developers wishing to
-contribute to the Kubecf project.</p>
+<p>KubeCF allows to leverage the Kubernetes Cluster available <code>StorageClass</code>. When Eirini is being enabled, two additional components are deployed, the <code>eirini-persi-extension</code> and <code>eirini-persi-broker</code>.</p>
 
-<p>Here we explain how to deploy Kubecf locally using:</p>
+<p>The broker must be configured in order to use the storageclass to provide support for persistence data for applications pushed to CloudFoundry with Eirini.</p>
+
+<p>You can set up default plans that are applied to the broker during deployment.</p>
+
+<p>To configure the broker, in the KubeCF values add and adjust as needed:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">eirinix<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>persi-broker<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>service-plans<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>id<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>default<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;default&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>description<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Existing default storage class&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>kube_storage_class<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;default&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Storageclass used for provisioning</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>free<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>default_size<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default size of generated PVC</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>default_access_mode<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ReadWriteOnly&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Here you can tweak the default access mode for new PVCs</span></code></pre></div>
+<h2 id="setup-eirini-persi-broker-with-kubecf">Setup eirini-persi-broker with KubeCF</h2>
+
+<p>In this section we will see how to setup the eirini-persi-broker on a KubeCF deployment.</p>
+
+<h3 id="get-the-broker-password">Get the broker password</h3>
+
+<p>After deploying KubeCF the broker password should be automatically generated (the example assumes you have deployed KubeCF in the <code>kubecf</code> namespace):</p>
+
+<pre><code>$&gt; BROKER_PASS=$(kubectl get secrets -n kubecf -o json persi-broker-auth-password | jq -r '.data.&quot;password&quot;' | base64 -d)
+</code></pre>
+
+<h3 id="create-the-service-broker">Create the service broker</h3>
+
+<p>With <code>cf-cli</code> (you must be logged in) let&rsquo;s add the broker to our cf instance:</p>
+
+<pre><code>$&gt; cf create-service-broker eirini-persi admin $BROKER_PASS http://eirini-persi-broker:8999
+</code></pre>
+
+<h3 id="enable-the-service-for-the-space">Enable the service for the space</h3>
+
+<p>Let&rsquo;s enable the service (here, doing it globally):</p>
+
+<pre><code>$&gt; cf enable-service-access eirini-persi
+
+
+Enabling access to all plans of service eirini-persi for all orgs as admin...
+OK
+
+</code></pre>
+
+<p>Check everything is ok:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cf service-brokers
+
+Getting service brokers as admin...
+
+name                  url
+eirini-persi          http://eirini-persi-broker:8999</code></pre></div>
+<p>If eirini-persi is showed among the list of the available brokers, it means that it is configured and plans supplied during deployment are available to be consumed.</p>
+
+<p>Now the broker should be available in the marketplace, list all the broker services:</p>
+
+<pre><code>$&gt; cf marketplace
+Getting services from marketplace in org system / space tmp as admin...
+OK
+
+service        plans     description
+eirini-persi   default   Eirini persistence broker
+</code></pre>
+
+<p>List the plans available from the broker (output might differ):</p>
+
+<pre><code>$&gt; cf marketplace -s eirini-persi
+Getting service plan information for service eirini-persi as admin...
+OK
+
+service plan   description                 free or paid
+default        Eirini persistence broker   free
+</code></pre>
+
+<h2 id="using-the-eirini-persi-broker">Using the Eirini-persi broker</h2>
+
+<p>To verify that everything works correctly it is possible to check after creating a service that the persistent volume claims are present in the Kubernetes cluster.</p>
+
+<h3 id="create-a-service">Create a service</h3>
+
+<p><code>eirini-persi-broker</code> will create PVCs associated to the services that are created:</p>
+
+<pre><code>$&gt; cf create-service eirini-persi default eirini-persi-1
+Creating service instance eirini-persi-1 in org system / space tmp as admin...
+OK
+</code></pre>
+
+<p>In this way, we can associate the service to an app, which will actually link and attach a PVC to it.</p>
+
+<p>List all the <code>PersistentVolumeClaim</code> and verify that a new one was created:</p>
+
+<pre><code>$&gt; kubectl get pvc -n eirini
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+f9d4b977-0b9e-4fcb-a92e-652bc77dd7e7   Bound    pvc-9960cc11-7895-11e9-afac-024267c84a6b   1Gi        RWO            persistent     6s
+
+</code></pre>
+
+<p>To create a service with a custom capacity, you can define the quota when creating the service.</p>
+
+<p>E.g. create a service providing a volume with 20M of quota:</p>
+
+<pre><code>$&gt; cf create-service eirini-persi default eirini-persi-1-20M-quota -c '{&quot;size&quot;: &quot;20M&quot;}'
+</code></pre>
+
+<p>E.g. To create a PVC which has a different access mode:</p>
+
+<pre><code>$&gt; cf create-service eirini-persi default eirini-persi-1-rwm -c '{&quot;access_mode&quot;: &quot;ReadWriteMany&quot;}'
+</code></pre>
+
+<h3 id="bind-volumes-to-a-cloud-foundry-application">Bind volumes to a Cloud Foundry application</h3>
+
+<p>List the available services:</p>
+
+<pre><code>$&gt; cf services
+Getting services in org system / space tmp as admin...
+
+name                          service        plan      bound apps    last operation
+eirini-persi-1                eirini-persi   default   dizzylizard   create succeeded
+</code></pre>
+
+<p>Let&rsquo;s associate the service to an application (in this case <code>dizzylizard</code>) using <code>eirini-persi-1</code>:</p>
+
+<pre><code>$&gt; cf bind-service dizzylizard eirini-persi-1
+
+Binding service eirini-persi-1 to app dizzylizard in org system / space tmp as admin...
+OK
+
+</code></pre>
+
+<p>Restage our app so our change takes effect:</p>
+
+<pre><code>$&gt; cf restage dizzylizard
+
+Restaging app dizzylizard in org system / space tmp as admin...
+</code></pre>
+
+<h3 id="access-the-volume">Access the Volume</h3>
+
+<p>Once the service is associated, the application can access to the data of the volume mount by reading the mounted path inside the <code>VCAP_SERVICES</code> environment variable.</p>
+
+<p>An example of <code>VCAP_SERVICES</code> generated by <code>eirini-persi-broker</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">&#34;eirini-persi&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>	  <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">&#34;credentials&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;volume_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;the-volume-id&#34;</span> <span style="color:#000;font-weight:bold">},</span>
+		<span style="color:#204a87;font-weight:bold">&#34;label&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;eirini-persi&#34;</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;my-instance&#34;</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#204a87;font-weight:bold">&#34;plan&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;hostpath&#34;</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#204a87;font-weight:bold">&#34;tags&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+			<span style="color:#4e9a06">&#34;erini&#34;</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#4e9a06">&#34;kubernetes&#34;</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#4e9a06">&#34;storage&#34;</span>
+		<span style="color:#000;font-weight:bold">],</span>
+		<span style="color:#204a87;font-weight:bold">&#34;volume_mounts&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+		  <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#204a87;font-weight:bold">&#34;container_dir&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;/var/vcap/data/de847d34-bdcc-4c5d-92b1-cf2158a15b47&#34;</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#204a87;font-weight:bold">&#34;device_type&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;shared&#34;</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#204a87;font-weight:bold">&#34;mode&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;rw&#34;</span>
+		  <span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000;font-weight:bold">]</span>
+	  <span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">]</span>
+<span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<p>You can refer to the <a href="https://docs.cloudfoundry.org/devguide/services/using-vol-services.html" target="_blank">Cloud Foundry documentation regarding of how to access to the Volume Service</a>, with the difference that the eirini broker will create services with the id <code>eirini-persi</code>.</p>
+
+<h2 id="see-also">See also</h2>
 
 <ul>
-<li>Minikube to manage a local Kubernetes cluster.</li>
-<li>A cf-operator pinned with Bazel.</li>
-<li>Kubecf built and deployed from the sources in the current checkout.</li>
+<li><a href="https://github.com/SUSE/scf/wiki/Persistence-with-Eirini-in-SCF" target="_blank">https://github.com/SUSE/scf/wiki/Persistence-with-Eirini-in-SCF</a></li>
 </ul>
 
-<h2 id="minikube">Minikube</h2>
-
-<p>Minikube is one of several projects enabling the deployment,
-management and tear-down of a local Kubernetes cluster.</p>
-
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-a Minikube-based cluster. Using these has the advantage of using a
-specific version of Minikube. On the other side, the reduced
-variability of the development environment is a disadvantage as well,
-possibly allowing portability issues to slide through.</p>
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/minikube:start</code></td>
-</tr>
-
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/minikube:delete</code></td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="attention-dangers">Attention, Dangers</h3>
-
-<p>Minikube edits the Kubernetes configuration file referenced by the
-environment variable <code>KUBECONFIG</code>, or <code>~/.kube/config</code>.</p>
-
-<p>To preserve the original configuration either make a backup of the
-relevant file, or change <code>KUBECONFIG</code> to a different path specific to
-the intended deployment.</p>
-
-<h3 id="advanced-configuration">Advanced configuration</h3>
-
-<p>The local <a href="../kube/minikube.md">Minikube Documentation</a> explains the
-various environment variables which can be used to configure the
-resources used by the cluster (CPUs, memory, disk size, etc.) in
-detail.</p>
-
-<h2 id="cf-operator">cf-operator</h2>
-
-<p>The <a href="https://github.com/cloudfoundry-incubator/cf-operator" target="_blank">cf-operator</a> is the underlying generic tool to deploy a (modified)
-BOSH deployment like Kubecf for use.</p>
-
-<p>It has to be installed in the same kube cluster Kubecf will be deployed to.</p>
-
-<h3 id="deployment-and-tear-down">Deployment and Tear-down</h3>
-
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-cf-operator:</p>
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/cf_operator:apply</code></td>
-</tr>
-
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/cf_operator:delete</code></td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="kubecf">Kubecf</h2>
-
-<p>With all the prequisites handled by the preceding sections it is now
-possible to build and deploy kubecf itself.</p>
-
-<h3 id="system-domain">System domain</h3>
-
-<p>The main configuration to set for kubecf is its system domain.
-For the Minikube foundation we have to specify it as:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#204a87">echo</span> <span style="color:#4e9a06">&#34;system_domain: </span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">.xip.io&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  &gt; <span style="color:#4e9a06">&#34;</span><span style="color:#204a87;font-weight:bold">$(</span>bazel info workspace<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">/dev/kubecf/system_domain_values.yaml&#34;</span></code></pre></div>
-<h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
-
-<p>The Kubecf Bazel workspace contains targets to deploy and/or tear-down
-kubecf from the sources:</p>
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Command</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Deployment</td>
-<td><code>bazel run //dev/kubecf:apply</code></td>
-</tr>
-
-<tr>
-<td>Tear-down</td>
-<td><code>bazel run //dev/kubecf:delete</code></td>
-</tr>
-</tbody>
-</table>
-
-<p>In this default deployment kubecf is launched without Ingress, and
-uses the Diego scheduler.</p>
-
-<h3 id="access">Access</h3>
-
-<p>Accessing the cluster from outside of the minikube VM requires
-<a href="#ingress">ingress</a> to be set up correctly.</p>
-
-<p>To access the cluster after the cf-operator has completed the
-deployment and all pods are active invoke:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cf api --skip-ssl-validation <span style="color:#4e9a06">&#34;https://api.</span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">.xip.io&#34;</span>
-
-<span style="color:#8f5902;font-style:italic"># Copy the admin cluster password.</span>
-<span style="color:#000">acp</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get secret <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        --namespace kubecf kubecf.var-cf-admin-password <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        -o <span style="color:#000">jsonpath</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#39;{.data.password}&#39;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        <span style="color:#000;font-weight:bold">|</span> base64 --decode<span style="color:#204a87;font-weight:bold">)</span>
-
-<span style="color:#8f5902;font-style:italic"># Use the password from the previous step when requested.</span>
-cf auth admin <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">acp</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
-<h3 id="advanced-topics">Advanced Topics</h3>
-
-<h4 id="diego-vs-eirini">Diego vs Eirini</h4>
-
-<p>Diego is the standard scheduler used by kubecf to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
-Kubernetes native approach, deploying the CF apps directly to a
-Kubernetes namespace.</p>
-
-<p>To activate this alternative, add a file matching the pattern
-<code>*values.yaml</code> to the directory <strong>dev/kubecf</strong> and containing</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>eirini<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span></code></pre></div>
-<p>before deploying kubecf.</p>
-
-<h4 id="ingress">Ingress</h4>
-
-<p>By default, the cluster is exposed through its Kubernetes services.</p>
-
-<p>To use the NGINX ingress instead, it is necessary to:</p>
-
-<ul>
-<li>Install and configure the NGINX Ingress Controller.</li>
-<li>Configure Kubecf to use the ingress controller.</li>
-</ul>
-
-<p>This has to happen before deploying kubecf.</p>
-
-<h5 id="installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</h5>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install stable/nginx-ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --name ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --namespace ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.2222=kubecf/kubecf-scheduler:2222&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.start&gt;=kubecf/kubecf-tcp-router:&lt;services.tcp-router.port_range.start&gt;&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  ...
-  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.end&gt;=kubecf/kubecf-tcp-router:&lt;services.tcp-router.port_range.end&gt;&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;controller.service.externalIPs={</span><span style="color:#204a87;font-weight:bold">$(</span>minikube ip<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">}&#34;</span></code></pre></div>
-<p>The <code>tcp.&lt;port&gt;</code> option uses the NGINX TCP pass-through.</p>
-
-<p>In the case of the <code>tcp-router</code> ports, one <code>--set</code> for each port is required, starting with
-<code>services.tcp-router.port_range.start</code> and ending with <code>services.tcp-router.port_range.end</code>. Those
-values are defined on the <code>values.yaml</code> file with default values.</p>
-
-<p>The last flag in the command above assigns the external IP of the
-cluster to the Ingress Controller service.</p>
-
-<h5 id="configure-kubecf">Configure kubecf</h5>
-
-<p>Place a file matching the pattern <code>*values.yaml</code> into the directory
-<strong>dev/kubecf</strong> and containing</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ingress<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/ae742729c486ef79bf341b688213025cf9c102e4">Drop boilerplate content and add few extracts from real docs (ae74272)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 2, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/6026ab2a85af4a8049d7679b438d4e2cb6784b83">Add docs for eirini-persi (6026ab2)</a>
 </div>
 </div>
 

@@ -23,6 +23,11 @@
   </url>
   
   <url>
+    <loc>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</loc>
+    <lastmod>2020-09-02T14:20:57+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</loc>
     <lastmod>2020-02-07T15:46:27+01:00</lastmod>
   </url>
@@ -109,7 +114,7 @@
   
   <url>
     <loc>https://kubecf.suse.dev/index.json</loc>
-    <lastmod>2019-12-19T11:29:40+01:00</lastmod>
+    <lastmod>2019-12-19T12:02:29+01:00</lastmod>
   </url>
   
   <url>
@@ -129,7 +134,7 @@
   
   <url>
     <loc>https://kubecf.suse.dev/search/</loc>
-    <lastmod>2019-12-19T11:29:40+01:00</lastmod>
+    <lastmod>2019-12-19T12:02:29+01:00</lastmod>
   </url>
   
 </urlset>
