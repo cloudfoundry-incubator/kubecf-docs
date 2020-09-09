@@ -20,28 +20,28 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Deploy on Kubernetes | KubeCF</title><meta property="og:title" content="Deploy on Kubernetes" />
-<meta property="og:description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+<title>Kubernetes Affinities and Tolerations | KubeCF</title><meta property="og:title" content="Kubernetes Affinities and Tolerations" />
+<meta property="og:description" content="Managing which Kubernetes nodes workloads get deployed to
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/" />
-<meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-04T16:45:14+02:00" /><meta property="og:site_name" content="KubeCF" />
-<meta itemprop="name" content="Deploy on Kubernetes">
-<meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+<meta property="og:url" content="https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/" />
+<meta property="article:published_time" content="2020-09-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-08T17:14:46-07:00" /><meta property="og:site_name" content="KubeCF" />
+<meta itemprop="name" content="Kubernetes Affinities and Tolerations">
+<meta itemprop="description" content="Managing which Kubernetes nodes workloads get deployed to
 ">
 
 
-<meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-08-04T16:45:14&#43;02:00" />
-<meta itemprop="wordCount" content="825">
+<meta itemprop="datePublished" content="2020-09-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-09-08T17:14:46-07:00" />
+<meta itemprop="wordCount" content="434">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Deploy on Kubernetes"/>
-<meta name="twitter:description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+<meta name="twitter:title" content="Kubernetes Affinities and Tolerations"/>
+<meta name="twitter:description" content="Managing which Kubernetes nodes workloads get deployed to
 "/>
 
 
@@ -65,7 +65,7 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Deploy on Kubernetes | KubeCF</title>
+    <title>Kubernetes Affinities and Tolerations | KubeCF</title>
   </head>
   <body class="td-page">
     <header>
@@ -194,17 +194,23 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+    <a  href="/docs/deployment/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Deploying KubeCF</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-getting-started">
+    <li class="collapse show" id="docs-deployment">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-getting-started-kubernetes-deploy" href="/docs/getting-started/kubernetes-deploy/">Deploy on Kubernetes</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-deployment-affinities-and-tolerations" href="/docs/deployment/affinities-and-tolerations/">Affinities and Tolerations</a>
       
       
     </li>
@@ -429,8 +435,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Getting%20started/kubernetes-deploy.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Deploy%20on%20Kubernetes" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Deployment/affinities-and-tolerations.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Kubernetes%20Affinities%20and%20Tolerations" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -441,34 +447,6 @@
 
 
 
-
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#kubernetes">Kubernetes</a></li>
-<li><a href="#cf-operator">cf-operator</a>
-<ul>
-<li><a href="#deployment-and-tear-down">Deployment and Tear-down</a></li>
-</ul></li>
-<li><a href="#kubecf">Kubecf</a>
-<ul>
-<li><a href="#deployment-and-tear-down-1">Deployment and Tear-down</a></li>
-<li><a href="#access">Access</a></li>
-<li><a href="#advanced-topics">Advanced Topics</a>
-<ul>
-<li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
-<li><a href="#ingress">Ingress</a>
-<ul>
-<li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
-<li><a href="#configure-kubecf">Configure kubecf</a></li>
-</ul></li>
-<li><a href="#external-database">External Database</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
 
 
 
@@ -495,14 +473,14 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://kubecf.suse.dev/docs/getting-started/">Getting Started</a>
+	<a href="https://kubecf.suse.dev/docs/deployment/">Deploying KubeCF</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/">Deploy on Kubernetes</a>
+	<a href="https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/">Affinities and Tolerations</a>
 </li>
 
 	</ol>
@@ -510,228 +488,92 @@
 
             
 <div class="td-content">
-	<h1>Deploy on Kubernetes</h1>
-	<div class="lead">Explain steps to deploy KubeCF in any Kubernetes cluster</div>
+	<h1>Kubernetes Affinities and Tolerations</h1>
+	<div class="lead">Managing which Kubernetes nodes workloads get deployed to</div>
 	
 
-<p>The intended audience of this document are developers wishing to
-contribute to the Kubecf project.</p>
+<p>This document describes how the administrator may influence how the various
+workloads that are part of KubeCF will get deployed onto their Kuberntes
+cluster.</p>
 
-<p>Here we explain how to deploy Kubecf using:</p>
+<h2 id="affinities">Affinities</h2>
 
-<ul>
-<li>A generic kubernetes cluster.</li>
-<li>A released cf-operator helm chart.</li>
-<li>A released kubecf helm chart.</li>
-</ul>
+<p>Kubernetes will attempt to schedule work based on their <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity" target="_blank">affinities and
+anti-affinities</a>; by default, KubeCF will request for each instance group to be
+scheduled away from other replicas of the same instance group.  Additionally,
+by default the <code>router</code> instance group and the <code>diego-cell</code> instance group will
+have an anti-affinity towards each other.</p>
 
-<h2 id="kubernetes">Kubernetes</h2>
+<p>The affinities can be overridden on a per-instance-group basis, using helm
+configuration values such as the following:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">sizing<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>uaa<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>affinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>podAntiAffinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>preferredDuringSchedulingIgnoredDuringExecution<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>labelSelector<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>matchExpressions<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/quarks-statefulset-name<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>operator<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>In<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>values<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>uaa<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>api</code></pre></div>
+<p>This will request <code>uaa</code> pods to avoid any other <code>uaa</code> or <code>api</code> pods; this may be
+helpful if your UAA instances consume resources to the point where they slow
+down API access.  Note that if any affinity or anti-affinity options are given,
+they will override the default anti-affinities; it is recommended that they be
+specified explicitly as well, as given in the example above.</p>
 
-<p>In contrast to other recipes, we are not set on using a local
-cluster. Any Kubernetes cluster will do, assuming that the following
-requirements are met:</p>
+<p>Note that it is also possible to declare <code>nodeAffinity</code> and <code>podAffinity</code>, as
+the whole affinity block is assumed to be a valid Kubernetes <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#affinity-v1-core" target="_blank">affinity block</a>.</p>
 
-<ul>
-<li><p>Presence of a default storage class (provisioner).</p></li>
+<h2 id="tolerations">Tolerations</h2>
 
-<li><p>For use with a diego-based kubecf (default), a node OS with XFS
-support.</p>
+<p>Kubernetes has a concept of <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" target="_blank">taints and tolerations</a>, which can be used to
+prevent workloads from running on a given <a href="https://kubernetes.io/docs/concepts/architecture/nodes/" target="_blank">node</a>, and then whitelist some
+workloads on it again; this can be used to do things such as ensuring the
+physical host has the appropriate kinds of resources, or to evict work from
+nodes that will be removed.</p>
 
-<ul>
-<li>For GKE, using the option <code>--image-type UBUNTU</code> with the
-<code>gcloud beta container</code> command selects such an OS.</li>
-</ul></li>
-</ul>
-
-<p>This can be any of, but not restricted to:</p>
-
-<ul>
-<li>GKE (<a href="../provider/gke.md">Notes</a>)</li>
-<li>AKS</li>
-<li>EKS</li>
-</ul>
-
-<p>Note that how to deploy and tear-down such a cluster is outside of the
-scope of this recipe.</p>
-
-<h2 id="cf-operator">cf-operator</h2>
-
-<p>The <a href="https://github.com/cloudfoundry-incubator/cf-operator" target="_blank">cf-operator</a> is the underlying generic tool to deploy a (modified)
-BOSH deployment like Kubecf for use.</p>
-
-<p>It has to be installed in the same Kubernetes cluster that Kubecf will
-be deployed to.</p>
-
-<p>Here we are not using development-specific dependencies like bazel,
-but only generic tools, i.e. <code>kubectl</code> and <code>helm</code>.</p>
-
-<p><a href="helm.md" target="_blank">Installing and configuring Helm</a> is the same regardless of
-the chosen foundation, and assuming that the cluster does not come
-with Helm Tiller pre-installed.</p>
-
-<h3 id="deployment-and-tear-down">Deployment and Tear-down</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install cf-operator <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     --namespace cfo <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;global.singleNamespace.name=kubecf&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     https://cf-operators.s3.amazonaws.com/helm-charts/cf-operator-5.0.0%2B0.gd7ac12bc.tgz</code></pre></div>
-<p>In the example above, version 5.0.0 of the operator was used. Look
-into the <code>cf_operator</code> <a href="https://github.com/cloudfoundry-incubator/kubecf/blob/13ffb01dff8ab5eba16da54539b36e3b3b5f758e/dependencies.yaml#L108" target="_blank">section</a> of the top-level <code>dependencies.yaml</code> file to find
-the version of the operator validated against the current kubecf
-master.</p>
-
-<p><strong>Note:</strong>
-&gt; The above <code>helm install</code> will generate many controllers spread over multiple pods inside the <code>cfo</code> namespace.
-&gt; Most of these controllers run inside the <code>cf-operator</code> pod.
-&gt;
-&gt; The <code>global.singleNamespace.name=kubecf</code> path tells the
-controllers to watch for CRD´s instances into the <code>kubecf</code> namespace.
-&gt;
-&gt; The cf-operator helm chart will generate the <code>kubecf</code> namespace during installation, and eventually one of the
-controllers will use a webhook to label this namespace with the <code>cf-operator-ns</code> key.
-&gt;
-&gt; If the <code>kubecf</code> namespace is deleted, but the operators are still running, they will no longer
-know which namespace to watch. This can lead to problems, so make sure you also delete the pods
-inside the <code>cfo</code> namespace, after deleting the <code>kubecf</code> namespace.</p>
-
-<p>Note how the namespace the operator is installed into (<code>cfo</code>) differs
-from the namespace the operator is watching for deployments (<code>kubecf</code>).</p>
-
-<p>This form of deployment enables restarting the operator because it is
-not affected by webhooks. It further enables the deletion of the
-Kubecf deployment namespace to start from scratch, without redeploying
-the operator itself.</p>
-
-<p>Tear-down is done with a standard <code>helm delete ...</code> command.</p>
-
-<h2 id="kubecf">Kubecf</h2>
-
-<p>With all the prerequisites handled by the preceding sections it is now
-possible to build and deploy kubecf itself.</p>
-
-<p>This again uses helm and a released helm chart.</p>
-
-<h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install kubecf <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     --namespace kubecf <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v2.3.0.tgz <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;system_domain=kubecf.suse.dev&#34;</span></code></pre></div>
-<p>In this default deployment, kubecf is launched without Ingress, and it
-uses the Diego scheduler.</p>
-
-<p>Tear-down is done with a standard <code>helm delete ...</code> command.</p>
-
-<h3 id="access">Access</h3>
-
-<p>To access the cluster after the cf-operator has completed the
-deployment and all pods are active invoke:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cf api --skip-ssl-validation <span style="color:#4e9a06">&#34;https://api.&lt;domain&gt;&#34;</span>
-
-<span style="color:#8f5902;font-style:italic"># Copy the admin cluster password.</span>
-<span style="color:#000">admin_pass</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get secret <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        --namespace kubecf var-cf-admin-password <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        -o <span style="color:#000">jsonpath</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#39;{.data.password}&#39;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>        <span style="color:#000;font-weight:bold">|</span> base64 --decode<span style="color:#204a87;font-weight:bold">)</span>
-
-<span style="color:#8f5902;font-style:italic"># Use the password from the previous step when requested.</span>
-cf auth admin <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">admin_pass</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
-<h3 id="advanced-topics">Advanced Topics</h3>
-
-<h4 id="diego-vs-eirini">Diego vs Eirini</h4>
-
-<p>Diego is the standard scheduler used by kubecf to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
-Kubernetes native approach, deploying the CF apps directly to a
-Kubernetes namespace.</p>
-
-<p>To activate this alternative, use the option
-<code>--set features.eirini.enabled=true</code> when deploying kubecf from its chart.</p>
-
-<h4 id="ingress">Ingress</h4>
-
-<p>By default, the cluster is exposed through its Kubernetes services.</p>
-
-<p>To use the NGINX ingress instead, it is necessary to:</p>
-
-<ul>
-<li>Install and configure the NGINX Ingress Controller.</li>
-<li>Configure Kubecf to use the ingress controller.</li>
-</ul>
-
-<p>This has to happen before deploying kubecf.</p>
-
-<h5 id="installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</h5>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install stable/nginx-ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --name ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --namespace ingress <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.2222=kubecf/scheduler:2222&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.start&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.start&gt;&#34;</span> <span style="color:#4e9a06">\
-</span><span style="color:#4e9a06"></span>  ...
-  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.end&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.end&gt;&#34;</span></code></pre></div>
-<p>The <code>tcp.&lt;port&gt;</code> option uses the NGINX TCP pass-through.</p>
-
-<p>In the case of the <code>tcp-router</code> ports, one <code>--set</code> for each port is required, starting with
-<code>services.tcp-router.port_range.start</code> and ending with <code>services.tcp-router.port_range.end</code>. Those
-values are defined on the <code>values.yaml</code> file with default values.</p>
-
-<h5 id="configure-kubecf">Configure kubecf</h5>
-
-<p>Use the Helm option <code>--set features.ingress.enabled=true</code> when
-deploying kubecf.</p>
-
-<h4 id="external-database">External Database</h4>
-
-<p>By default, kubecf includes a single-availability database provided by the
-cf-mysql-release. Kubecf also exposes a way to use an external database via the
-Helm property <code>features.external_database</code>. Check the <a href="../../deploy/helm/kubecf/values.yaml">values.yaml</a> for more
-details.</p>
-
-<p>For local development with an external database, the command
-<code>bash  ./scripts/deploy_mysql.sh</code> will bring a mysql database up and running
-ready to be consumed by kubecf.</p>
-
-<p>An example for the additional values to be provided to <code>make kubecf:apply</code>:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>external_database<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>mysql<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>host<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubecf-mysql.kubecf-mysql.svc<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>port<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3306</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>databases<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>uaa<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>uaa<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>cc<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>cloud_controller<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>bbs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>diego<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>routing_api<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>routing-api<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>policy_server<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>network_policy<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>silk_controller<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>network_connectivity<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>locket<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>locket<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>credhub<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>credhub<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
+<p>Tolerations can be configured in KubeCF on an instance group level, by providing
+the appropriate configuration in the helm values.  For example, to allocate a
+Kubernetes node such that it will only run digeo-cell, we could do:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8f5902;font-style:italic"># This marks the node &#34;beefy-node&#34; with a taint of &#34;instance-group&#34;</span>
+<span style="color:#8f5902;font-style:italic"># with a value of &#34;diego-cell&#34;, and prevents scheduling workloads that</span>
+<span style="color:#8f5902;font-style:italic"># do not have a matching taint.</span>
+kubectl taint nodes beefy-node instance-group<span style="color:#ce5c00;font-weight:bold">=</span>diego-cell:NoSchedule</code></pre></div>
+<p>We could then allow diego-cell to be scheduled onto that node by deploying
+KubeCF with a helm <code>values.yaml</code> that contains the toleration:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">sizing<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>diego-cell<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>tolerations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>instance-group<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>operator<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Equal<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>diego-cell<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>effect<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>NoSchedule</code></pre></div>
+<p>Then any diego-cell containers will be allowed to run on the <code>beefy-node</code> node.
+This, of course, does not guarantee that those containers will actually run on
+that node; it is also available to run on any other node.  In order to enforce
+placement, we will also need to add a node label:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl label nodes beefy-node instance-group-label<span style="color:#ce5c00;font-weight:bold">=</span>diego-cell</code></pre></div>
+<p>It is then possible to add a node affinity term to the instane group, so that
+it will always be scheduled on nodes with the given label:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">sizing<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>diego-cell<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># tolerations: as above</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>affinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>nodeAffinity<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>requiredDuringSchedulingIgnoredDuringExecution<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span>nodeSelectorTerms<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>matchExpressions<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>instance-group-label<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>operator<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>In<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>values<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>diego-cell<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#8f5902;font-style:italic"># podAntiAffinity term, as above; the defaults will be lost.</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified August 4, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/686b6b4f3e2d78b42f61b332114a14ea8442901f">Update kubernetes-deploy.md (686b6b4)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/92620359e3ea6703e377cfaa3c6d41e7ab433a46">fix: tolerations: adjust wording (9262035)</a>
 </div>
 </div>
 

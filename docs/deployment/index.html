@@ -7,7 +7,7 @@
 
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://kubecf.suse.dev/docs/getting-started/index.xml">
+<link rel="alternate" type="application/rss&#43;xml" href="https://kubecf.suse.dev/docs/deployment/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,18 +21,18 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Getting Started | KubeCF</title><meta property="og:title" content="Getting Started" />
+<title>Deploying KubeCF on Kubernetes | KubeCF</title><meta property="og:title" content="Deploying KubeCF on Kubernetes" />
 <meta property="og:description" content="How to deploy KubeCF
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://kubecf.suse.dev/docs/getting-started/" />
+<meta property="og:url" content="https://kubecf.suse.dev/docs/deployment/" />
 <meta property="og:site_name" content="KubeCF" />
-<meta itemprop="name" content="Getting Started">
+<meta itemprop="name" content="Deploying KubeCF on Kubernetes">
 <meta itemprop="description" content="How to deploy KubeCF
 ">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Getting Started"/>
+<meta name="twitter:title" content="Deploying KubeCF on Kubernetes"/>
 <meta name="twitter:description" content="How to deploy KubeCF
 "/>
 
@@ -57,7 +57,7 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Getting Started | KubeCF</title>
+    <title>Deploying KubeCF on Kubernetes | KubeCF</title>
   </head>
   <body class="td-section">
     <header>
@@ -186,17 +186,23 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+    <a  href="/docs/deployment/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Deploying KubeCF</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-getting-started">
+    <li class="collapse show" id="docs-deployment">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-getting-started-kubernetes-deploy" href="/docs/getting-started/kubernetes-deploy/">Deploy on Kubernetes</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-affinities-and-tolerations" href="/docs/deployment/affinities-and-tolerations/">Affinities and Tolerations</a>
       
       
     </li>
@@ -421,8 +427,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Getting%20started/_index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Getting%20Started" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Deployment/_index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Deploying%20KubeCF%20on%20Kubernetes" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -467,7 +473,7 @@
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://kubecf.suse.dev/docs/getting-started/">Getting Started</a>
+	<a href="https://kubecf.suse.dev/docs/deployment/">Deploying KubeCF</a>
 </li>
 
 	</ol>
@@ -475,7 +481,7 @@
 
             
 <div class="td-content">
-	<h1>Getting Started</h1>
+	<h1>Deploying KubeCF on Kubernetes</h1>
 	<div class="lead">How to deploy KubeCF</div>
 	
 
@@ -508,6 +514,8 @@ one is the &ldquo;kubecf-bundle&rdquo; which contains the KubeCF chart along wit
 <p>The standalone chart (<code>kubecf.tgz</code>) contains a <code>Metadata.yaml</code> file which indicates the version of the cf-operator to install for a successfull deployment.</p>
 
 <h2 id="try-it-out">Try it out!</h2>
+
+<p>Detailed deployment instructions can be found on the <a href="https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/" target="_blank">walkthrough</a> page.</p>
 
         <div class="section-index">
     
@@ -555,15 +563,24 @@ one is the &ldquo;kubecf-bundle&rdquo; which contains the KubeCF chart along wit
             
         
             
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+                    </h5>
+                    <p>Explain steps to deploy KubeCF in any Kubernetes cluster</p>
+                </div>
+            
+        
+            
         
             
         
             
                 <div class="entry">
                     <h5>
-                        <a href="/docs/getting-started/kubernetes-deploy/">Deploy on Kubernetes</a>
+                        <a href="/docs/deployment/affinities-and-tolerations/">Kubernetes Affinities and Tolerations</a>
                     </h5>
-                    <p>Explain steps to deploy KubeCF in any Kubernetes cluster</p>
+                    <p>Managing which Kubernetes nodes workloads get deployed to</p>
                 </div>
             
         
@@ -572,7 +589,7 @@ one is the &ldquo;kubecf-bundle&rdquo; which contains the KubeCF chart along wit
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified March 20, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/821a171f40a7168468b11123e8488a8d6b8fcf21">Update getting started, pointing to official releases (821a171)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/d00f16f90e78c9a1ed2a9deaa0568898e7ac0e68">fix: deployment: use more practical examples (d00f16f)</a>
 </div>
 </div>
 

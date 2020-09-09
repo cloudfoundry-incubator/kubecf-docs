@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://kubecf.suse.dev/docs/concepts/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,29 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Concepts | KubeCF</title><meta property="og:title" content="Concepts" />
-<meta property="og:description" content="CloudFoundry on Kubernetes" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kubecf.suse.dev/docs/concepts/" />
-<meta property="og:site_name" content="KubeCF" />
-<meta itemprop="name" content="Concepts">
-<meta itemprop="description" content="CloudFoundry on Kubernetes">
+<title>Deployment Walkthrough | KubeCF</title><meta property="og:title" content="Deployment Walkthrough" />
+<meta property="og:description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/" />
+<meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-08T11:17:27-07:00" /><meta property="og:site_name" content="KubeCF" />
+<meta itemprop="name" content="Deployment Walkthrough">
+<meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+">
 
+
+<meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-09-08T11:17:27-07:00" />
+<meta itemprop="wordCount" content="825">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Concepts"/>
-<meta name="twitter:description" content="CloudFoundry on Kubernetes"/>
+<meta name="twitter:title" content="Deployment Walkthrough"/>
+<meta name="twitter:description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
+"/>
 
 
 
@@ -54,9 +65,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Concepts | KubeCF</title>
+    <title>Deployment Walkthrough | KubeCF</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -183,17 +194,17 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deploying KubeCF</a>
+    <a  href="/docs/deployment/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Deploying KubeCF</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-deployment">
+    <li class="collapse show" id="docs-deployment">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
       
       
       
@@ -218,10 +229,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/concepts/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Concepts</a>
+    <a  href="/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-concepts">
+    <li class="collapse " id="docs-concepts">
       
       
       
@@ -424,8 +435,8 @@
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Concepts/_index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Concepts" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Deployment/kubernetes-deploy.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Deployment%20Walkthrough" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/cloudfoundry-incubator/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -434,6 +445,36 @@
 
 
 
+
+
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#kubernetes">Kubernetes</a></li>
+<li><a href="#cf-operator">cf-operator</a>
+<ul>
+<li><a href="#deployment-and-tear-down">Deployment and Tear-down</a></li>
+</ul></li>
+<li><a href="#kubecf">Kubecf</a>
+<ul>
+<li><a href="#deployment-and-tear-down-1">Deployment and Tear-down</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#advanced-topics">Advanced Topics</a>
+<ul>
+<li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
+<li><a href="#ingress">Ingress</a>
+<ul>
+<li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
+<li><a href="#configure-kubecf">Configure kubecf</a></li>
+</ul></li>
+<li><a href="#external-database">External Database</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
 
 
 
@@ -449,6 +490,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://kubecf.suse.dev/docs/">Documentation</a>
 </li>
@@ -456,8 +500,15 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://kubecf.suse.dev/docs/deployment/">Deploying KubeCF</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://kubecf.suse.dev/docs/concepts/">Concepts</a>
+	<a href="https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
 </li>
 
 	</ol>
@@ -465,84 +516,231 @@
 
             
 <div class="td-content">
-	<h1>Concepts</h1>
+	<h1>Deployment Walkthrough</h1>
+	<div class="lead">Explain steps to deploy KubeCF in any Kubernetes cluster</div>
+	
+
+<p>The intended audience of this document are developers wishing to
+contribute to the Kubecf project.</p>
+
+<p>Here we explain how to deploy Kubecf using:</p>
+
+<ul>
+<li>A generic kubernetes cluster.</li>
+<li>A released cf-operator helm chart.</li>
+<li>A released kubecf helm chart.</li>
+</ul>
+
+<h2 id="kubernetes">Kubernetes</h2>
+
+<p>In contrast to other recipes, we are not set on using a local
+cluster. Any Kubernetes cluster will do, assuming that the following
+requirements are met:</p>
+
+<ul>
+<li><p>Presence of a default storage class (provisioner).</p></li>
+
+<li><p>For use with a diego-based kubecf (default), a node OS with XFS
+support.</p>
+
+<ul>
+<li>For GKE, using the option <code>--image-type UBUNTU</code> with the
+<code>gcloud beta container</code> command selects such an OS.</li>
+</ul></li>
+</ul>
+
+<p>This can be any of, but not restricted to:</p>
+
+<ul>
+<li>GKE (<a href="../provider/gke.md">Notes</a>)</li>
+<li>AKS</li>
+<li>EKS</li>
+</ul>
+
+<p>Note that how to deploy and tear-down such a cluster is outside of the
+scope of this recipe.</p>
+
+<h2 id="cf-operator">cf-operator</h2>
+
+<p>The <a href="https://github.com/cloudfoundry-incubator/cf-operator" target="_blank">cf-operator</a> is the underlying generic tool to deploy a (modified)
+BOSH deployment like Kubecf for use.</p>
+
+<p>It has to be installed in the same Kubernetes cluster that Kubecf will
+be deployed to.</p>
+
+<p>Here we are not using development-specific dependencies like bazel,
+but only generic tools, i.e. <code>kubectl</code> and <code>helm</code>.</p>
+
+<p><a href="helm.md" target="_blank">Installing and configuring Helm</a> is the same regardless of
+the chosen foundation, and assuming that the cluster does not come
+with Helm Tiller pre-installed.</p>
+
+<h3 id="deployment-and-tear-down">Deployment and Tear-down</h3>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install cf-operator <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     --namespace cfo <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;global.singleNamespace.name=kubecf&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     https://cf-operators.s3.amazonaws.com/helm-charts/cf-operator-5.0.0%2B0.gd7ac12bc.tgz</code></pre></div>
+<p>In the example above, version 5.0.0 of the operator was used. Look
+into the <code>cf_operator</code> <a href="https://github.com/cloudfoundry-incubator/kubecf/blob/13ffb01dff8ab5eba16da54539b36e3b3b5f758e/dependencies.yaml#L108" target="_blank">section</a> of the top-level <code>dependencies.yaml</code> file to find
+the version of the operator validated against the current kubecf
+master.</p>
+
+<p><strong>Note:</strong>
+&gt; The above <code>helm install</code> will generate many controllers spread over multiple pods inside the <code>cfo</code> namespace.
+&gt; Most of these controllers run inside the <code>cf-operator</code> pod.
+&gt;
+&gt; The <code>global.singleNamespace.name=kubecf</code> path tells the
+controllers to watch for CRD´s instances into the <code>kubecf</code> namespace.
+&gt;
+&gt; The cf-operator helm chart will generate the <code>kubecf</code> namespace during installation, and eventually one of the
+controllers will use a webhook to label this namespace with the <code>cf-operator-ns</code> key.
+&gt;
+&gt; If the <code>kubecf</code> namespace is deleted, but the operators are still running, they will no longer
+know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+inside the <code>cfo</code> namespace, after deleting the <code>kubecf</code> namespace.</p>
+
+<p>Note how the namespace the operator is installed into (<code>cfo</code>) differs
+from the namespace the operator is watching for deployments (<code>kubecf</code>).</p>
+
+<p>This form of deployment enables restarting the operator because it is
+not affected by webhooks. It further enables the deletion of the
+Kubecf deployment namespace to start from scratch, without redeploying
+the operator itself.</p>
+
+<p>Tear-down is done with a standard <code>helm delete ...</code> command.</p>
+
+<h2 id="kubecf">Kubecf</h2>
+
+<p>With all the prerequisites handled by the preceding sections it is now
+possible to build and deploy kubecf itself.</p>
+
+<p>This again uses helm and a released helm chart.</p>
+
+<h3 id="deployment-and-tear-down-1">Deployment and Tear-down</h3>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install kubecf <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     --namespace kubecf <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     https://kubecf.s3.amazonaws.com/kubecf-v2.3.0.tgz <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>     --set <span style="color:#4e9a06">&#34;system_domain=kubecf.suse.dev&#34;</span></code></pre></div>
+<p>In this default deployment, kubecf is launched without Ingress, and it
+uses the Diego scheduler.</p>
+
+<p>Tear-down is done with a standard <code>helm delete ...</code> command.</p>
+
+<h3 id="access">Access</h3>
+
+<p>To access the cluster after the cf-operator has completed the
+deployment and all pods are active invoke:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cf api --skip-ssl-validation <span style="color:#4e9a06">&#34;https://api.&lt;domain&gt;&#34;</span>
+
+<span style="color:#8f5902;font-style:italic"># Copy the admin cluster password.</span>
+<span style="color:#000">admin_pass</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get secret <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>        --namespace kubecf var-cf-admin-password <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>        -o <span style="color:#000">jsonpath</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#39;{.data.password}&#39;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>        <span style="color:#000;font-weight:bold">|</span> base64 --decode<span style="color:#204a87;font-weight:bold">)</span>
+
+<span style="color:#8f5902;font-style:italic"># Use the password from the previous step when requested.</span>
+cf auth admin <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">admin_pass</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
+<h3 id="advanced-topics">Advanced Topics</h3>
+
+<h4 id="diego-vs-eirini">Diego vs Eirini</h4>
+
+<p>Diego is the standard scheduler used by kubecf to deploy CF
+applications. Eirini is an alternative to Diego that follows a more
+Kubernetes native approach, deploying the CF apps directly to a
+Kubernetes namespace.</p>
+
+<p>To activate this alternative, use the option
+<code>--set features.eirini.enabled=true</code> when deploying kubecf from its chart.</p>
+
+<h4 id="ingress">Ingress</h4>
+
+<p>By default, the cluster is exposed through its Kubernetes services.</p>
+
+<p>To use the NGINX ingress instead, it is necessary to:</p>
+
+<ul>
+<li>Install and configure the NGINX Ingress Controller.</li>
+<li>Configure Kubecf to use the ingress controller.</li>
+</ul>
+
+<p>This has to happen before deploying kubecf.</p>
+
+<h5 id="installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</h5>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install stable/nginx-ingress <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --name ingress <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --namespace ingress <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.2222=kubecf/scheduler:2222&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.start&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.start&gt;&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>  ...
+  --set <span style="color:#4e9a06">&#34;tcp.&lt;services.tcp-router.port_range.end&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.end&gt;&#34;</span></code></pre></div>
+<p>The <code>tcp.&lt;port&gt;</code> option uses the NGINX TCP pass-through.</p>
+
+<p>In the case of the <code>tcp-router</code> ports, one <code>--set</code> for each port is required, starting with
+<code>services.tcp-router.port_range.start</code> and ending with <code>services.tcp-router.port_range.end</code>. Those
+values are defined on the <code>values.yaml</code> file with default values.</p>
+
+<h5 id="configure-kubecf">Configure kubecf</h5>
+
+<p>Use the Helm option <code>--set features.ingress.enabled=true</code> when
+deploying kubecf.</p>
+
+<h4 id="external-database">External Database</h4>
+
+<p>By default, kubecf includes a single-availability database provided by the
+cf-mysql-release. Kubecf also exposes a way to use an external database via the
+Helm property <code>features.external_database</code>. Check the <a href="../../deploy/helm/kubecf/values.yaml">values.yaml</a> for more
+details.</p>
+
+<p>For local development with an external database, the command
+<code>bash  ./scripts/deploy_mysql.sh</code> will bring a mysql database up and running
+ready to be consumed by kubecf.</p>
+
+<p>An example for the additional values to be provided to <code>make kubecf:apply</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>external_database<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>enabled<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>mysql<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>host<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubecf-mysql.kubecf-mysql.svc<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>port<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">3306</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>databases<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>uaa<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>uaa<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>cc<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>cloud_controller<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>bbs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>diego<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>routing_api<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>routing-api<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>policy_server<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>network_policy<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>silk_controller<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>network_connectivity<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>locket<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>locket<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>credhub<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>credhub<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;root_password<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
 	
 	
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/concepts/operator/">Cloud Foundry Operator</a>
-                    </h5>
-                    <p>Cloud Foundry Kubernetes Operator</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/concepts/quarks/">Project Quarks</a>
-                    </h5>
-                    <p>Integrating Cloud Foundry and Kubernetes</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/d00f16f90e78c9a1ed2a9deaa0568898e7ac0e68">fix: deployment: use more practical examples (d00f16f)</a>
+</div>
 </div>
 
-	
-	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 19, 2019: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/ae742729c486ef79bf341b688213025cf9c102e4">Drop boilerplate content and add few extracts from real docs (ae74272)</a>
-</div>
-</div>
 
           </main>
         </div>
