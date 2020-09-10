@@ -1219,7 +1219,7 @@ support.&lt;/p&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;This can be any of, but not restricted to:&lt;/p&gt;
+&lt;p&gt;This can be any of, but is not restricted to:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;GKE (&lt;a href=&#34;../provider/gke.md&#34;&gt;Notes&lt;/a&gt;)&lt;/li&gt;
@@ -1321,6 +1321,24 @@ Kubernetes namespace.&lt;/p&gt;
 
 &lt;p&gt;To activate this alternative, use the option
 &lt;code&gt;--set features.eirini.enabled=true&lt;/code&gt; when deploying kubecf from its chart.&lt;/p&gt;
+
+&lt;h4 id=&#34;diego-cell-affinities-tainted-nodes&#34;&gt;Diego Cell Affinities &amp;amp; Tainted Nodes&lt;/h4&gt;
+
+&lt;p&gt;Note that the &lt;code&gt;diego-cell&lt;/code&gt; pods used by the Diego standard scheduler
+are&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;privileged,&lt;/li&gt;
+&lt;li&gt;use large local emptyDir volumes (i.e. require node disk storage),&lt;/li&gt;
+&lt;li&gt;and set kernel parameters on the node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These things all mean that these pods should not live next to other
+Kubernetes workloads. They should all be placed on their own
+&lt;strong&gt;dedicated nodes&lt;/strong&gt; instead where possible.&lt;/p&gt;
+
+&lt;p&gt;This can be done by setting affinities and tolerations, as explained in
+the associated &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/&#34; target=&#34;_blank&#34;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
 

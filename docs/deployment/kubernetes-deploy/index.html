@@ -26,15 +26,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-09-08T11:17:27-07:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-09-10T14:44:40-07:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deployment Walkthrough">
 <meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-09-08T11:17:27-07:00" />
-<meta itemprop="wordCount" content="825">
+<meta itemprop="dateModified" content="2020-09-10T14:44:40-07:00" />
+<meta itemprop="wordCount" content="905">
 
 
 
@@ -464,6 +464,7 @@
 <li><a href="#advanced-topics">Advanced Topics</a>
 <ul>
 <li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
+<li><a href="#diego-cell-affinities-tainted-nodes">Diego Cell Affinities &amp; Tainted Nodes</a></li>
 <li><a href="#ingress">Ingress</a>
 <ul>
 <li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
@@ -549,7 +550,7 @@ support.</p>
 </ul></li>
 </ul>
 
-<p>This can be any of, but not restricted to:</p>
+<p>This can be any of, but is not restricted to:</p>
 
 <ul>
 <li>GKE (<a href="../provider/gke.md">Notes</a>)</li>
@@ -652,6 +653,24 @@ Kubernetes namespace.</p>
 <p>To activate this alternative, use the option
 <code>--set features.eirini.enabled=true</code> when deploying kubecf from its chart.</p>
 
+<h4 id="diego-cell-affinities-tainted-nodes">Diego Cell Affinities &amp; Tainted Nodes</h4>
+
+<p>Note that the <code>diego-cell</code> pods used by the Diego standard scheduler
+are</p>
+
+<ul>
+<li>privileged,</li>
+<li>use large local emptyDir volumes (i.e. require node disk storage),</li>
+<li>and set kernel parameters on the node.</li>
+</ul>
+
+<p>These things all mean that these pods should not live next to other
+Kubernetes workloads. They should all be placed on their own
+<strong>dedicated nodes</strong> instead where possible.</p>
+
+<p>This can be done by setting affinities and tolerations, as explained in
+the associated <a href="https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/" target="_blank">tutorial</a>.</p>
+
 <h4 id="ingress">Ingress</h4>
 
 <p>By default, the cluster is exposed through its Kubernetes services.</p>
@@ -737,7 +756,7 @@ ready to be consumed by kubecf.</p>
 </span><span style="color:#8f5902;font-style:italic">        username: root</span></code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified September 8, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/d00f16f90e78c9a1ed2a9deaa0568898e7ac0e68">fix: deployment: use more practical examples (d00f16f)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified September 10, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/e445dcac33258bdba72e92f6adb9b5e6e8624a90">Update content/en/docs/Deployment/kubernetes-deploy.md (e445dca)</a>
 </div>
 </div>
 
