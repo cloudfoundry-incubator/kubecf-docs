@@ -961,7 +961,7 @@ Test Suite Passed
 
 &lt;h2 id=&#34;upgrading-from-a-previous-deployment&#34;&gt;Upgrading from a previous deployment&lt;/h2&gt;
 
-&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.suse.dev/docs/getting-started/kubernetes-deploy/&#34;&gt;initial deployment&lt;/a&gt;; however, please
+&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/&#34; target=&#34;_blank&#34;&gt;initial deployment&lt;/a&gt;; however, please
 use &lt;code&gt;helm upgrade&lt;/code&gt; intead of &lt;code&gt;helm install&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you are providing a configuration file that was originally from a previous
