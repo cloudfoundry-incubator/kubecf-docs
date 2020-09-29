@@ -24,8 +24,7 @@
         
         
 
-&lt;p&gt;The intended audience of this document are developers wishing to
-contribute to the Kubecf project.&lt;/p&gt;
+&lt;p&gt;The intended audience of this document are developers wishing to contribute to the Kubecf project.&lt;/p&gt;
 
 &lt;p&gt;Here we explain how to deploy Kubecf using:&lt;/p&gt;
 
@@ -35,11 +34,16 @@ contribute to the Kubecf project.&lt;/p&gt;
 &lt;li&gt;A released kubecf helm chart.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&#34;before&#34;&gt;Before&lt;/h2&gt;
+
+&lt;p&gt;To assure that &lt;code&gt;kubecf&lt;/code&gt; is installed with the correct &lt;code&gt;cf-operator&lt;/code&gt; version, it&amp;rsquo;s highly recommended
+to use the kubecf bundle artifact from the GitHub &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/releases&#34; target=&#34;_blank&#34;&gt;releases&lt;/a&gt;
+page.&lt;/p&gt;
+
 &lt;h2 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h2&gt;
 
-&lt;p&gt;In contrast to other recipes, we are not set on using a local
-cluster. Any Kubernetes cluster will do, assuming that the following
-requirements are met:&lt;/p&gt;
+&lt;p&gt;In contrast to other instructions, we are not set on using a local cluster. Any Kubernetes cluster will
+do, assuming that the following requirements are met:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Presence of a default storage class (provisioner).&lt;/p&gt;&lt;/li&gt;
@@ -48,21 +52,21 @@ requirements are met:&lt;/p&gt;
 support.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;For GKE, using the option &lt;code&gt;--image-type UBUNTU&lt;/code&gt; with the
-&lt;code&gt;gcloud beta container&lt;/code&gt; command selects such an OS.&lt;/li&gt;
+&lt;li&gt;For GKE, using the option &lt;code&gt;--image-type UBUNTU&lt;/code&gt; with the &lt;code&gt;gcloud beta container&lt;/code&gt; command selects
+such an OS.&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;This can be any of, but is not restricted to:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;GKE (&lt;a href=&#34;../provider/gke.md&#34;&gt;Notes&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;GKE&lt;/li&gt;
 &lt;li&gt;AKS&lt;/li&gt;
 &lt;li&gt;EKS&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Note that how to deploy and tear-down such a cluster is outside of the
-scope of this recipe.&lt;/p&gt;
+scope of instructions.&lt;/p&gt;
 
 &lt;h2 id=&#34;cf-operator&#34;&gt;cf-operator&lt;/h2&gt;
 
@@ -75,75 +79,182 @@ be deployed to.&lt;/p&gt;
 &lt;p&gt;Here we are not using development-specific dependencies like bazel,
 but only generic tools, i.e. &lt;code&gt;kubectl&lt;/code&gt; and &lt;code&gt;helm&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;helm.md&#34; target=&#34;_blank&#34;&gt;Installing and configuring Helm&lt;/a&gt; is the same regardless of
+&lt;p&gt;Installing and configuring Helm is the same regardless of
 the chosen foundation, and assuming that the cluster does not come
 with Helm Tiller pre-installed.&lt;/p&gt;
 
-&lt;h3 id=&#34;deployment-and-tear-down&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace cfo &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.singleNamespace.name=kubecf&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://cf-operators.s3.amazonaws.com/helm-charts/cf-operator-5.0.0%2B0.gd7ac12bc.tgz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the example above, version 5.0.0 of the operator was used. Look
-into the &lt;code&gt;cf_operator&lt;/code&gt; &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/blob/13ffb01dff8ab5eba16da54539b36e3b3b5f758e/dependencies.yaml#L108&#34; target=&#34;_blank&#34;&gt;section&lt;/a&gt; of the top-level &lt;code&gt;dependencies.yaml&lt;/code&gt; file to find
-the version of the operator validated against the current kubecf
-master.&lt;/p&gt;
+&lt;h3 id=&#34;deployment&#34;&gt;Deployment&lt;/h3&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s create the &lt;code&gt;cf-operator&lt;/code&gt; namespace manually&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl create namespace cf-operator
+
+namespace/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;then we can proceed with the &lt;code&gt;cf-operator&lt;/code&gt; deployment&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ helm install cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--namespace cf-operator &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;global.singleNamespace.name=kubecf&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;./cf-operator.tgz
+
+NAME: cf-operator
+LAST DEPLOYED: Mon Sep &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;28&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;11&lt;/span&gt;:30:32 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt;
+NAMESPACE: cf-operator
+STATUS: deployed
+REVISION: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+TEST SUITE: None
+NOTES:
+Running the operator will install the following CRD´s:
+
+- boshdeployments.quarks.cloudfoundry.org
+- quarksjobs.quarks.cloudfoundry.org
+- quarksecrets.quarks.cloudfoundry.org
+- quarkstatefulsets.quarks.cloudfoundry.org
+
+You can always verify &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; the CRD´s are installed, by running:
+ $ kubectl get crds
+
+You can check the charts README: &lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;helm show readme quarks/cf-operator&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; more information about configuration options.
+
+Interacting with the cf-operator pod
+
+&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;. Check the cf-operator pod status
+  kubectl -n cf-operator get pods
+
+&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;. Tail the cf-operator pod logs
+  &lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;OPERATOR_POD&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get pods -l &lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;cf-operator --namespace cf-operator --output name&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+  kubectl -n cf-operator logs &lt;span style=&#34;color:#000&#34;&gt;$OPERATOR_POD&lt;/span&gt; -f
+
+&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;. Apply one of the BOSH deployment manifest examples
+  kubectl -n kubecf apply -f docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml
+
+&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;. See the cf-operator in action!
+  watch -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;kubectl -n kubecf get pods&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and wait&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ watch -c kubectl -n cf-operator get pods
+
+Every &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;.0s: kubectl -n cf-operator get pods                                                                 Jaimes-MacBook-Pro.local: Mon Sep &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;28&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;11&lt;/span&gt;:31:04 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt;
+
+NAME                                         READY   STATUS    RESTARTS   AGE
+cf-operator-c89644498-q75dh                  &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          30s
+cf-operator-quarks-job-85665697bb-72vsp      &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          31s
+cf-operator-quarks-secret-844844556b-xl9jq   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          31s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;until all the pods are up &amp;amp; running.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
-&amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt; namespace.
-&amp;gt; Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
+&amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt;
+&amp;gt; namespace. Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
 &amp;gt;
 &amp;gt; The &lt;code&gt;global.singleNamespace.name=kubecf&lt;/code&gt; path tells the
 controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.
 &amp;gt;
-&amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and eventually one of the
-controllers will use a webhook to label this namespace with the &lt;code&gt;cf-operator-ns&lt;/code&gt; key.
+&amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and
+&amp;gt; eventually one of the controllers will use a webhook to label this namespace with the
+&amp;gt; &lt;code&gt;cf-operator-ns&lt;/code&gt; key.
 &amp;gt;
 &amp;gt; If the &lt;code&gt;kubecf&lt;/code&gt; namespace is deleted, but the operators are still running, they will no longer
-know which namespace to watch. This can lead to problems, so make sure you also delete the pods
-inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
+&amp;gt; know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+&amp;gt; inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
 
-&lt;p&gt;Note how the namespace the operator is installed into (&lt;code&gt;cfo&lt;/code&gt;) differs
-from the namespace the operator is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+&amp;gt; how the namespace the operator is installed into (&lt;code&gt;cfo&lt;/code&gt;) differs from the namespace the operator
+&amp;gt; is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).
+&amp;gt; This form of deployment enables restarting the operator because it is not affected by webhooks.
+&amp;gt; It further enables the deletion of the Kubecf deployment namespace to start from scratch, without
+&amp;gt; redeploying the operator itself.&lt;/p&gt;
 
-&lt;p&gt;This form of deployment enables restarting the operator because it is
-not affected by webhooks. It further enables the deletion of the
-Kubecf deployment namespace to start from scratch, without redeploying
-the operator itself.&lt;/p&gt;
+&lt;h3 id=&#34;tear-down&#34;&gt;Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ helm uninstall cf-operator --namespace cf-operator
 
-&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+release &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cf-operator&amp;#34;&lt;/span&gt; uninstalled&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;kubecf&#34;&gt;KubeCF&lt;/h2&gt;
 
-&lt;h2 id=&#34;kubecf&#34;&gt;Kubecf&lt;/h2&gt;
-
-&lt;p&gt;With all the prerequisites handled by the preceding sections it is now
-possible to build and deploy kubecf itself.&lt;/p&gt;
+&lt;p&gt;With all the prerequisites handled by the preceding sections it is now possible to build and deploy
+kubecf itself.&lt;/p&gt;
 
 &lt;p&gt;This again uses helm and a released helm chart.&lt;/p&gt;
 
-&lt;h3 id=&#34;deployment-and-tear-down-1&#34;&gt;Deployment and Tear-down&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm install kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     https://kubecf.s3.amazonaws.com/kubecf-v2.3.0.tgz &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;     --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;system_domain=kubecf.suse.dev&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;deployment-1&#34;&gt;Deployment&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ helm install kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--namespace kubecf &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;system_domain=kubecf.yourdomain.net&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;./kubecf_release.tgz
+
+NAME: kubecf
+LAST DEPLOYED: Mon Sep &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;28&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;11&lt;/span&gt;:39:01 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt;
+NAMESPACE: kubecf
+STATUS: deployed
+REVISION: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+TEST SUITE: None
+NOTES:
+Welcome to your new deployment of KubeCF.
+
+    The endpoint &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; use by the &lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;cf&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt; client is
+        https://api.kubecf.suse.dev
+
+    To target this endpoint and login, run
+        cf login --skip-ssl-validation -a https://api.kubecf.suse.dev -u admin
+
+    Please remember, it may take some &lt;span style=&#34;color:#204a87&#34;&gt;time&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; everything to come online.
+
+    You can use
+        kubectl get pods --namespace kubecf
+
+    to spot-check &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; everything is up and running, or
+        watch -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;kubectl get pods --namespace kubecf&amp;#39;&lt;/span&gt;
+
+    to monitor continuously.
+
+    You will be running &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; diego cell&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;, with 40960Mi of disk each.
+    The default app quota is &lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; to 1024Mi, which means you&lt;span style=&#34;color:#a40000&#34;&gt;&amp;#39;&lt;/span&gt;ll have enough disk
+    space to run about &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;40&lt;/span&gt; apps.
+
+    The online documentation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;release notes, deployment guide&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; can be found at
+        https://kubecf.suse.dev/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and wait until all the pods are up &amp;amp; running (which can take around 20 minutes)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$  watch -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;kubectl get pods --namespace kubecf&amp;#39;&lt;/span&gt;
+
+Every &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;.0s: kubectl get pods --namespace kubecf                                                             Jaimes-MacBook-Pro.local: Mon Sep &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;28&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;12&lt;/span&gt;:03:23 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt;
+
+NAME                                     READY   STATUS      RESTARTS   AGE
+api-0                                    &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;17&lt;/span&gt;/17   Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;          16m
+apps-dns-77b46d5657-5rm24                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          24m
+auctioneer-0                             &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt;/6     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;          16m
+bosh-dns-8679ff8bd4-5hb95                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          22m
+bosh-dns-8679ff8bd4-fzkhq                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;/1     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          22m
+cc-worker-0                              &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt;/6     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+credhub-0                                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;8&lt;/span&gt;/8     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;          16m
+database-0                               &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;/2     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          22m
+database-seeder-25b239b49d162e7c-xhrmr   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;/2     Completed   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          23m
+diego-api-0                              &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;9&lt;/span&gt;/9     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;          16m
+diego-cell-0                             &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;12&lt;/span&gt;/12   Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;          16m
+doppler-0                                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt;/6     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+log-api-0                                &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;9&lt;/span&gt;/9     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+log-cache-0                              &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;10&lt;/span&gt;/10   Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+nats-0                                   &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;7&lt;/span&gt;/7     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+router-0                                 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;7&lt;/span&gt;/7     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+routing-api-0                            &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;6&lt;/span&gt;/6     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+scheduler-0                              &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;13&lt;/span&gt;/13   Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;          16m
+singleton-blobstore-0                    &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;8&lt;/span&gt;/8     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+tcp-router-0                             &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;7&lt;/span&gt;/7     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;          16m
+uaa-0                                    &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;9&lt;/span&gt;/9     Running     &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;          16m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In this default deployment, kubecf is launched without Ingress, and it
 uses the Diego scheduler.&lt;/p&gt;
 
-&lt;p&gt;Tear-down is done with a standard &lt;code&gt;helm delete ...&lt;/code&gt; command.&lt;/p&gt;
+&lt;h3 id=&#34;tear-down-1&#34;&gt;Tear-down&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ helm uninstall kubecf --namespace kubecf
 
+release &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;kubecf&amp;#34;&lt;/span&gt; uninstalled&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;access&#34;&gt;Access&lt;/h3&gt;
 
-&lt;p&gt;To access the cluster after the cf-operator has completed the
-deployment and all pods are active invoke:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cf api --skip-ssl-validation &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://api.&amp;lt;domain&amp;gt;&amp;#34;&lt;/span&gt;
-
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy the admin cluster password.&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get secret &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;p&gt;Run the following commands to access the cluster after the cf-operator and KubeCF has completed
+sucessfully the deployment and all pods are up and running correctly&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cf api --skip-ssl-validation &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://api.&amp;lt;domain&amp;gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Copy the admin cluster password.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ &lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get secret &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        --namespace kubecf var-cf-admin-password &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.data.password}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 --decode&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
-
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Use the password from the previous step when requested.&lt;/span&gt;
-cf auth admin &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 --decode&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use the password from the previous step when requested.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cf auth admin &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;advanced-topics&#34;&gt;Advanced Topics&lt;/h3&gt;
 
 &lt;h4 id=&#34;diego-vs-eirini&#34;&gt;Diego vs Eirini&lt;/h4&gt;
