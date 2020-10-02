@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.57.2" />
+
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>Deploy KubeCF on K3s | KubeCF</title><meta property="og:title" content="Deploy KubeCF on K3s" />
+<meta property="og:description" content="Step-by-step guide to deploy KubeCF on top of k3s
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-k3s/" />
+<meta property="article:published_time" content="2020-10-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-02T13:13:12+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta itemprop="name" content="Deploy KubeCF on K3s">
+<meta itemprop="description" content="Step-by-step guide to deploy KubeCF on top of k3s
+">
+
+
+<meta itemprop="datePublished" content="2020-10-01T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-10-02T13:13:12&#43;02:00" />
+<meta itemprop="wordCount" content="881">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Deploy KubeCF on K3s"/>
+<meta name="twitter:description" content="Step-by-step guide to deploy KubeCF on top of k3s
+"/>
+
+
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" as="style">
+<link href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" rel="stylesheet" integrity="">
+
+
+<link href="/css/offline-search.css" rel="stylesheet">
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
+<script src="/js/offline-search.js"></script>
+
+
+    <title>Deploy KubeCF on K3s | KubeCF</title>
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1071.73 221.27"><defs><linearGradient id="a" x1="-424.28" y1="-348.73" x2="-423.28" y2="-348.73" gradientTransform="matrix(297.1, 0, 0, -297.1, 126823.42, -103498.81)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#00b1e1"/><stop offset="1" stop-color="#2c75ba"/></linearGradient></defs><title>Asset 4</title><path d="M128.57 217.38 62.99 130.7 46.1 150.82v66.56H0V.83H46.1V97.58L122.72.83H179.54L93.5 102.45 185.38 217.38H128.57z"/><path d="M290.79 217.38v-19.8c-10.71 12-29.54 23.69-55.19 23.69-34.42.0-50.65-18.82-50.65-49.34V60.57h41.24v95.12c0 21.76 11.36 28.9 28.89 28.9 15.91.0 28.57-8.77 35.71-17.86V60.57H332V217.38z"/><path d="M358 217.38V.83h41.24V80.7c12.33-15.91 29.86-24 48.37-24 39.93.0 69.48 31.17 69.48 82.47.0 52.27-29.87 82.13-69.48 82.13-18.83.0-36-8.44-48.37-24v20.13zm76.62-32.79c24 0 39.94-18.18 39.94-45.45s-15.91-45.78-39.94-45.78c-13.31.0-28.57 7.79-35.38 18.18v55.52C406 177.12 421.3 184.59 434.61 184.59z"/><path d="M525.51 138.81c0-45.45 33.44-82.14 81.17-82.14 46.75.0 78.56 35.07 78.56 86.36v9.09H568.69c2.6 19.81 18.51 36.36 45.13 36.36 13.31.0 31.82-5.84 41.88-15.58l18.18 26.62c-15.58 14.29-40.25 21.75-64.61 21.75C561.55 221.27 525.51 189.13 525.51 138.81zm81.17-49.35C581 89.46 570 108.62 568 124.2h77.27C644.34 109.27 634 89.46 606.68 89.46z"/><path d="M964.59 87.19V74.01 41.42H1071.73V.83H918.49V217.38H964.59V175.15 127.78 87.19z"/><path d="M1041.05 90l-23.77-18.87V90h-139a45.54 45.54.0 0 1-31.52-12.64c-.48-.45-1-.91-1.42-1.39a45.78 45.78.0 1 0 0 66.27c.46-.47.94-.93 1.42-1.39a45.59 45.59.0 0 1 31.52-12.64h139v18.87l23.77-18.87 24.07-19.1z" fill="url(#a)"/><path d="M868.23 146A65.12 65.12.0 1 1 868 72.22L907.56 51.6a110.68 110.68.0 0 0-19.67-23.52c-.61.42-1.23.82-1.88 1.18A23.68 23.68.0 0 1 850.85 6.08a110 110 0 0 0-16.21-4.34A112 112 0 0 0 820.33.0c-.17.6-.36 1.19-.58 1.78a23.69 23.69.0 0 1-30.52 13.81 23.6 23.6.0 0 1-11.62-9.44 110.35 110.35.0 0 0-27.46 14.39 25.32 25.32.0 0 1 1.18 2.77 23.68 23.68.0 0 1-31.21 29.81 109.19 109.19.0 0 0-12 28.55 23.7 23.7.0 0 1 12.95 34.57 23.6 23.6.0 0 1-15.21 11 109.48 109.48.0 0 0 9.38 29.88 23.69 23.69.0 0 1 28.5 36.76 108.8 108.8.0 0 0 27 16.67 23.68 23.68.0 0 1 45.87 9 109.18 109.18.0 0 0 31.26-5.21 23.68 23.68.0 0 1 40.22-23.2 109.46 109.46.0 0 0 20-24c-.48-.35-.93-.76-1.39-1.15z"/></svg></span><span class="text-uppercase font-weight-bold">KubeCF</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/community/" ><span>Community</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<div id="search-nav-container">
+<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
+<div id="search-results" class="container"></div>
+</div>
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<div id="search-nav-container">
+<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
+<div id="search-results" class="container"></div>
+</div>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/overview/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Overview</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-overview">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deploying KubeCF</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-deployment">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-affinities-and-tolerations" href="/docs/deployment/affinities-and-tolerations/">Affinities and Tolerations</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-concepts">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-concepts-operator" href="/docs/concepts/operator/">Operator</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-concepts-quarks" href="/docs/concepts/quarks/">Quarks</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/tasks/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Core Tasks</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-tasks">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tasks-upgrade" href="/docs/tasks/upgrade/">KubeCF Upgrades</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tasks-deploy" href="/docs/tasks/deploy/">KubeCF Deployment guidelines</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tasks-secrets" href="/docs/tasks/secrets/">KubeCF and Secrets</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tasks-bosh" href="/docs/tasks/bosh/">Test BOSH Releases</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/tutorials/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Tutorials</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="docs-tutorials">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-tutorials-deploy-k3s" href="/docs/tutorials/deploy-k3s/">Deploy KubeCF on K3s</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-kind" href="/docs/tutorials/deploy-kind/">Deploy KubeCF on Kind</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-eirini-persi" href="/docs/tutorials/eirini_persi/">Eirini Persistence broker</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-stratos" href="/docs/tutorials/deploy-stratos/">Deploy Stratos next to KubeCF</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-bosh-integration" href="/docs/tutorials/bosh-integration/">Bosh releases integration</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-deploy-minikube" href="/docs/tutorials/deploy-minikube/">Deploy KubeCF in Minikube</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-tutorials-run-smoke-tests" href="/docs/tutorials/run-smoke-tests/">Run smoke tests</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/reference/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Reference</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-reference">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-reference-tests" href="/docs/reference/tests/">Tests</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/contribution-guidelines/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Contribution Guidelines</a>
+  </li>
+  <ul>
+    <li class="collapse " id="docs-contribution-guidelines">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/edit/master/content/en/docs/Tutorials/deploy-k3s.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/kubecf-docs/issues/new?title=Deploy%20KubeCF%20on%20K3s" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/cloudfoundry-incubator/kubecf/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+
+</div>
+
+
+
+
+
+
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#before-you-begin">Before you begin</a></li>
+<li><a href="#prerequisites">Prerequisites</a>
+<ul>
+<li><a href="#k3s-installation-notes">K3s installation notes</a></li>
+<li><a href="#longhorn-installation-notes">Longhorn installation notes</a></li>
+<li><a href="#suse-charts">SUSE charts</a></li>
+</ul></li>
+<li><a href="#deploy-nginx-ingress">Deploy Nginx-ingress</a></li>
+<li><a href="#deploy-quarks-operator">Deploy Quarks-Operator</a></li>
+<li><a href="#deploy-kubecf">Deploy KubeCF</a></li>
+</ul></li>
+</ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://kubecf.suse.dev/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://kubecf.suse.dev/docs/tutorials/">Tutorials</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://kubecf.suse.dev/docs/tutorials/deploy-k3s/">Deploy KubeCF on K3s</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Deploy KubeCF on K3s</h1>
+	<div class="lead">Step-by-step guide to deploy KubeCF on top of k3s</div>
+	
+
+<h2 id="before-you-begin">Before you begin</h2>
+
+<p>This guideline will provide a quick way to deploy KubeCF with K3S and should be used only for evaluation purposes.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li><a href="https://github.com/rancher/k3s/" target="_blank">K3s</a></li>
+<li><a href="https://github.com/helm/helm/releases" target="_blank">Helm</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_blank">kubectl</a></li>
+<li><a href="https://github.com/cloudfoundry-incubator/kubecf/releases" target="_blank">KubeCF release</a></li>
+</ul>
+
+<p>Before you begin you need a k3s cluster running and a <a href="https://github.com/cloudfoundry-incubator/kubecf/releases" target="_blank">KubeCF release</a> copy extracted in a folder which will be used in the tutorial, you will find notes/tips to deploy on a VM based environment.</p>
+
+<h3 id="k3s-installation-notes">K3s installation notes</h3>
+
+<p><code>curl -sfL https://raw.githubusercontent.com/rancher/k3s/master/install.sh | INSTALL_K3S_EXEC=&quot;server --no-deploy traefik --node-external-ip $EXT_IP&quot; sh</code></p>
+
+<blockquote>
+<ul>
+<li><code>--node-external-ip</code> Replace <code>$EXT_IP</code> with the node external IP. For example, the IP which can be reached from over the network.</li>
+<li><code>--no-deploy traefik</code> It&rsquo;s to disable traefik deploy by default</li>
+</ul>
+</blockquote>
+
+<p>Depending on your Linux Distribution, you might want to install relevant packages for <code>k3s</code> to work properly, remember to check <a href="https://rancher.com/docs/k3s/latest/en/installation/installation-requirements/" target="_blank">Installation requirements</a> and the appropriate section for your OS. For example in OpenSUSE Tumbleweed, <code>zypper in -y kernel-default which curl wget open-iscsi</code> or switch to iptable-legacy for <a href="https://rancher.com/docs/k3s/latest/en/advanced/#enabling-legacy-iptables-on-raspbian-buster" target="_blank">Debian</a>.</p>
+
+<ul>
+<li>agent token to join new nodes in <code>/var/lib/rancher/k3s/server/node-token</code></li>
+<li>joining a node in the k3s cluster: <code>curl -sfL https://raw.githubusercontent.com/rancher/k3s/master/install.sh | INSTALL_K3S_EXEC=&quot;agent --node-external-ip ext-ip&quot; K3S_URL=https://externalip:6443 K3S_TOKEN=agent_token sh -</code></li>
+<li>Take the <code>kubeconfig</code> from <code>/etc/rancher/k3s/k3s.yaml</code> on the master node and edit <code>server</code> with the node ip reachable from outside</li>
+<li>Debian hosts might need specific kernels, e.g. <code>apt install linux-image-4.19-cloud-amd64</code></li>
+</ul>
+
+<h3 id="longhorn-installation-notes">Longhorn installation notes</h3>
+
+<p>Make sure to have installed host required dependencies (iscsi) ( for e.g. in Tumbleweed: <code>zypper in -y kernel-default which curl wget open-iscsi</code> )
+and enable them on boot <code>systemctl enable --now iscsid</code>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/longhorn/longhorn
+
+ <span style="color:#8f5902;font-style:italic"># Tweak depending on your number of nodes</span>
+$ cat <span style="color:#4e9a06">&lt;&lt;EOF &gt;&gt;longhorn_values.yaml
+</span><span style="color:#4e9a06">persistence:  
+</span><span style="color:#4e9a06">  defaultClass: true
+</span><span style="color:#4e9a06">  defaultClassReplicaCount: 1
+</span><span style="color:#4e9a06">EOF</span>
+$ kubectl create namespace longhorn-system
+$ helm install longhorn ./longhorn/chart/ --namespace longhorn-system --values longhorn_values.yaml</code></pre></div>
+<h3 id="suse-charts">SUSE charts</h3>
+
+<p>Add the SUSE helm repository, where we will install nginx-ingress from:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm repo add suse https://kubernetes-charts.suse.com/
+<span style="color:#4e9a06">&#34;suse&#34;</span> has been added to your repositories
+$ helm repo update</code></pre></div>
+<h2 id="deploy-nginx-ingress">Deploy Nginx-ingress</h2>
+
+<p>We will use the nginx-ingress with KubeCF in the following example.</p>
+
+<p>Let&rsquo;s create a <code>nginx_ingress.yaml</code> values file with the following content:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat <span style="color:#4e9a06">&lt;&lt;EOF &gt;&gt;nginx_ingress.yaml
+</span><span style="color:#4e9a06">tcp:
+</span><span style="color:#4e9a06">  2222: &#34;kubecf/scheduler:2222&#34;
+</span><span style="color:#4e9a06">  20000: &#34;kubecf/tcp-router:20000&#34;
+</span><span style="color:#4e9a06">  20001: &#34;kubecf/tcp-router:20001&#34;
+</span><span style="color:#4e9a06">  20002: &#34;kubecf/tcp-router:20002&#34;
+</span><span style="color:#4e9a06">  20003: &#34;kubecf/tcp-router:20003&#34;
+</span><span style="color:#4e9a06">  20004: &#34;kubecf/tcp-router:20004&#34;
+</span><span style="color:#4e9a06">  20005: &#34;kubecf/tcp-router:20005&#34;
+</span><span style="color:#4e9a06">  20006: &#34;kubecf/tcp-router:20006&#34;
+</span><span style="color:#4e9a06">  20007: &#34;kubecf/tcp-router:20007&#34;
+</span><span style="color:#4e9a06">  20008: &#34;kubecf/tcp-router:20008&#34;
+</span><span style="color:#4e9a06">EOF</span></code></pre></div>
+<p>we will use it to install the Ingress and support tcp routing in CF.</p>
+
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">ExternalIPs</h4>
+<blockquote>
+<p>If you want to expose the ingress over specific externalIPs in your cluster, you can while installing the ingress with helm</p>
+
+<p>we will find th node external IPs which we are interested in:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get node
+NAME     STATUS   ROLES    EXTERNAL-IP
+host-1   Ready    master   <span style="color:#0000cf;font-weight:bold">203</span>.0.113.1
+host-2   Ready    node     <span style="color:#0000cf;font-weight:bold">203</span>.0.113.2
+host-3   Ready    node     <span style="color:#0000cf;font-weight:bold">203</span>.0.113.3</code></pre></div>
+<p>and update the <code>nginx_ingress</code> values file:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat <span style="color:#4e9a06">&lt;&lt;EOF &gt;&gt;nginx_ingress.yaml
+</span><span style="color:#4e9a06">service:
+</span><span style="color:#4e9a06">  externalIPs:
+</span><span style="color:#4e9a06">  - 203.0.113.2
+</span><span style="color:#4e9a06">  - 203.0.113.3
+</span><span style="color:#4e9a06">EOF</span></code></pre></div></blockquote>
+
+</div>
+
+
+<p>Let&rsquo;s install <code>nginx-ingress</code> with helm:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create namespace nginx-ingress
+namespace/nginx-ingress created
+
+$ helm install nginx-ingress suse/nginx-ingress <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>--namespace nginx-ingress <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>--values nginx_ingress.yaml</code></pre></div>
+<h2 id="deploy-quarks-operator">Deploy Quarks-Operator</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create namespace cf-operator
+namespace/cf-operator created
+
+$ helm install cf-operator ./cf-operator.tgz --namespace cf-operator --set <span style="color:#4e9a06">&#34;global.singleNamespace.name=kubecf&#34;</span></code></pre></div>
+<h2 id="deploy-kubecf">Deploy KubeCF</h2>
+
+<p>We will use a <code>nip.io</code> domain, for whose those aren&rsquo;t familiar, it&rsquo;s a free redirection service. Meaning that we can assign to kubecf an entire <code>*.domain</code> like <code>myip.nip.io</code> to make our deployment reachable from outside. If you aren&rsquo;t interested in the ingress option, just skip the instructions in the <code>features</code> block:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#4e9a06">&lt;&lt;EOF &gt;&gt; kubecf-config-values.yaml
+</span><span style="color:#4e9a06">system_domain: $EXT_IP.nip.io
+</span><span style="color:#4e9a06">
+</span><span style="color:#4e9a06">credentials:
+</span><span style="color:#4e9a06">  cf_admin_password: testcluster
+</span><span style="color:#4e9a06">  uaa_admin_client_secret: testcluster
+</span><span style="color:#4e9a06">
+</span><span style="color:#4e9a06">features:
+</span><span style="color:#4e9a06">  ingress:
+</span><span style="color:#4e9a06">    enabled: true
+</span><span style="color:#4e9a06">    tls:
+</span><span style="color:#4e9a06">      crt: |
+</span><span style="color:#4e9a06">        -----BEGIN CERTIFICATE-----
+</span><span style="color:#4e9a06">        MIIE8jCCAtqgAwIBAgIUT/Yu/Sv8AUl5zHXXEKCy5RKJqmYwDQYJKoZIhvcMOQMM
+</span><span style="color:#4e9a06">        [...]
+</span><span style="color:#4e9a06">        xC8x/+zB7XlvcRJRio6kk670+25ABP==
+</span><span style="color:#4e9a06">        -----END CERTIFICATE-----
+</span><span style="color:#4e9a06">      key: |
+</span><span style="color:#4e9a06">        -----BEGIN RSA PRIVATE KEY-----
+</span><span style="color:#4e9a06">        MIIE8jCCAtqgAwIBAgIUSI02lj2b2ImLy/zMrjNgW5d8EygwQSVJKoZIhvcYEGAW
+</span><span style="color:#4e9a06">        [...]
+</span><span style="color:#4e9a06">        to2WV7rPMb9W9fd2vVUXKKHTc+PiNg==
+</span><span style="color:#4e9a06">        -----END RSA PRIVATE KEY-----
+</span><span style="color:#4e9a06">EOF</span></code></pre></div>
+<p>if you don&rsquo;t have a certificate, and if you are setting up a staging environment, you can generate one with quarks-secret and avoid to provide it in the values, for e.g. by applying (mind to replace <code>$EXT_IP</code> with your ip ):</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>QuarksSecret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nip.quarks.ca<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>namespace<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubecf<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>request<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>certificate<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>alternativeNames<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">null</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>commonName<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>$EXT_IP.nip.io<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>isCA<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>signerType<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>local<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>secretName<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nip.secret.ca<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>certificate<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>---<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>quarks.cloudfoundry.org/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>QuarksSecret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nip.quarks.tls<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>namespace<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubecf<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>request<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>certificate<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>CAKeyRef<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>private_key<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nip.secret.ca<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>CARef<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>key<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>certificate<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nip.secret.ca<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>alternativeNames<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;*.$EXT_IP.nip.io&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>commonName<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubeTlsTypeCert<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>isCA<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>signerType<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>local<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>secretName<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>kubecf-ingress-tls<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>tls</code></pre></div>
+<p>or by providing your own certificate in <code>kubecf/kubecf-ingress-tls</code> a tls certificate type.</p>
+
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">Storage Class</h4>
+<p><blockquote>
+<p>Note if you have a custom Storage class, set the relevant section in the KubeCF config values:</p>
+</blockquote>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat <span style="color:#4e9a06">&lt;&lt;EOF &gt;&gt; kubecf-config-values.yaml
+</span><span style="color:#4e9a06">
+</span><span style="color:#4e9a06">kube:
+</span><span style="color:#4e9a06">  storage_class: longhorn
+</span><span style="color:#4e9a06">EOF</span></code></pre></div></p>
+
+</div>
+
+
+<p>Finally let&rsquo;s install KubeCF:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install kubecf --namespace kubecf ./kubecf_release.tgz --values kubecf-config-values.yaml
+
+NAME: kubecf
+LAST DEPLOYED: Thu Oct  <span style="color:#0000cf;font-weight:bold">1</span> <span style="color:#0000cf;font-weight:bold">11</span>:34:06 <span style="color:#0000cf;font-weight:bold">2020</span>
+NAMESPACE: kubecf
+STATUS: deployed
+REVISION: <span style="color:#0000cf;font-weight:bold">1</span>
+TEST SUITE: None
+NOTES:
+Welcome to your new deployment of KubeCF.
+
+    The endpoint <span style="color:#204a87;font-weight:bold">for</span> use by the <span style="color:#4e9a06">`</span>cf<span style="color:#4e9a06">`</span> client is
+        https://api.<span style="color:#000">$EXT_IP</span>.nip.io
+
+    To target this endpoint and login, run
+        cf login --skip-ssl-validation -a https://api.<span style="color:#000">$EXT_IP</span>.nip.io -u admin
+
+    Please remember, it may take some <span style="color:#204a87">time</span> <span style="color:#204a87;font-weight:bold">for</span> everything to come online.
+
+    You can use
+        kubectl get pods --namespace kubecf
+
+    to spot-check <span style="color:#204a87;font-weight:bold">if</span> everything is up and running, or
+        watch -c <span style="color:#4e9a06">&#39;kubectl get pods --namespace kubecf&#39;</span>
+
+    to monitor continuously.
+
+    You will be running <span style="color:#0000cf;font-weight:bold">1</span> diego cell<span style="color:#ce5c00;font-weight:bold">(</span>s<span style="color:#ce5c00;font-weight:bold">)</span>, with 40960Mi of disk each.
+    The default app quota is <span style="color:#204a87">set</span> to 1024Mi, which means you<span style="color:#a40000">&#39;</span>ll have enough disk
+    space to run about <span style="color:#0000cf;font-weight:bold">40</span> apps.
+
+    The online documentation <span style="color:#ce5c00;font-weight:bold">(</span>release notes, deployment guide<span style="color:#ce5c00;font-weight:bold">)</span> can be found at
+        https://kubecf.suse.dev/docs</code></pre></div>
+<p>Now you are ready to <a href="/docs/tutorials/deploy-stratos/">deploy Stratos</a></p>
+
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">Note on eirini</h4>
+<p>After deployment with Eirini is completed, it&rsquo;s necessary to trust the CA used by eirini to pull images from internal registry on the node.</p>
+
+<p><p>On each node, you can do with (needs yq on the nodes):</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ k3s kubectl get secret bits-service-ssl -n kubecf -o yaml <span style="color:#000;font-weight:bold">|</span> yq r - <span style="color:#4e9a06">&#39;data.ca&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -d &gt; eirini-ca.crt</p>
+
+<p>$ cp -rfv eirini-ca.crt /etc/ssl/certs/ <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> systemctl restart k3s</code></pre></div></p>
+
+</div>
+
+
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified October 2, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/66a4dcf5ea3761af8618c25114278e1b0f11a627">Add a note on eirini (66a4dcf)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" href="https://github.com/cloudfoundry-incubator/kubecf">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
+    <a class="text-white" target="_blank" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2020 CloudFoundry.org Foundation, Inc. All Rights Reserved</small>
+        <small class="ml-1"><a href="https://www.cloudfoundry.org/privacy-policy/" target="_blank">Privacy Policy</a></small>
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="/js/main.min.fa74d55c6307c336362cc0822df44dc7238fafbc6143a52c3647f84771327ab5.js" integrity="sha256-&#43;nTVXGMHwzY2LMCCLfRNxyOPr7xhQ6UsNkf4R3EyerU=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>
