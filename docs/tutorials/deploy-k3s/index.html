@@ -26,14 +26,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.suse.dev/docs/tutorials/deploy-k3s/" />
 <meta property="article:published_time" content="2020-10-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-10-02T13:13:12+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-10-02T14:38:00+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy KubeCF on K3s">
 <meta itemprop="description" content="Step-by-step guide to deploy KubeCF on top of k3s
 ">
 
 
 <meta itemprop="datePublished" content="2020-10-01T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-10-02T13:13:12&#43;02:00" />
+<meta itemprop="dateModified" content="2020-10-02T14:38:00&#43;02:00" />
 <meta itemprop="wordCount" content="881">
 
 
@@ -739,19 +739,18 @@ Welcome to your new deployment of KubeCF.
 
 <div class="alert alert-primary" role="alert">
 <h4 class="alert-heading">Note on eirini</h4>
-<p>After deployment with Eirini is completed, it&rsquo;s necessary to trust the CA used by eirini to pull images from internal registry on the node.</p>
+<p>After deployment if Eirini is enabled, it&rsquo;s necessary to trust the CA used by eirini to pull images from internal registry on the node.</p>
 
 <p><p>On each node, you can do with (needs yq on the nodes):</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ k3s kubectl get secret bits-service-ssl -n kubecf -o yaml <span style="color:#000;font-weight:bold">|</span> yq r - <span style="color:#4e9a06">&#39;data.ca&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -d &gt; eirini-ca.crt</p>
-
-<p>$ cp -rfv eirini-ca.crt /etc/ssl/certs/ <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> systemctl restart k3s</code></pre></div></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ k3s kubectl  get secret kubecf-bits-service-ssl-csr-private-key -n kubecf -o yaml <span style="color:#000;font-weight:bold">|</span> yq r - <span style="color:#4e9a06">&#39;data.private_key&#39;</span> <span style="color:#000;font-weight:bold">|</span> base64 -d &gt; eirini-ca.crt
+$ cp -rfv eirini-ca.crt /etc/ssl/certs/ <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> systemctl restart k3s</code></pre></div></p>
 
 </div>
 
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified October 2, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/66a4dcf5ea3761af8618c25114278e1b0f11a627">Add a note on eirini (66a4dcf)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified October 2, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/c252a9a151644a7586b488f5750d68f1a530e7d3">Update ca command (c252a9a)</a>
 </div>
 </div>
 
