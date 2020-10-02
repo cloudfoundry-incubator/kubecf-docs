@@ -293,7 +293,7 @@ Welcome to your new deployment of KubeCF.
 &lt;p&gt;After deployment if Eirini is enabled, it&amp;rsquo;s necessary to trust the CA used by eirini to pull images from internal registry on the node.&lt;/p&gt;
 
 &lt;p&gt;&lt;p&gt;On each node, you can do with (needs yq on the nodes):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ k3s kubectl  get secret kubecf-bits-service-ssl-csr-private-key -n kubecf -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; yq r - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;data.private_key&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -d &amp;gt; eirini-ca.crt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ k3s kubectl get secret bits-service-ssl -n kubecf -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; yq r - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;data.ca&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -d &amp;gt; eirini-ca.crt
 $ cp -rfv eirini-ca.crt /etc/ssl/certs/ &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl restart k3s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 
 &lt;/div&gt;
