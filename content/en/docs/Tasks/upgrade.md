@@ -20,7 +20,7 @@ possible, not specifying configuration that maintains the default values will
 prevent accidentally changing them if the defaults have changed in the new
 version.
 
-[initial deployment]: https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/
+[initial deployment]: https://kubecf.io/docs/deployment/kubernetes-deploy/
 
 ## Upgrading from SCF
 

@@ -254,7 +254,7 @@ Welcome to your new deployment of KubeCF.
     space to run about 40 apps.
 
     The online documentation (release notes, deployment guide) can be found at
-        https://kubecf.suse.dev/docs
+        https://kubecf.io/docs
 ```
 
 Now you are ready to [deploy Stratos](/docs/tutorials/deploy-stratos/)
