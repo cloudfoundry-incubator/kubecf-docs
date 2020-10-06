@@ -20,8 +20,8 @@ KubeCF follows the CloudFoundry Foundation [Code of Conduct](https://www.cloudfo
 
 ## Useful links
 
-- [Documentation](https://kubecf.suse.dev/docs)
-- [Contribution Guidelines](https://kubecf.suse.dev/docs/contribution-guidelines/)
-- [Deploy locally with kind](https://kubecf.suse.dev/docs/tutorials/deploy-kind/)
+- [Documentation](https://kubecf.io/docs)
+- [Contribution Guidelines](https://kubecf.io/docs/contribution-guidelines/)
+- [Deploy locally with kind](https://kubecf.io/docs/tutorials/deploy-kind/)
 
 Not sure where to start? have a quick look at the open issues that are marked as ["Good first issues"](https://github.com/cloudfoundry-incubator/kubecf/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)

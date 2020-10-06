@@ -203,7 +203,7 @@ Welcome to your new deployment of KubeCF.
     space to run about 40 apps.
 
     The online documentation (release notes, deployment guide) can be found at
-        https://kubecf.suse.dev/docs
+        https://kubecf.io/docs
 ```
 
 and wait until all the pods are up & running (which can take around 20 minutes)
