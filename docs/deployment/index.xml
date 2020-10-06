@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Deploying KubeCF on Kubernetes</title>
-    <link>https://kubecf.suse.dev/docs/deployment/</link>
+    <link>https://kubecf.io/docs/deployment/</link>
     <description>Recent content in Deploying KubeCF on Kubernetes on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://kubecf.suse.dev/docs/deployment/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.io/docs/deployment/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Deployment Walkthrough</title>
-      <link>https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/</link>
+      <link>https://kubecf.io/docs/deployment/kubernetes-deploy/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/</guid>
+      <guid>https://kubecf.io/docs/deployment/kubernetes-deploy/</guid>
       <description>
         
         
@@ -208,7 +208,7 @@ Welcome to your new deployment of KubeCF.
     space to run about &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;40&lt;/span&gt; apps.
 
     The online documentation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;release notes, deployment guide&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; can be found at
-        https://kubecf.suse.dev/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        https://kubecf.io/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;and wait until all the pods are up &amp;amp; running (which can take around 20 minutes)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$  watch -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;kubectl get pods --namespace kubecf&amp;#39;&lt;/span&gt;
 
@@ -283,7 +283,7 @@ Kubernetes workloads. They should all be placed on their own
 &lt;strong&gt;dedicated nodes&lt;/strong&gt; instead where possible.&lt;/p&gt;
 
 &lt;p&gt;This can be done by setting affinities and tolerations, as explained in
-the associated &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/&#34; target=&#34;_blank&#34;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
+the associated &lt;a href=&#34;https://kubecf.io/docs/deployment/affinities-and-tolerations/&#34; target=&#34;_blank&#34;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
 
@@ -373,10 +373,10 @@ ready to be consumed by kubecf.&lt;/p&gt;
     
     <item>
       <title>Docs: Kubernetes Affinities and Tolerations</title>
-      <link>https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/</link>
+      <link>https://kubecf.io/docs/deployment/affinities-and-tolerations/</link>
       <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/</guid>
+      <guid>https://kubecf.io/docs/deployment/affinities-and-tolerations/</guid>
       <description>
         
         

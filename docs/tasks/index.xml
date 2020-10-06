@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Core Tasks</title>
-    <link>https://kubecf.suse.dev/docs/tasks/</link>
+    <link>https://kubecf.io/docs/tasks/</link>
     <description>Recent content in Core Tasks on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://kubecf.suse.dev/docs/tasks/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.io/docs/tasks/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Upgrading KubeCF deployments</title>
-      <link>https://kubecf.suse.dev/docs/tasks/upgrade/</link>
+      <link>https://kubecf.io/docs/tasks/upgrade/</link>
       <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/upgrade/</guid>
+      <guid>https://kubecf.io/docs/tasks/upgrade/</guid>
       <description>
         
         
@@ -27,7 +27,7 @@
 
 &lt;h2 id=&#34;upgrading-from-a-previous-deployment&#34;&gt;Upgrading from a previous deployment&lt;/h2&gt;
 
-&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/&#34; target=&#34;_blank&#34;&gt;initial deployment&lt;/a&gt;; however, please
+&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.io/docs/deployment/kubernetes-deploy/&#34; target=&#34;_blank&#34;&gt;initial deployment&lt;/a&gt;; however, please
 use &lt;code&gt;helm upgrade&lt;/code&gt; intead of &lt;code&gt;helm install&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you are providing a configuration file that was originally from a previous
@@ -47,10 +47,10 @@ insallation and importing into KubeCF is required.&lt;/p&gt;
     
     <item>
       <title>Docs: Deploy KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
+      <link>https://kubecf.io/docs/tasks/deploy/</link>
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/deploy/</guid>
+      <guid>https://kubecf.io/docs/tasks/deploy/</guid>
       <description>
         
         
@@ -70,10 +70,10 @@ worker node that may host any &lt;code&gt;diego-cell&lt;/code&gt; workloads:&lt;
     
     <item>
       <title>Docs: Secret rotation KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tasks/secrets/</link>
+      <link>https://kubecf.io/docs/tasks/secrets/</link>
       <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/secrets/</guid>
+      <guid>https://kubecf.io/docs/tasks/secrets/</guid>
       <description>
         
         
@@ -234,10 +234,10 @@ installed.&lt;/p&gt;
     
     <item>
       <title>Docs: Test BOSH releases</title>
-      <link>https://kubecf.suse.dev/docs/tasks/bosh/</link>
+      <link>https://kubecf.io/docs/tasks/bosh/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/bosh/</guid>
+      <guid>https://kubecf.io/docs/tasks/bosh/</guid>
       <description>
         
         

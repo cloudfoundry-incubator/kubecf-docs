@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Documentation</title>
-    <link>https://kubecf.suse.dev/docs/</link>
+    <link>https://kubecf.io/docs/</link>
     <description>Recent content in Documentation on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://kubecf.suse.dev/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.io/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Tests</title>
-      <link>https://kubecf.suse.dev/docs/reference/tests/</link>
+      <link>https://kubecf.io/docs/reference/tests/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/reference/tests/</guid>
+      <guid>https://kubecf.io/docs/reference/tests/</guid>
       <description>
         
         
@@ -27,7 +27,7 @@
 &lt;p&gt;The &lt;code&gt;make cats&lt;/code&gt; target starts a run of the
 &lt;a href=&#34;https://github.com/SUSE/cf-acceptance-tests-release&#34; target=&#34;_blank&#34;&gt;Cloud Foundry Acceptance Tests&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;See also the &lt;a href=&#34;https://kubecf.suse.dev/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See also the &lt;a href=&#34;https://kubecf.io/docs/reference/layout/testing/&#34;&gt;entire set of available tests&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;limiting-test-suites&#34;&gt;Limiting test suites&lt;/h2&gt;
 
@@ -41,17 +41,17 @@ key in &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/blob/mas
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;include&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;+docker,-ssh&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that this is an example of how to use the second kind of
 customization feature noted in the main
-&lt;a href=&#34;https://kubecf.suse.dev/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://kubecf.io/docs/contribution-guidelines/#customization&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Deploy KubeCF on K3s</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-k3s/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-k3s/</link>
       <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-k3s/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-k3s/</guid>
       <description>
         
         
@@ -283,8 +283,8 @@ Welcome to your new deployment of KubeCF.
     space to run about &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;40&lt;/span&gt; apps.
 
     The online documentation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;release notes, deployment guide&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; can be found at
-        https://kubecf.suse.dev/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now you are ready to &lt;a href=&#34;https://kubecf.suse.dev/docs/tutorials/deploy-stratos/&#34;&gt;deploy Stratos&lt;/a&gt;&lt;/p&gt;
+        https://kubecf.io/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you are ready to &lt;a href=&#34;https://kubecf.io/docs/tutorials/deploy-stratos/&#34;&gt;deploy Stratos&lt;/a&gt;&lt;/p&gt;
 
 
 
@@ -304,10 +304,10 @@ $ cp -rfv eirini-ca.crt /etc/ssl/certs/ &lt;span style=&#34;color:#ce5c00;font-w
     
     <item>
       <title>Docs: Deploy KubeCF on Kind</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-kind/</link>
       <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-kind/</guid>
       <description>
         
         
@@ -503,10 +503,10 @@ internet connection speed.&lt;/p&gt;
     
     <item>
       <title>Docs: Eirini Persistence broker</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</link>
+      <link>https://kubecf.io/docs/tutorials/eirini_persi/</link>
       <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</guid>
+      <guid>https://kubecf.io/docs/tutorials/eirini_persi/</guid>
       <description>
         
         
@@ -688,10 +688,10 @@ Restaging app dizzylizard in org system / space tmp as admin...
     
     <item>
       <title>Docs: Deploy Stratos next to KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-stratos/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-stratos/</guid>
       <description>
         
         
@@ -737,10 +737,10 @@ helm install --namespace stratos --name stratos --values ./stratos.yml suse/cons
     
     <item>
       <title>Docs: Bosh releases integration</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</link>
+      <link>https://kubecf.io/docs/tutorials/bosh-integration/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</guid>
+      <guid>https://kubecf.io/docs/tutorials/bosh-integration/</guid>
       <description>
         
         
@@ -887,10 +887,10 @@ according to any of the recipes listed by the main
     
     <item>
       <title>Docs: Deploy KubeCF in Minikube</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-minikube/</guid>
       <description>
         
         
@@ -1104,10 +1104,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Cloud Foundry Operator</title>
-      <link>https://kubecf.suse.dev/docs/concepts/operator/</link>
+      <link>https://kubecf.io/docs/concepts/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/concepts/operator/</guid>
+      <guid>https://kubecf.io/docs/concepts/operator/</guid>
       <description>
         
         
@@ -1136,10 +1136,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Project Quarks</title>
-      <link>https://kubecf.suse.dev/docs/concepts/quarks/</link>
+      <link>https://kubecf.io/docs/concepts/quarks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/concepts/quarks/</guid>
+      <guid>https://kubecf.io/docs/concepts/quarks/</guid>
       <description>
         
         
@@ -1152,10 +1152,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Run smoke tests</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</link>
+      <link>https://kubecf.io/docs/tutorials/run-smoke-tests/</link>
       <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</guid>
+      <guid>https://kubecf.io/docs/tutorials/run-smoke-tests/</guid>
       <description>
         
         
@@ -1206,10 +1206,10 @@ Test Suite Passed
     
     <item>
       <title>Docs: Upgrading KubeCF deployments</title>
-      <link>https://kubecf.suse.dev/docs/tasks/upgrade/</link>
+      <link>https://kubecf.io/docs/tasks/upgrade/</link>
       <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/upgrade/</guid>
+      <guid>https://kubecf.io/docs/tasks/upgrade/</guid>
       <description>
         
         
@@ -1217,7 +1217,7 @@ Test Suite Passed
 
 &lt;h2 id=&#34;upgrading-from-a-previous-deployment&#34;&gt;Upgrading from a previous deployment&lt;/h2&gt;
 
-&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/&#34; target=&#34;_blank&#34;&gt;initial deployment&lt;/a&gt;; however, please
+&lt;p&gt;Upgrading is roughly the same as doing an &lt;a href=&#34;https://kubecf.io/docs/deployment/kubernetes-deploy/&#34; target=&#34;_blank&#34;&gt;initial deployment&lt;/a&gt;; however, please
 use &lt;code&gt;helm upgrade&lt;/code&gt; intead of &lt;code&gt;helm install&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you are providing a configuration file that was originally from a previous
@@ -1237,10 +1237,10 @@ insallation and importing into KubeCF is required.&lt;/p&gt;
     
     <item>
       <title>Docs: Deploy KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tasks/deploy/</link>
+      <link>https://kubecf.io/docs/tasks/deploy/</link>
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/deploy/</guid>
+      <guid>https://kubecf.io/docs/tasks/deploy/</guid>
       <description>
         
         
@@ -1260,10 +1260,10 @@ worker node that may host any &lt;code&gt;diego-cell&lt;/code&gt; workloads:&lt;
     
     <item>
       <title>Docs: Secret rotation KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tasks/secrets/</link>
+      <link>https://kubecf.io/docs/tasks/secrets/</link>
       <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/secrets/</guid>
+      <guid>https://kubecf.io/docs/tasks/secrets/</guid>
       <description>
         
         
@@ -1424,10 +1424,10 @@ installed.&lt;/p&gt;
     
     <item>
       <title>Docs: Test BOSH releases</title>
-      <link>https://kubecf.suse.dev/docs/tasks/bosh/</link>
+      <link>https://kubecf.io/docs/tasks/bosh/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tasks/bosh/</guid>
+      <guid>https://kubecf.io/docs/tasks/bosh/</guid>
       <description>
         
         
@@ -1437,10 +1437,10 @@ installed.&lt;/p&gt;
     
     <item>
       <title>Docs: Deployment Walkthrough</title>
-      <link>https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/</link>
+      <link>https://kubecf.io/docs/deployment/kubernetes-deploy/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/deployment/kubernetes-deploy/</guid>
+      <guid>https://kubecf.io/docs/deployment/kubernetes-deploy/</guid>
       <description>
         
         
@@ -1630,7 +1630,7 @@ Welcome to your new deployment of KubeCF.
     space to run about &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;40&lt;/span&gt; apps.
 
     The online documentation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;release notes, deployment guide&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; can be found at
-        https://kubecf.suse.dev/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        https://kubecf.io/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;and wait until all the pods are up &amp;amp; running (which can take around 20 minutes)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$  watch -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;kubectl get pods --namespace kubecf&amp;#39;&lt;/span&gt;
 
@@ -1705,7 +1705,7 @@ Kubernetes workloads. They should all be placed on their own
 &lt;strong&gt;dedicated nodes&lt;/strong&gt; instead where possible.&lt;/p&gt;
 
 &lt;p&gt;This can be done by setting affinities and tolerations, as explained in
-the associated &lt;a href=&#34;https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/&#34; target=&#34;_blank&#34;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
+the associated &lt;a href=&#34;https://kubecf.io/docs/deployment/affinities-and-tolerations/&#34; target=&#34;_blank&#34;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id=&#34;ingress&#34;&gt;Ingress&lt;/h4&gt;
 
@@ -1795,10 +1795,10 @@ ready to be consumed by kubecf.&lt;/p&gt;
     
     <item>
       <title>Docs: Kubernetes Affinities and Tolerations</title>
-      <link>https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/</link>
+      <link>https://kubecf.io/docs/deployment/affinities-and-tolerations/</link>
       <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/deployment/affinities-and-tolerations/</guid>
+      <guid>https://kubecf.io/docs/deployment/affinities-and-tolerations/</guid>
       <description>
         
         

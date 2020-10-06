@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KubeCF – Tutorials</title>
-    <link>https://kubecf.suse.dev/docs/tutorials/</link>
+    <link>https://kubecf.io/docs/tutorials/</link>
     <description>Recent content in Tutorials on KubeCF</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 04 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://kubecf.suse.dev/docs/tutorials/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://kubecf.io/docs/tutorials/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Deploy KubeCF on K3s</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-k3s/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-k3s/</link>
       <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-k3s/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-k3s/</guid>
       <description>
         
         
@@ -251,8 +251,8 @@ Welcome to your new deployment of KubeCF.
     space to run about &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;40&lt;/span&gt; apps.
 
     The online documentation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;release notes, deployment guide&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; can be found at
-        https://kubecf.suse.dev/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now you are ready to &lt;a href=&#34;https://kubecf.suse.dev/docs/tutorials/deploy-stratos/&#34;&gt;deploy Stratos&lt;/a&gt;&lt;/p&gt;
+        https://kubecf.io/docs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you are ready to &lt;a href=&#34;https://kubecf.io/docs/tutorials/deploy-stratos/&#34;&gt;deploy Stratos&lt;/a&gt;&lt;/p&gt;
 
 
 
@@ -272,10 +272,10 @@ $ cp -rfv eirini-ca.crt /etc/ssl/certs/ &lt;span style=&#34;color:#ce5c00;font-w
     
     <item>
       <title>Docs: Deploy KubeCF on Kind</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-kind/</link>
       <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-kind/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-kind/</guid>
       <description>
         
         
@@ -471,10 +471,10 @@ internet connection speed.&lt;/p&gt;
     
     <item>
       <title>Docs: Eirini Persistence broker</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</link>
+      <link>https://kubecf.io/docs/tutorials/eirini_persi/</link>
       <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/eirini_persi/</guid>
+      <guid>https://kubecf.io/docs/tutorials/eirini_persi/</guid>
       <description>
         
         
@@ -656,10 +656,10 @@ Restaging app dizzylizard in org system / space tmp as admin...
     
     <item>
       <title>Docs: Deploy Stratos next to KubeCF</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-stratos/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-stratos/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-stratos/</guid>
       <description>
         
         
@@ -705,10 +705,10 @@ helm install --namespace stratos --name stratos --values ./stratos.yml suse/cons
     
     <item>
       <title>Docs: Bosh releases integration</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</link>
+      <link>https://kubecf.io/docs/tutorials/bosh-integration/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/bosh-integration/</guid>
+      <guid>https://kubecf.io/docs/tutorials/bosh-integration/</guid>
       <description>
         
         
@@ -855,10 +855,10 @@ according to any of the recipes listed by the main
     
     <item>
       <title>Docs: Deploy KubeCF in Minikube</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</link>
+      <link>https://kubecf.io/docs/tutorials/deploy-minikube/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/deploy-minikube/</guid>
+      <guid>https://kubecf.io/docs/tutorials/deploy-minikube/</guid>
       <description>
         
         
@@ -1072,10 +1072,10 @@ cluster to the Ingress Controller service.&lt;/p&gt;
     
     <item>
       <title>Docs: Run smoke tests</title>
-      <link>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</link>
+      <link>https://kubecf.io/docs/tutorials/run-smoke-tests/</link>
       <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kubecf.suse.dev/docs/tutorials/run-smoke-tests/</guid>
+      <guid>https://kubecf.io/docs/tutorials/run-smoke-tests/</guid>
       <description>
         
         
