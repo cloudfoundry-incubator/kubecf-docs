@@ -50,22 +50,23 @@
 
 
 
-<link rel="preload" href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" as="style">
-<link href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" as="style">
+<link href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" rel="stylesheet" integrity="">
 
-
-<link href="/css/offline-search.css" rel="stylesheet">
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 
-<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
-<script src="/js/offline-search.js"></script>
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
 
 
-    <title>Bosh releases integration | KubeCF</title>
+
+
   </head>
   <body class="td-page">
     <header>
@@ -103,10 +104,20 @@
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 </div>
 </nav>
 
@@ -124,16 +135,26 @@
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
   </form>
   
-  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
     
     
 
@@ -425,6 +446,8 @@
 
 
 
+
+
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 
 
@@ -469,6 +492,9 @@
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 	<ol class="breadcrumb spb-1">
 		
@@ -506,7 +532,8 @@
             
 <div class="td-content">
 	<h1>Bosh releases integration</h1>
-	<div class="lead">Developing BOSH releases with Kubecf and Quarks.</div>
+    <div class="lead">Developing BOSH releases with Kubecf and Quarks.</div>
+	       
 	
 
 <h2 id="table-of-contents">Table Of Contents</h2>
@@ -541,7 +568,7 @@ cluster for testing it, e.g. with Kubecf.</p>
 
 <p>To generate a docker image from the BOSH release, you should use the
 following subcommand:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fissile build release-image</code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fissile build release-image</code></pre></div>
 <p>For more information on how to use the command, please refer to the
 related <a href="https://github.com/cloudfoundry-incubator/fissile/blob/develop/docs/build-docker-imgs.md" target="_blank">documentation</a>. For a real example, see <a href="https://github.com/cloudfoundry-incubator/cf-operator-ci/blob/e83e46548787ee740ea1918182604faaa5cddf8f/pipelines/release-images/tasks/build.sh#L34" target="_blank">build.sh</a>.</p>
 
@@ -556,29 +583,29 @@ you build the image with <code>fissile</code>.</p>
 
 <p>With <strong>kind</strong>, you need to use <code>kind load docker-image</code> after building
 the image, to make it available, i.e.:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kind load docker-image docker.io/org/nats:0.1-dev</code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kind load docker-image docker.io/org/nats:0.1-dev</code></pre></div>
 <h3 id="modify-kubecf-to-use-the-new-image">Modify Kubecf to Use the New Image</h3>
 
 <p>Add an operations file to Kubernetes with the new image location. The
 example below uses NATS as the example for a BOSH release.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">kubectl<span style="color:#f8f8f8;text-decoration:underline"> </span>apply<span style="color:#f8f8f8;text-decoration:underline"> </span>-f<span style="color:#f8f8f8;text-decoration:underline"> </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;&lt;EOF<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>---<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ConfigMap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats-dev<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>data<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>ops<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>|<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>replace<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/releases/name=nats<span style="color:#000;font-weight:bold">?</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>url<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>docker.io/org/nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>version<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">0.1</span>-dev<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>sha1<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>~<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>EOF</code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">kubectl<span style="color:#666"> </span>apply<span style="color:#666"> </span>-f<span style="color:#666"> </span>-<span style="color:#666"> </span>&lt;&lt;EOF<span style="color:#666">
+</span><span style="color:#666"></span>---<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>kind:<span style="color:#666"> </span>ConfigMap<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>nats-dev<span style="color:#666">
+</span><span style="color:#666"></span>data:<span style="color:#666">
+</span><span style="color:#666">  </span>ops:<span style="color:#666"> </span>|<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>type:<span style="color:#666"> </span>replace<span style="color:#666">
+</span><span style="color:#666">  </span>path:<span style="color:#666"> </span>/releases/name=nats?<span style="color:#666">
+</span><span style="color:#666">  </span>value:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">    </span>url:<span style="color:#666"> </span>docker.io/org/nats<span style="color:#666">
+</span><span style="color:#666">    </span>version:<span style="color:#666"> </span><span style="color:#3677a9">0.1</span>-dev<span style="color:#666">
+</span><span style="color:#666">    </span>sha1:<span style="color:#666"> </span>~<span style="color:#666">
+</span><span style="color:#666"></span>EOF</code></pre></div>
 <p>Then, when running <code>helm install kubecf</code>, refer to that image:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install ... --set <span style="color:#4e9a06">&#39;operations.custom={nats-dev}&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install ... --set <span style="color:#ed9d13">&#39;operations.custom={nats-dev}&#39;</span></code></pre></div>
 <p><strong>Note</strong>: You can also unpack the helm release and modify it directly.
 There is no need to zip the release again, as <code>helm install kubecf/</code> is
 able to install the unpacked release.</p>
@@ -600,22 +627,22 @@ configuration in the deployment manifest in the <code>quarks</code> field. See
 <a href="https://bosh.io/docs/bpm/config/" target="_blank">the bpm documentation</a> for details on how to configure BPM.</p>
 
 <p>Example:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">instance_groups<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>instances<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>jobs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>properties<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>quarks<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">        </span>bpm<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>processes<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">          </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>limits<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">              </span>open_files<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>executable<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/var/vcap/packages/gnatsd/bin/gnatsd<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>args<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>-c<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/var/vcap/jobs/nats/config/nats.conf&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">instance_groups:<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">  </span>instances:<span style="color:#666"> </span><span style="color:#3677a9">2</span><span style="color:#666">
+</span><span style="color:#666">  </span>jobs:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">    </span>properties:<span style="color:#666">
+</span><span style="color:#666">      </span>quarks:<span style="color:#666">
+</span><span style="color:#666">        </span>bpm:<span style="color:#666">
+</span><span style="color:#666">          </span>processes:<span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">            </span>limits:<span style="color:#666">
+</span><span style="color:#666">              </span>open_files:<span style="color:#666"> </span><span style="color:#3677a9">50</span><span style="color:#666">
+</span><span style="color:#666">            </span>executable:<span style="color:#666"> </span>/var/vcap/packages/gnatsd/bin/gnatsd<span style="color:#666">
+</span><span style="color:#666">            </span>args:<span style="color:#666">
+</span><span style="color:#666">            </span>-<span style="color:#666"> </span>-c<span style="color:#666">
+</span><span style="color:#666">            </span>-<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/var/vcap/jobs/nats/config/nats.conf&#34;</span></code></pre></div>
 <p>Note: The next section on <a href="#operation-files">ops files</a> explains how
 this can be applied without the need to modify the original deployment
 manifest using ops files.</p>
@@ -629,16 +656,16 @@ will be automagically applied during installation, courtesy of the
 bazel machinery.</p>
 
 <p>The ops file for the example above could look like this:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#f8f8f8;text-decoration:underline"> </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>replace<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/instance_groups/name=nats/jobs/name=nats/properties/quarks<span style="color:#000;font-weight:bold">?</span>/bpm/processes<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>limits<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>open_files<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>executable<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/var/vcap/packages/gnatsd/bin/gnatsd<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>args<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>-c<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/var/vcap/jobs/nats/config/nats.conf&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>type:<span style="color:#666"> </span>replace<span style="color:#666">
+</span><span style="color:#666">  </span>path:<span style="color:#666"> </span>/instance_groups/name=nats/jobs/name=nats/properties/quarks?/bpm/processes<span style="color:#666">
+</span><span style="color:#666">  </span>value:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>nats<span style="color:#666">
+</span><span style="color:#666">    </span>limits:<span style="color:#666">
+</span><span style="color:#666">      </span>open_files:<span style="color:#666"> </span><span style="color:#3677a9">50</span><span style="color:#666">
+</span><span style="color:#666">    </span>executable:<span style="color:#666"> </span>/var/vcap/packages/gnatsd/bin/gnatsd<span style="color:#666">
+</span><span style="color:#666">    </span>args:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>-c<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/var/vcap/jobs/nats/config/nats.conf&#34;</span></code></pre></div>
 <h2 id="testing-with-kubecf">Testing With Kubecf</h2>
 
 <p>After upload and integration, it is possible to build and deploy Kubecf
@@ -671,13 +698,13 @@ according to any of the recipes listed by the main
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/cloudfoundry-incubator/kubecf">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/cloudfoundry-incubator/kubecf">
       <i class="fab fa-github"></i>
     </a>
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
       <i class="fab fa-slack"></i>
     </a>
   </li>
@@ -709,7 +736,15 @@ according to any of the recipes listed by the main
 
 
 
-<script src="/js/main.min.b5d3de058a649fced1f6e7f92a12099f8f3338f27890ac1a0d1dae6a1da22af6.js" integrity="sha256-tdPeBYpkn87R9uf5KhIJn48zOPJ4kKwaDR2uah2iKvY=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
 
 
 

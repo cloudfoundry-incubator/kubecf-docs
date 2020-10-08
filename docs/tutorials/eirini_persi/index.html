@@ -50,22 +50,23 @@
 
 
 
-<link rel="preload" href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" as="style">
-<link href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" as="style">
+<link href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" rel="stylesheet" integrity="">
 
-
-<link href="/css/offline-search.css" rel="stylesheet">
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 
-<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
-<script src="/js/offline-search.js"></script>
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
 
 
-    <title>Eirini Persistence broker | KubeCF</title>
+
+
   </head>
   <body class="td-page">
     <header>
@@ -103,10 +104,20 @@
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 </div>
 </nav>
 
@@ -124,16 +135,26 @@
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
   </form>
   
-  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
     
     
 
@@ -425,6 +446,8 @@
 
 
 
+
+
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 
 
@@ -469,6 +492,9 @@
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 	<ol class="breadcrumb spb-1">
 		
@@ -506,7 +532,8 @@
             
 <div class="td-content">
 	<h1>Eirini Persistence broker</h1>
-	<div class="lead">How to set-up KubeCF with Eirini and the persistence broker</div>
+    <div class="lead">How to set-up KubeCF with Eirini and the persistence broker</div>
+	       
 	
 
 <p>KubeCF allows to leverage the Kubernetes Cluster available <code>StorageClass</code>. When Eirini is being enabled, two additional components are deployed, the <code>eirini-persi-extension</code> and <code>eirini-persi-broker</code>.</p>
@@ -516,16 +543,16 @@
 <p>You can set up default plans that are applied to the broker during deployment.</p>
 
 <p>To configure the broker, in the KubeCF values add and adjust as needed:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">eirinix<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>persi-broker<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>service-plans<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>id<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>default<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;default&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>description<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Existing default storage class&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>kube_storage_class<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;default&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Storageclass used for provisioning</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>free<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>default_size<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default size of generated PVC</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>default_access_mode<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ReadWriteOnly&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Here you can tweak the default access mode for new PVCs</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">eirinix:<span style="color:#666">
+</span><span style="color:#666">  </span>persi-broker:<span style="color:#666">
+</span><span style="color:#666">    </span>service-plans:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>id:<span style="color:#666"> </span>default<span style="color:#666">
+</span><span style="color:#666">      </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;default&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Existing default storage class&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>kube_storage_class:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;default&#34;</span><span style="color:#666"> </span><span style="color:#999;font-style:italic"># Storageclass used for provisioning</span><span style="color:#666">
+</span><span style="color:#666">      </span>free:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
+</span><span style="color:#666">      </span>default_size:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;1Gi&#34;</span><span style="color:#666"> </span><span style="color:#999;font-style:italic"># Default size of generated PVC</span><span style="color:#666">
+</span><span style="color:#666">      </span>default_access_mode:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ReadWriteOnly&#34;</span><span style="color:#666"> </span><span style="color:#999;font-style:italic"># Here you can tweak the default access mode for new PVCs</span></code></pre></div>
 <h2 id="setup-eirini-persi-broker-with-kubecf">Setup eirini-persi-broker with KubeCF</h2>
 
 <p>In this section we will see how to setup the eirini-persi-broker on a KubeCF deployment.</p>
@@ -557,7 +584,7 @@ OK
 </code></pre>
 
 <p>Check everything is ok:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cf service-brokers
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cf service-brokers
 
 Getting service brokers as admin...
 
@@ -652,26 +679,26 @@ Restaging app dizzylizard in org system / space tmp as admin...
 <p>Once the service is associated, the application can access to the data of the volume mount by reading the mounted path inside the <code>VCAP_SERVICES</code> environment variable.</p>
 
 <p>An example of <code>VCAP_SERVICES</code> generated by <code>eirini-persi-broker</code>:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">{</span><span style="color:#204a87;font-weight:bold">&#34;eirini-persi&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>	  <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#204a87;font-weight:bold">&#34;credentials&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;volume_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;the-volume-id&#34;</span> <span style="color:#000;font-weight:bold">},</span>
-		<span style="color:#204a87;font-weight:bold">&#34;label&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;eirini-persi&#34;</span><span style="color:#000;font-weight:bold">,</span>
-		<span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;my-instance&#34;</span><span style="color:#000;font-weight:bold">,</span>
-		<span style="color:#204a87;font-weight:bold">&#34;plan&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;hostpath&#34;</span><span style="color:#000;font-weight:bold">,</span>
-		<span style="color:#204a87;font-weight:bold">&#34;tags&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-			<span style="color:#4e9a06">&#34;erini&#34;</span><span style="color:#000;font-weight:bold">,</span>
-			<span style="color:#4e9a06">&#34;kubernetes&#34;</span><span style="color:#000;font-weight:bold">,</span>
-			<span style="color:#4e9a06">&#34;storage&#34;</span>
-		<span style="color:#000;font-weight:bold">],</span>
-		<span style="color:#204a87;font-weight:bold">&#34;volume_mounts&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-		  <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#204a87;font-weight:bold">&#34;container_dir&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;/var/vcap/data/de847d34-bdcc-4c5d-92b1-cf2158a15b47&#34;</span><span style="color:#000;font-weight:bold">,</span>
-			<span style="color:#204a87;font-weight:bold">&#34;device_type&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;shared&#34;</span><span style="color:#000;font-weight:bold">,</span>
-			<span style="color:#204a87;font-weight:bold">&#34;mode&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;rw&#34;</span>
-		  <span style="color:#000;font-weight:bold">}</span>
-		<span style="color:#000;font-weight:bold">]</span>
-	  <span style="color:#000;font-weight:bold">}</span>
-	<span style="color:#000;font-weight:bold">]</span>
-<span style="color:#000;font-weight:bold">}</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#6ab825;font-weight:bold">&#34;eirini-persi&#34;</span>: [	  {
+		<span style="color:#6ab825;font-weight:bold">&#34;credentials&#34;</span>: { <span style="color:#6ab825;font-weight:bold">&#34;volume_id&#34;</span>: <span style="color:#ed9d13">&#34;the-volume-id&#34;</span> },
+		<span style="color:#6ab825;font-weight:bold">&#34;label&#34;</span>: <span style="color:#ed9d13">&#34;eirini-persi&#34;</span>,
+		<span style="color:#6ab825;font-weight:bold">&#34;name&#34;</span>: <span style="color:#ed9d13">&#34;my-instance&#34;</span>,
+		<span style="color:#6ab825;font-weight:bold">&#34;plan&#34;</span>: <span style="color:#ed9d13">&#34;hostpath&#34;</span>,
+		<span style="color:#6ab825;font-weight:bold">&#34;tags&#34;</span>: [
+			<span style="color:#ed9d13">&#34;erini&#34;</span>,
+			<span style="color:#ed9d13">&#34;kubernetes&#34;</span>,
+			<span style="color:#ed9d13">&#34;storage&#34;</span>
+		],
+		<span style="color:#6ab825;font-weight:bold">&#34;volume_mounts&#34;</span>: [
+		  {
+			<span style="color:#6ab825;font-weight:bold">&#34;container_dir&#34;</span>: <span style="color:#ed9d13">&#34;/var/vcap/data/de847d34-bdcc-4c5d-92b1-cf2158a15b47&#34;</span>,
+			<span style="color:#6ab825;font-weight:bold">&#34;device_type&#34;</span>: <span style="color:#ed9d13">&#34;shared&#34;</span>,
+			<span style="color:#6ab825;font-weight:bold">&#34;mode&#34;</span>: <span style="color:#ed9d13">&#34;rw&#34;</span>
+		  }
+		]
+	  }
+	]
+}</code></pre></div>
 <p>You can refer to the <a href="https://docs.cloudfoundry.org/devguide/services/using-vol-services.html" target="_blank">Cloud Foundry documentation regarding of how to access to the Volume Service</a>, with the difference that the eirini broker will create services with the id <code>eirini-persi</code>.</p>
 
 <h2 id="see-also">See also</h2>
@@ -706,13 +733,13 @@ Restaging app dizzylizard in org system / space tmp as admin...
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/cloudfoundry-incubator/kubecf">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/cloudfoundry-incubator/kubecf">
       <i class="fab fa-github"></i>
     </a>
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
       <i class="fab fa-slack"></i>
     </a>
   </li>
@@ -744,7 +771,15 @@ Restaging app dizzylizard in org system / space tmp as admin...
 
 
 
-<script src="/js/main.min.b5d3de058a649fced1f6e7f92a12099f8f3338f27890ac1a0d1dae6a1da22af6.js" integrity="sha256-tdPeBYpkn87R9uf5KhIJn48zOPJ4kKwaDR2uah2iKvY=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
 
 
 

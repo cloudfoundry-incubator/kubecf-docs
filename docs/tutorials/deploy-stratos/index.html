@@ -26,14 +26,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.io/docs/tutorials/deploy-stratos/" />
 <meta property="article:published_time" content="2020-02-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-02-28T14:00:08+01:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-02-28T14:36:32+01:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deploy Stratos next to KubeCF">
 <meta itemprop="description" content="Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF
 ">
 
 
 <meta itemprop="datePublished" content="2020-02-07T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-28T14:00:08&#43;01:00" />
+<meta itemprop="dateModified" content="2020-02-28T14:36:32&#43;01:00" />
 <meta itemprop="wordCount" content="229">
 
 
@@ -50,22 +50,23 @@
 
 
 
-<link rel="preload" href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" as="style">
-<link href="/scss/main.min.de2e3299cd7d4088947e25e9ed887d91ebd756863ab68fb4e3bfec6a311f6c3d.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" as="style">
+<link href="/scss/main.min.a267473c50c1e3a3a293c7356bde2df7ef31dc904e49772ce6366a3703594ac5.css" rel="stylesheet" integrity="">
 
-
-<link href="/css/offline-search.css" rel="stylesheet">
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 
-<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
-<script src="/js/offline-search.js"></script>
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
 
 
-    <title>Deploy Stratos next to KubeCF | KubeCF</title>
+
+
   </head>
   <body class="td-page">
     <header>
@@ -103,10 +104,20 @@
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 </div>
 </nav>
 
@@ -124,16 +135,26 @@
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<div id="search-nav-container">
-<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
-<div id="search-results" class="container"></div>
-</div>
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
   </form>
   
-  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
     
     
 
@@ -425,6 +446,8 @@
 
 
 
+
+
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 
 
@@ -462,6 +485,9 @@
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 	<ol class="breadcrumb spb-1">
 		
@@ -499,7 +525,8 @@
             
 <div class="td-content">
 	<h1>Deploy Stratos next to KubeCF</h1>
-	<div class="lead">Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF</div>
+    <div class="lead">Deploy Stratos - Web-based Console UI for Cloud Foundry - next to KubeCF</div>
+	       
 	
 
 <h2 id="required-details">Required details</h2>
@@ -514,14 +541,14 @@
 <h3 id="prepare-stratos-setup-config">Prepare Stratos setup config</h3>
 
 <p>Replace <code>&lt;EXTERNAL_IP&gt;</code> by the external ip[s] of your cluster,  adapt the port if required and store everything in a file, for example <code>stratos.yml</code>.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">console<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>service<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>externalIPs<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&lt;EXTERNAL_IP&gt;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>servicePort<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">8443</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">console:<span style="color:#666">
+</span><span style="color:#666">  </span>service:<span style="color:#666">
+</span><span style="color:#666">    </span>externalIPs:<span style="color:#666"> </span>[<span style="color:#ed9d13">&#34;&lt;EXTERNAL_IP&gt;&#34;</span>]<span style="color:#666">
+</span><span style="color:#666">    </span>servicePort:<span style="color:#666"> </span><span style="color:#3677a9">8443</span></code></pre></div>
 <h3 id="deploy-stratos">Deploy Stratos</h3>
 
 <p>Add the SUSE Kubernetes charts repo and deploy Stratos. Instead of the SUSE repo the Stratos chart can also be referenced from <a href="https://github.com/cloudfoundry/stratos/releases" target="_blank">https://github.com/cloudfoundry/stratos/releases</a>.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo add suse https://kubernetes-charts.suse.com/
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo add suse https://kubernetes-charts.suse.com/
 helm install --namespace stratos --name stratos --values ./stratos.yml suse/console</code></pre></div>
 <h2 id="initial-setup-of-stratos">Initial setup of Stratos</h2>
 
@@ -532,14 +559,14 @@ helm install --namespace stratos --name stratos --values ./stratos.yml suse/cons
 <p>The client id is <code>cf</code> and the client secret stays empty.</p>
 
 <p>The admin username is <code>admin</code> and password is the Cloudfoundry admin password. If you do not know the admin password yet, because for example it was autogenerated during the initial deployment of kubecf, it can be extracted with this command:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">echo</span> <span style="color:#204a87;font-weight:bold">$(</span>kubectl get secrets -n kubecf kubecf.var-cf-admin-password -o json <span style="color:#000;font-weight:bold">|</span> jq -r .data.password <span style="color:#000;font-weight:bold">|</span> base64 -d<span style="color:#204a87;font-weight:bold">)</span></code></pre></div>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#24909d">echo</span> <span style="color:#6ab825;font-weight:bold">$(</span>kubectl get secrets -n kubecf kubecf.var-cf-admin-password -o json | jq -r .data.password | base64 -d<span style="color:#6ab825;font-weight:bold">)</span></code></pre></div>
 <p>The next step defines which uaa group specifies Stratos admins and does not need to be changed.</p>
 
 <p>After the initial setup Cloudfoundry can be added with the api endpoint url and the same cloudfoundry admin credentials.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified February 28, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/a21f4d7c6f349d5c6faad2d6b381bb64c09a4161">Apply suggestions from code review (a21f4d7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 28, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/d4e4538aac5b8a025b61c826cc0fda9d8d282d56">Fixup command to make it easy to copy-paste (d4e4538)</a>
 </div>
 </div>
 
@@ -563,13 +590,13 @@ helm install --namespace stratos --name stratos --values ./stratos.yml suse/cons
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/cloudfoundry-incubator/kubecf">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/cloudfoundry-incubator/kubecf">
       <i class="fab fa-github"></i>
     </a>
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://cloudfoundry.slack.com/archives/CQ2U3L6DC">
       <i class="fab fa-slack"></i>
     </a>
   </li>
@@ -601,7 +628,15 @@ helm install --namespace stratos --name stratos --values ./stratos.yml suse/cons
 
 
 
-<script src="/js/main.min.b5d3de058a649fced1f6e7f92a12099f8f3338f27890ac1a0d1dae6a1da22af6.js" integrity="sha256-tdPeBYpkn87R9uf5KhIJn48zOPJ4kKwaDR2uah2iKvY=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+
 
 
 
