@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-10-06T00:43:00&#43;02:00" />
-<meta itemprop="wordCount" content="1394">
+<meta itemprop="wordCount" content="1416">
 
 
 
@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-index-json-src="/offline-search-index.14592bbba1f45008d5f506ad292f9390c83c9c6442d5920fd3d8e33a589c77262023dea888027a46f3bf30733acf94c07dd7a99c40c5bf0067a1c91aeab06b23.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.4c45a0acde02113f935b70117382806474de59dc8043e1b8bbbceacbe866400a9781845ecc463738c466df57714075a7653ef7297e69741a6a7f4b790cc39073.json"
+  data-offline-search-index-json-src="/offline-search-index.14592bbba1f45008d5f506ad292f9390c83c9c6442d5920fd3d8e33a589c77262023dea888027a46f3bf30733acf94c07dd7a99c40c5bf0067a1c91aeab06b23.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -842,55 +842,63 @@ deploying kubecf.</p>
 
 <h4 id="external-database">External Database</h4>
 
-<p>By default, kubecf includes a single-availability database provided by the
-cf-mysql-release. Kubecf also exposes a way to use an external database via the
-Helm property <code>features.external_database</code>. Check the <a href="../../deploy/helm/kubecf/values.yaml">values.yaml</a> for more
-details.</p>
+<p>By default, KubeCF includes an internal single-availability database. KubeCF
+also exposes a way to use an external database via the Helm property
+<code>features.external_database</code>. Check the <a href="../../deploy/helm/kubecf/values.yaml">values.yaml</a> for more details.</p>
 
-<p>For local development with an external database, the command
-<code>bash  ./scripts/deploy_mysql.sh</code> will bring a mysql database up and running
-ready to be consumed by kubecf.</p>
+<p>Setting <code>features.external_database.seed</code> to <code>true</code> will allow KubeCF to
+configure the various required databases for you; however, this will require
+providing the root database password (via the <code>var-pxc-root-password</code> secret),
+which may be an issue under some policies.</p>
 
-<p>An example for the additional values to be provided to <code>make kubecf:apply</code>:</p>
+<p>It is also possible to manually create all necessary databases externally, and
+then provide the individual credentials to KubeCF.  When deploying KubeCF with
+Helm, it will error out if any of the required database credentials are missing.
+An example configuration is below:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features:<span style="color:#666">
 </span><span style="color:#666">  </span>external_database:<span style="color:#666">
 </span><span style="color:#666">    </span>enabled:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
 </span><span style="color:#666">    </span>type:<span style="color:#666"> </span>mysql<span style="color:#666">
-</span><span style="color:#666">    </span>host:<span style="color:#666"> </span>kubecf-mysql.kubecf-mysql.svc<span style="color:#666">
+</span><span style="color:#666">    </span>host:<span style="color:#666"> </span>mariadb-server.corp.example.com<span style="color:#666">
 </span><span style="color:#666">    </span>port:<span style="color:#666"> </span><span style="color:#3677a9">3306</span><span style="color:#666">
+</span><span style="color:#666">    </span>seed:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
 </span><span style="color:#666">    </span>databases:<span style="color:#666">
 </span><span style="color:#666">      </span>uaa:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>uaa<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>uaa-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>PAWjxQst5l16J3w3vJdfX7fXY8HyHtyb<span style="color:#666">
 </span><span style="color:#666">      </span>cc:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>cloud_controller<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>cc-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>qj5KI3qwVe+XVFENAuEU9AfSkpUK/nzb<span style="color:#666">
 </span><span style="color:#666">      </span>bbs:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>diego<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>diego-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>z7gvkjWNUgX+xcn3Ia0loMEnAD7MXBgE<span style="color:#666">
 </span><span style="color:#666">      </span>routing_api:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>routing-api<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>routing-api-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>bTL6DhK89F+G05OZtHbvEdR1uwkyRMJt<span style="color:#666">
 </span><span style="color:#666">      </span>policy_server:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>network_policy<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>network-policy-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>EYviLFS/F4dAyVry5Stm8wrpOI64Xmnz<span style="color:#666">
 </span><span style="color:#666">      </span>silk_controller:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>network_connectivity<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>silk-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>ah7nbU1wsHuZ4BtmcdU1vV37KgVV2lLf<span style="color:#666">
 </span><span style="color:#666">      </span>locket:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>locket<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span><span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>locket-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>rWicBxhg8mIrhkuSR/aDlqljOMORuyL<span style="color:#666">
 </span><span style="color:#666">      </span>credhub:<span style="color:#666">
 </span><span style="color:#666">        </span>name:<span style="color:#666"> </span>credhub<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>&lt;root_password<span style="color:#ed9d13">&gt;
-</span><span style="color:#ed9d13">        username: root</span></code></pre></div>
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>credhub-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>5tJcIWHCR1QTLdfQDiN1Mz8K8jB+clD<span style="color:#666">
+</span><span style="color:#666">      </span>autoscaler:<span style="color:#666">
+</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>autoscaler<span style="color:#666">
+</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>autoscaler-database-user<span style="color:#666">
+</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>cYo2Tdi61N39mUjoEksXHuu3F7Dk58F</code></pre></div>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">Last modified October 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/8b08926d12b4a79d0381a3b08078089b1f9b77f9">Point all of the kubecf.suse.dev links to kubecf.io (8b08926)</a>

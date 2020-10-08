@@ -1741,55 +1741,63 @@ deploying kubecf.&lt;/p&gt;
 
 &lt;h4 id=&#34;external-database&#34;&gt;External Database&lt;/h4&gt;
 
-&lt;p&gt;By default, kubecf includes a single-availability database provided by the
-cf-mysql-release. Kubecf also exposes a way to use an external database via the
-Helm property &lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more
-details.&lt;/p&gt;
+&lt;p&gt;By default, KubeCF includes an internal single-availability database. KubeCF
+also exposes a way to use an external database via the Helm property
+&lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more details.&lt;/p&gt;
 
-&lt;p&gt;For local development with an external database, the command
-&lt;code&gt;bash  ./scripts/deploy_mysql.sh&lt;/code&gt; will bring a mysql database up and running
-ready to be consumed by kubecf.&lt;/p&gt;
+&lt;p&gt;Setting &lt;code&gt;features.external_database.seed&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; will allow KubeCF to
+configure the various required databases for you; however, this will require
+providing the root database password (via the &lt;code&gt;var-pxc-root-password&lt;/code&gt; secret),
+which may be an issue under some policies.&lt;/p&gt;
 
-&lt;p&gt;An example for the additional values to be provided to &lt;code&gt;make kubecf:apply&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;It is also possible to manually create all necessary databases externally, and
+then provide the individual credentials to KubeCF.  When deploying KubeCF with
+Helm, it will error out if any of the required database credentials are missing.
+An example configuration is below:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;features:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;external_database:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;enabled:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;type:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;mysql&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;host:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;kubecf-mysql.kubecf-mysql.svc&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;host:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;mariadb-server.corp.example.com&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;port:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;seed:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;databases:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;uaa:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;uaa&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;uaa-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;PAWjxQst5l16J3w3vJdfX7fXY8HyHtyb&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;cc:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;cloud_controller&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;cc-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;qj5KI3qwVe+XVFENAuEU9AfSkpUK/nzb&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;bbs:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;diego&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;diego-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;z7gvkjWNUgX+xcn3Ia0loMEnAD7MXBgE&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;routing_api:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;routing-api&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;routing-api-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;bTL6DhK89F+G05OZtHbvEdR1uwkyRMJt&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;policy_server:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;network_policy&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;network-policy-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;EYviLFS/F4dAyVry5Stm8wrpOI64Xmnz&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;silk_controller:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;network_connectivity&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;silk-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;ah7nbU1wsHuZ4BtmcdU1vV37KgVV2lLf&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;locket:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;locket&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;locket-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;rWicBxhg8mIrhkuSR/aDlqljOMORuyL&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;credhub:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;credhub&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&amp;lt;root_password&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        username: root&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;credhub-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;5tJcIWHCR1QTLdfQDiN1Mz8K8jB+clD&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;autoscaler:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;autoscaler&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;username:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;autoscaler-database-user&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;cYo2Tdi61N39mUjoEksXHuu3F7Dk58F&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
