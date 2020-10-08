@@ -342,57 +342,65 @@ deploying kubecf.
 
 #### External Database
 
-By default, kubecf includes a single-availability database provided by the
-cf-mysql-release. Kubecf also exposes a way to use an external database via the
-Helm property `features.external_database`. Check the [values.yaml] for more
-details.
+By default, KubeCF includes an internal single-availability database. KubeCF
+also exposes a way to use an external database via the Helm property
+`features.external_database`. Check the [values.yaml] for more details.
 
 [values.yaml]: ../../deploy/helm/kubecf/values.yaml
 
-For local development with an external database, the command
-`bash  ./scripts/deploy_mysql.sh` will bring a mysql database up and running
-ready to be consumed by kubecf.
+Setting `features.external_database.seed` to `true` will allow KubeCF to
+configure the various required databases for you; however, this will require
+providing the root database password (via the `var-pxc-root-password` secret),
+which may be an issue under some policies.
 
-An example for the additional values to be provided to `make kubecf:apply`:
+It is also possible to manually create all necessary databases externally, and
+then provide the individual credentials to KubeCF.  When deploying KubeCF with
+Helm, it will error out if any of the required database credentials are missing.
+An example configuration is below:
 
 ```yaml
 features:
   external_database:
     enabled: true
     type: mysql
-    host: kubecf-mysql.kubecf-mysql.svc
+    host: mariadb-server.corp.example.com
     port: 3306
+    seed: false
     databases:
       uaa:
         name: uaa
-        password: <root_password>
-        username: root
+        username: uaa-database-user
+        password: PAWjxQst5l16J3w3vJdfX7fXY8HyHtyb
       cc:
         name: cloud_controller
-        password: <root_password>
-        username: root
+        username: cc-database-user
+        password: qj5KI3qwVe+XVFENAuEU9AfSkpUK/nzb
       bbs:
         name: diego
-        password: <root_password>
-        username: root
+        username: diego-database-user
+        password: z7gvkjWNUgX+xcn3Ia0loMEnAD7MXBgE
       routing_api:
         name: routing-api
-        password: <root_password>
-        username: root
+        username: routing-api-database-user
+        password: bTL6DhK89F+G05OZtHbvEdR1uwkyRMJt
       policy_server:
         name: network_policy
-        password: <root_password>
-        username: root
+        username: network-policy-database-user
+        password: EYviLFS/F4dAyVry5Stm8wrpOI64Xmnz
       silk_controller:
         name: network_connectivity
-        password: <root_password>
-        username: root
+        username: silk-database-user
+        password: ah7nbU1wsHuZ4BtmcdU1vV37KgVV2lLf
       locket:
         name: locket
-        password: <root_password>
-        username: root
+        username: locket-database-user
+        password: rWicBxhg8mIrhkuSR/aDlqljOMORuyL
       credhub:
         name: credhub
-        password: <root_password>
-        username: root
+        username: credhub-database-user
+        password: 5tJcIWHCR1QTLdfQDiN1Mz8K8jB+clD
+      autoscaler:
+        name: autoscaler
+        username: autoscaler-database-user
+        password: cYo2Tdi61N39mUjoEksXHuu3F7Dk58F
 ```
