@@ -131,7 +131,7 @@ until all the pods are up & running.
 
 {{% alert title="Note" %}}
 
-> The above `helm install` will generate many controllers spread over multiple pods inside the `cfo`
+> The above `helm install` will generate many controllers spread over multiple pods inside the `cf-operator`
 > namespace. Most of these controllers run inside the `cf-operator` pod.
 >
 > The `global.singleNamespace.name=kubecf` path tells the
@@ -146,9 +146,9 @@ controllers to watch for CRD´s instances into the `kubecf` namespace.
 > inside the `cfo` namespace, after deleting the `kubecf` namespace.
 {{% /alert %}}
 
-{{% alert title="Also" %}}
+{{% alert title="Note" %}}
 
-> How the namespace the operator is installed into (`cfo`) differs from the namespace the operator
+> How the namespace the operator is installed into (`cf-operator`) differs from the namespace the operator
 > is watching for deployments (`kubecf`).
 > 
 > This form of deployment enables restarting the operator because it is not affected by webhooks.
