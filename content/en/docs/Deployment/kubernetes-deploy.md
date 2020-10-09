@@ -284,4 +284,5 @@ cf auth admin "${admin_pass}"
 
 ```
 
-See [Advanced Topics](/docs/deployment/advanced-topics) for more configuration settings available in KubeCF
+See [Advanced Topics](/docs/deployment/advanced-topics) for more configuration settings available in KubeCF.
+

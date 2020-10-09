@@ -10,7 +10,7 @@ description: >
 #### Diego vs Eirini
 
 Diego is the standard scheduler used by KubeCF to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
+applications. [Eirini](https://www.cloudfoundry.org/project-eirini/) is an alternative to Diego that follows a more
 Kubernetes native approach, deploying the CF apps directly to a
 Kubernetes namespace.
 
