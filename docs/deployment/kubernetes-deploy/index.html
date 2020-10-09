@@ -26,15 +26,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kubecf.io/docs/deployment/kubernetes-deploy/" />
 <meta property="article:published_time" content="2017-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-10-06T00:43:00+02:00" /><meta property="og:site_name" content="KubeCF" />
+<meta property="article:modified_time" content="2020-10-09T14:40:28+02:00" /><meta property="og:site_name" content="KubeCF" />
 <meta itemprop="name" content="Deployment Walkthrough">
 <meta itemprop="description" content="Explain steps to deploy KubeCF in any Kubernetes cluster
 ">
 
 
 <meta itemprop="datePublished" content="2017-01-05T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-10-06T00:43:00&#43;02:00" />
-<meta itemprop="wordCount" content="1416">
+<meta itemprop="dateModified" content="2020-10-09T14:40:28&#43;02:00" />
+<meta itemprop="wordCount" content="1048">
 
 
 
@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.14592bbba1f45008d5f506ad292f9390c83c9c6442d5920fd3d8e33a589c77262023dea888027a46f3bf30733acf94c07dd7a99c40c5bf0067a1c91aeab06b23.json"
+  data-offline-search-index-json-src="/offline-search-index.9dc6c902b1631f1d6fcc81bd48111a0e07aea2d955d0318f84d7c10fc5e853511c8ac4c48def76e2deedc1c9652023f23798c82de5da4233fdc50070d9f54343.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.14592bbba1f45008d5f506ad292f9390c83c9c6442d5920fd3d8e33a589c77262023dea888027a46f3bf30733acf94c07dd7a99c40c5bf0067a1c91aeab06b23.json"
+  data-offline-search-index-json-src="/offline-search-index.9dc6c902b1631f1d6fcc81bd48111a0e07aea2d955d0318f84d7c10fc5e853511c8ac4c48def76e2deedc1c9652023f23798c82de5da4233fdc50070d9f54343.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -216,6 +216,12 @@
       
       
       <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-deployment-kubernetes-deploy" href="/docs/deployment/kubernetes-deploy/">Deployment Walkthrough</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-deployment-advanced-topics" href="/docs/deployment/advanced-topics/">Advanced Topics</a>
       
       
       
@@ -483,17 +489,6 @@
 <li><a href="#deployment-1">Deployment</a></li>
 <li><a href="#tear-down-1">Tear-down</a></li>
 <li><a href="#access">Access</a></li>
-<li><a href="#advanced-topics">Advanced Topics</a>
-<ul>
-<li><a href="#diego-vs-eirini">Diego vs Eirini</a></li>
-<li><a href="#diego-cell-affinities-tainted-nodes">Diego Cell Affinities &amp; Tainted Nodes</a></li>
-<li><a href="#ingress">Ingress</a>
-<ul>
-<li><a href="#installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</a></li>
-<li><a href="#configure-kubecf">Configure kubecf</a></li>
-</ul></li>
-<li><a href="#external-database">External Database</a></li>
-</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -662,27 +657,45 @@ cf-operator-quarks-job-85665697bb-72vsp      <span style="color:#3677a9">1</span
 cf-operator-quarks-secret-844844556b-xl9jq   <span style="color:#3677a9">1</span>/1     Running   <span style="color:#3677a9">0</span>          31s</code></pre></div>
 <p>until all the pods are up &amp; running.</p>
 
-<p><strong>Note:</strong>
-&gt; The above <code>helm install</code> will generate many controllers spread over multiple pods inside the <code>cfo</code>
-&gt; namespace. Most of these controllers run inside the <code>cf-operator</code> pod.
-&gt;
-&gt; The <code>global.singleNamespace.name=kubecf</code> path tells the
-controllers to watch for CRD´s instances into the <code>kubecf</code> namespace.
-&gt;
-&gt; The cf-operator helm chart will generate the <code>kubecf</code> namespace during installation, and
-&gt; eventually one of the controllers will use a webhook to label this namespace with the
-&gt; <code>cf-operator-ns</code> key.
-&gt;
-&gt; If the <code>kubecf</code> namespace is deleted, but the operators are still running, they will no longer
-&gt; know which namespace to watch. This can lead to problems, so make sure you also delete the pods
-&gt; inside the <code>cfo</code> namespace, after deleting the <code>kubecf</code> namespace.</p>
 
-<p><strong>Note:</strong>
-&gt; how the namespace the operator is installed into (<code>cfo</code>) differs from the namespace the operator
-&gt; is watching for deployments (<code>kubecf</code>).
-&gt; This form of deployment enables restarting the operator because it is not affected by webhooks.
-&gt; It further enables the deletion of the Kubecf deployment namespace to start from scratch, without
-&gt; redeploying the operator itself.</p>
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">Note</h4>
+<blockquote>
+<p>The above <code>helm install</code> will generate many controllers spread over multiple pods inside the <code>cf-operator</code>
+namespace. Most of these controllers run inside the <code>cf-operator</code> pod.</p>
+
+<p>The <code>global.singleNamespace.name=kubecf</code> path tells the
+controllers to watch for CRD´s instances into the <code>kubecf</code> namespace.</p>
+
+<p>The cf-operator helm chart will generate the <code>kubecf</code> namespace during installation, and
+eventually one of the controllers will use a webhook to label this namespace with the
+<code>cf-operator-ns</code> key.</p>
+
+<p>If the <code>kubecf</code> namespace is deleted, but the operators are still running, they will no longer
+know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+inside the <code>cfo</code> namespace, after deleting the <code>kubecf</code> namespace.</p>
+</blockquote>
+
+</div>
+
+
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">Note</h4>
+<blockquote>
+<p>How the namespace the operator is installed into (<code>cf-operator</code>) differs from the namespace the operator
+is watching for deployments (<code>kubecf</code>).</p>
+
+<p>This form of deployment enables restarting the operator because it is not affected by webhooks.</p>
+
+<p>It further enables the deletion of the KubeCF deployment namespace to start from scratch, without
+redeploying the operator itself.</p>
+</blockquote>
+
+</div>
+
 
 <h3 id="tear-down">Tear-down</h3>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ helm uninstall cf-operator --namespace cf-operator
@@ -778,130 +791,11 @@ sucessfully the deployment and all pods are up and running correctly</p>
 </span><span style="color:#ed9d13"></span>        | base64 --decode<span style="color:#6ab825;font-weight:bold">)</span></code></pre></div>
 <p>Use the password from the previous step when requested.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cf auth admin <span style="color:#ed9d13">&#34;</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">admin_pass</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">&#34;</span></code></pre></div>
-<h3 id="advanced-topics">Advanced Topics</h3>
+<p>See <a href="/docs/deployment/advanced-topics">Advanced Topics</a> for more configuration settings available in KubeCF.</p>
 
-<h4 id="diego-vs-eirini">Diego vs Eirini</h4>
-
-<p>Diego is the standard scheduler used by kubecf to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
-Kubernetes native approach, deploying the CF apps directly to a
-Kubernetes namespace.</p>
-
-<p>To activate this alternative, use the option
-<code>--set features.eirini.enabled=true</code> when deploying kubecf from its chart.</p>
-
-<h4 id="diego-cell-affinities-tainted-nodes">Diego Cell Affinities &amp; Tainted Nodes</h4>
-
-<p>Note that the <code>diego-cell</code> pods used by the Diego standard scheduler
-are</p>
-
-<ul>
-<li>privileged,</li>
-<li>use large local emptyDir volumes (i.e. require node disk storage),</li>
-<li>and set kernel parameters on the node.</li>
-</ul>
-
-<p>These things all mean that these pods should not live next to other
-Kubernetes workloads. They should all be placed on their own
-<strong>dedicated nodes</strong> instead where possible.</p>
-
-<p>This can be done by setting affinities and tolerations, as explained in
-the associated <a href="https://kubecf.io/docs/deployment/affinities-and-tolerations/" target="_blank">tutorial</a>.</p>
-
-<h4 id="ingress">Ingress</h4>
-
-<p>By default, the cluster is exposed through its Kubernetes services.</p>
-
-<p>To use the NGINX ingress instead, it is necessary to:</p>
-
-<ul>
-<li>Install and configure the NGINX Ingress Controller.</li>
-<li>Configure Kubecf to use the ingress controller.</li>
-</ul>
-
-<p>This has to happen before deploying kubecf.</p>
-
-<h5 id="installation-of-the-nginx-ingress-controller">Installation of the NGINX Ingress Controller</h5>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm install stable/nginx-ingress <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>  --name ingress <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>  --namespace ingress <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>  --set <span style="color:#ed9d13">&#34;tcp.2222=kubecf/scheduler:2222&#34;</span> <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>  --set <span style="color:#ed9d13">&#34;tcp.&lt;services.tcp-router.port_range.start&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.start&gt;&#34;</span> <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>  ...
-  --set <span style="color:#ed9d13">&#34;tcp.&lt;services.tcp-router.port_range.end&gt;=kubecf/tcp-router:&lt;services.tcp-router.port_range.end&gt;&#34;</span></code></pre></div>
-<p>The <code>tcp.&lt;port&gt;</code> option uses the NGINX TCP pass-through.</p>
-
-<p>In the case of the <code>tcp-router</code> ports, one <code>--set</code> for each port is required, starting with
-<code>services.tcp-router.port_range.start</code> and ending with <code>services.tcp-router.port_range.end</code>. Those
-values are defined on the <code>values.yaml</code> file with default values.</p>
-
-<h5 id="configure-kubecf">Configure kubecf</h5>
-
-<p>Use the Helm option <code>--set features.ingress.enabled=true</code> when
-deploying kubecf.</p>
-
-<h4 id="external-database">External Database</h4>
-
-<p>By default, KubeCF includes an internal single-availability database. KubeCF
-also exposes a way to use an external database via the Helm property
-<code>features.external_database</code>. Check the <a href="../../deploy/helm/kubecf/values.yaml">values.yaml</a> for more details.</p>
-
-<p>Setting <code>features.external_database.seed</code> to <code>true</code> will allow KubeCF to
-configure the various required databases for you; however, this will require
-providing the root database password (via the <code>var-pxc-root-password</code> secret),
-which may be an issue under some policies.</p>
-
-<p>It is also possible to manually create all necessary databases externally, and
-then provide the individual credentials to KubeCF.  When deploying KubeCF with
-Helm, it will error out if any of the required database credentials are missing.
-An example configuration is below:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">features:<span style="color:#666">
-</span><span style="color:#666">  </span>external_database:<span style="color:#666">
-</span><span style="color:#666">    </span>enabled:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
-</span><span style="color:#666">    </span>type:<span style="color:#666"> </span>mysql<span style="color:#666">
-</span><span style="color:#666">    </span>host:<span style="color:#666"> </span>mariadb-server.corp.example.com<span style="color:#666">
-</span><span style="color:#666">    </span>port:<span style="color:#666"> </span><span style="color:#3677a9">3306</span><span style="color:#666">
-</span><span style="color:#666">    </span>seed:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">false</span><span style="color:#666">
-</span><span style="color:#666">    </span>databases:<span style="color:#666">
-</span><span style="color:#666">      </span>uaa:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>uaa<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>uaa-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>PAWjxQst5l16J3w3vJdfX7fXY8HyHtyb<span style="color:#666">
-</span><span style="color:#666">      </span>cc:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>cloud_controller<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>cc-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>qj5KI3qwVe+XVFENAuEU9AfSkpUK/nzb<span style="color:#666">
-</span><span style="color:#666">      </span>bbs:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>diego<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>diego-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>z7gvkjWNUgX+xcn3Ia0loMEnAD7MXBgE<span style="color:#666">
-</span><span style="color:#666">      </span>routing_api:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>routing-api<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>routing-api-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>bTL6DhK89F+G05OZtHbvEdR1uwkyRMJt<span style="color:#666">
-</span><span style="color:#666">      </span>policy_server:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>network_policy<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>network-policy-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>EYviLFS/F4dAyVry5Stm8wrpOI64Xmnz<span style="color:#666">
-</span><span style="color:#666">      </span>silk_controller:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>network_connectivity<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>silk-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>ah7nbU1wsHuZ4BtmcdU1vV37KgVV2lLf<span style="color:#666">
-</span><span style="color:#666">      </span>locket:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>locket<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>locket-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>rWicBxhg8mIrhkuSR/aDlqljOMORuyL<span style="color:#666">
-</span><span style="color:#666">      </span>credhub:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>credhub<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>credhub-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>5tJcIWHCR1QTLdfQDiN1Mz8K8jB+clD<span style="color:#666">
-</span><span style="color:#666">      </span>autoscaler:<span style="color:#666">
-</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>autoscaler<span style="color:#666">
-</span><span style="color:#666">        </span>username:<span style="color:#666"> </span>autoscaler-database-user<span style="color:#666">
-</span><span style="color:#666">        </span>password:<span style="color:#666"> </span>cYo2Tdi61N39mUjoEksXHuu3F7Dk58F</code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified October 6, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/8b08926d12b4a79d0381a3b08078089b1f9b77f9">Point all of the kubecf.suse.dev links to kubecf.io (8b08926)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified October 9, 2020: <a  href="https://github.com/cloudfoundry-incubator/kubecf-docs/commit/353d9bf2a5e01ae713f8398347c5df95eeba11b0">Fixup after review (353d9bf)</a>
 </div>
 </div>
 

@@ -139,27 +139,45 @@ cf-operator-quarks-job-85665697bb-72vsp      &lt;span style=&#34;color:#3677a9&#
 cf-operator-quarks-secret-844844556b-xl9jq   &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt;/1     Running   &lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;          31s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;until all the pods are up &amp;amp; running.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
-&amp;gt; The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cfo&lt;/code&gt;
-&amp;gt; namespace. Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.
-&amp;gt;
-&amp;gt; The &lt;code&gt;global.singleNamespace.name=kubecf&lt;/code&gt; path tells the
-controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.
-&amp;gt;
-&amp;gt; The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and
-&amp;gt; eventually one of the controllers will use a webhook to label this namespace with the
-&amp;gt; &lt;code&gt;cf-operator-ns&lt;/code&gt; key.
-&amp;gt;
-&amp;gt; If the &lt;code&gt;kubecf&lt;/code&gt; namespace is deleted, but the operators are still running, they will no longer
-&amp;gt; know which namespace to watch. This can lead to problems, so make sure you also delete the pods
-&amp;gt; inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
-&amp;gt; how the namespace the operator is installed into (&lt;code&gt;cfo&lt;/code&gt;) differs from the namespace the operator
-&amp;gt; is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).
-&amp;gt; This form of deployment enables restarting the operator because it is not affected by webhooks.
-&amp;gt; It further enables the deletion of the Kubecf deployment namespace to start from scratch, without
-&amp;gt; redeploying the operator itself.&lt;/p&gt;
+
+&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The above &lt;code&gt;helm install&lt;/code&gt; will generate many controllers spread over multiple pods inside the &lt;code&gt;cf-operator&lt;/code&gt;
+namespace. Most of these controllers run inside the &lt;code&gt;cf-operator&lt;/code&gt; pod.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;global.singleNamespace.name=kubecf&lt;/code&gt; path tells the
+controllers to watch for CRD´s instances into the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
+
+&lt;p&gt;The cf-operator helm chart will generate the &lt;code&gt;kubecf&lt;/code&gt; namespace during installation, and
+eventually one of the controllers will use a webhook to label this namespace with the
+&lt;code&gt;cf-operator-ns&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;p&gt;If the &lt;code&gt;kubecf&lt;/code&gt; namespace is deleted, but the operators are still running, they will no longer
+know which namespace to watch. This can lead to problems, so make sure you also delete the pods
+inside the &lt;code&gt;cfo&lt;/code&gt; namespace, after deleting the &lt;code&gt;kubecf&lt;/code&gt; namespace.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;/div&gt;
+
+
+
+
+&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How the namespace the operator is installed into (&lt;code&gt;cf-operator&lt;/code&gt;) differs from the namespace the operator
+is watching for deployments (&lt;code&gt;kubecf&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;This form of deployment enables restarting the operator because it is not affected by webhooks.&lt;/p&gt;
+
+&lt;p&gt;It further enables the deletion of the KubeCF deployment namespace to start from scratch, without
+redeploying the operator itself.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;/div&gt;
+
 
 &lt;h3 id=&#34;tear-down&#34;&gt;Tear-down&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ helm uninstall cf-operator --namespace cf-operator
@@ -255,12 +273,26 @@ sucessfully the deployment and all pods are up and running correctly&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&lt;/span&gt;        | base64 --decode&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Use the password from the previous step when requested.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cf auth admin &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;admin_pass&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;advanced-topics&#34;&gt;Advanced Topics&lt;/h3&gt;
+&lt;p&gt;See &lt;a href=&#34;https://kubecf.io/docs/deployment/advanced-topics&#34;&gt;Advanced Topics&lt;/a&gt; for more configuration settings available in KubeCF.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Advanced Topics</title>
+      <link>https://kubecf.io/docs/deployment/advanced-topics/</link>
+      <pubDate>Fri, 08 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://kubecf.io/docs/deployment/advanced-topics/</guid>
+      <description>
+        
+        
+        
 
 &lt;h4 id=&#34;diego-vs-eirini&#34;&gt;Diego vs Eirini&lt;/h4&gt;
 
-&lt;p&gt;Diego is the standard scheduler used by kubecf to deploy CF
-applications. Eirini is an alternative to Diego that follows a more
+&lt;p&gt;Diego is the standard scheduler used by KubeCF to deploy CF
+applications. &lt;a href=&#34;https://www.cloudfoundry.org/project-eirini/&#34; target=&#34;_blank&#34;&gt;Eirini&lt;/a&gt; is an alternative to Diego that follows a more
 Kubernetes native approach, deploying the CF apps directly to a
 Kubernetes namespace.&lt;/p&gt;
 
@@ -321,12 +353,28 @@ deploying kubecf.&lt;/p&gt;
 
 &lt;p&gt;By default, KubeCF includes an internal single-availability database. KubeCF
 also exposes a way to use an external database via the Helm property
-&lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;../../deploy/helm/kubecf/values.yaml&#34;&gt;values.yaml&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;code&gt;features.external_database&lt;/code&gt;. Check the &lt;a href=&#34;https://github.com/cloudfoundry-incubator/kubecf/blob/master/chart/values.yaml#L374&#34; target=&#34;_blank&#34;&gt;values.yaml&lt;/a&gt; for more details.&lt;/p&gt;
 
 &lt;p&gt;Setting &lt;code&gt;features.external_database.seed&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; will allow KubeCF to
 configure the various required databases for you; however, this will require
 providing the root database password (via the &lt;code&gt;var-pxc-root-password&lt;/code&gt; secret),
 which may be an issue under some policies.&lt;/p&gt;
+
+
+
+&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Example of providing root database password&lt;/h4&gt;
+&lt;p&gt;&lt;p&gt;For example, to provide the &lt;code&gt;root&lt;/code&gt; password of the KubeCF deployment in the &lt;code&gt;kubecf&lt;/code&gt; namespace we can apply the following secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;apiVersion:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;kind:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;Secret&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;metadata:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;name:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;var-pxc-root-password&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;namespace:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;kubecf&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;stringData:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;password:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+
 
 &lt;p&gt;It is also possible to manually create all necessary databases externally, and
 then provide the individual credentials to KubeCF.  When deploying KubeCF with
