@@ -14,8 +14,13 @@ applications. [Eirini](https://www.cloudfoundry.org/project-eirini/) is an alter
 Kubernetes native approach, deploying the CF apps directly to a
 Kubernetes namespace.
 
-To activate this alternative, use the option
+To activate this alternative, use the option:
 `--set features.eirini.enabled=true` when deploying kubecf from its chart.
+
+Eirini is only supported with sle15 stacks for now. Hence, set them as so in your values yaml:
+```
+install_stacks: [sle15]
+```
 
 #### Diego Cell Affinities & Tainted Nodes
 
