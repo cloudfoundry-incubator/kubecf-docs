@@ -117,9 +117,6 @@ services:
   router:
     externalIPs:
     - ${node_ip}
-kube:
-  service_cluster_ip_range: 0.0.0.0/0
-  pod_cluster_ip_range: 0.0.0.0/0
 _EOF_
 ```
 
@@ -131,6 +128,8 @@ lines into your **values.yaml** file:
 features:
   eirini:
     enabled: true
+
+install_stacks: ["sle15"]
 ...
 ```
 
