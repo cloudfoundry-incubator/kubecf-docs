@@ -148,7 +148,7 @@ system_domain: 172.17.0.3.nip.io
 
 services:
   router:
-    loadBalancerIP:
+    externalIPs:
     - 172.17.0.3
 
 kube:
