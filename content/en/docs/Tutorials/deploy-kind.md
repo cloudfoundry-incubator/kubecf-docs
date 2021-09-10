@@ -148,12 +148,8 @@ system_domain: 172.17.0.3.nip.io
 
 services:
   router:
-    loadBalancerIP:
+    externalIPs:
     - 172.17.0.3
-
-kube:
-  service_cluster_ip_range: 0.0.0.0/0
-  pod_cluster_ip_range: 0.0.0.0/0
 ```
 
 Now is time to install KubeCF by running the helm command:
